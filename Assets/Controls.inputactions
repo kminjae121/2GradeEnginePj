@@ -51,15 +51,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Rolling",
-                    "type": "Button",
-                    "id": "61cff902-291b-45df-be7d-cbf3a574f29d",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "StrongAttackSkill",
                     "type": "Button",
                     "id": "048bc804-b31b-4fa2-9015-c0ff541167bd",
@@ -72,6 +63,15 @@
                     "name": "ChargeSklil",
                     "type": "Button",
                     "id": "4db40146-ca6d-459d-b7aa-f3d2337a06b4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "HighAttack",
+                    "type": "Button",
+                    "id": "381885b8-c01b-4ece-8ad9-cbd08566c78a",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -191,17 +191,6 @@
                 },
                 {
                     "name": "",
-                    "id": "3c5a37fc-b2d6-4dc7-854d-77a155b80fa6",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Rolling",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "a83f08f2-4a7e-41cf-8446-d0d66b811b40",
                     "path": "<Keyboard>/r",
                     "interactions": "",
@@ -219,6 +208,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ChargeSklil",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1fab1364-3e49-4c2b-a87b-c854a5d5f62f",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HighAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -137,15 +137,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Rolling"",
-                    ""type"": ""Button"",
-                    ""id"": ""61cff902-291b-45df-be7d-cbf3a574f29d"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""StrongAttackSkill"",
                     ""type"": ""Button"",
                     ""id"": ""048bc804-b31b-4fa2-9015-c0ff541167bd"",
@@ -158,6 +149,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": ""ChargeSklil"",
                     ""type"": ""Button"",
                     ""id"": ""4db40146-ca6d-459d-b7aa-f3d2337a06b4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HighAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""381885b8-c01b-4ece-8ad9-cbd08566c78a"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -277,17 +277,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3c5a37fc-b2d6-4dc7-854d-77a155b80fa6"",
-                    ""path"": ""<Keyboard>/shift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rolling"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""a83f08f2-4a7e-41cf-8446-d0d66b811b40"",
                     ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
@@ -305,6 +294,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ChargeSklil"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1fab1364-3e49-4c2b-a87b-c854a5d5f62f"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HighAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -897,9 +897,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_MousePos = m_Player.FindAction("MousePos", throwIfNotFound: true);
         m_Player_SheldSkill = m_Player.FindAction("SheldSkill", throwIfNotFound: true);
-        m_Player_Rolling = m_Player.FindAction("Rolling", throwIfNotFound: true);
         m_Player_StrongAttackSkill = m_Player.FindAction("StrongAttackSkill", throwIfNotFound: true);
         m_Player_ChargeSklil = m_Player.FindAction("ChargeSklil", throwIfNotFound: true);
+        m_Player_HighAttack = m_Player.FindAction("HighAttack", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -998,9 +998,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_MousePos;
     private readonly InputAction m_Player_SheldSkill;
-    private readonly InputAction m_Player_Rolling;
     private readonly InputAction m_Player_StrongAttackSkill;
     private readonly InputAction m_Player_ChargeSklil;
+    private readonly InputAction m_Player_HighAttack;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1033,10 +1033,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @SheldSkill => m_Wrapper.m_Player_SheldSkill;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Rolling".
-        /// </summary>
-        public InputAction @Rolling => m_Wrapper.m_Player_Rolling;
-        /// <summary>
         /// Provides access to the underlying input action "Player/StrongAttackSkill".
         /// </summary>
         public InputAction @StrongAttackSkill => m_Wrapper.m_Player_StrongAttackSkill;
@@ -1044,6 +1040,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/ChargeSklil".
         /// </summary>
         public InputAction @ChargeSklil => m_Wrapper.m_Player_ChargeSklil;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/HighAttack".
+        /// </summary>
+        public InputAction @HighAttack => m_Wrapper.m_Player_HighAttack;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1085,15 +1085,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @SheldSkill.started += instance.OnSheldSkill;
             @SheldSkill.performed += instance.OnSheldSkill;
             @SheldSkill.canceled += instance.OnSheldSkill;
-            @Rolling.started += instance.OnRolling;
-            @Rolling.performed += instance.OnRolling;
-            @Rolling.canceled += instance.OnRolling;
             @StrongAttackSkill.started += instance.OnStrongAttackSkill;
             @StrongAttackSkill.performed += instance.OnStrongAttackSkill;
             @StrongAttackSkill.canceled += instance.OnStrongAttackSkill;
             @ChargeSklil.started += instance.OnChargeSklil;
             @ChargeSklil.performed += instance.OnChargeSklil;
             @ChargeSklil.canceled += instance.OnChargeSklil;
+            @HighAttack.started += instance.OnHighAttack;
+            @HighAttack.performed += instance.OnHighAttack;
+            @HighAttack.canceled += instance.OnHighAttack;
         }
 
         /// <summary>
@@ -1120,15 +1120,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @SheldSkill.started -= instance.OnSheldSkill;
             @SheldSkill.performed -= instance.OnSheldSkill;
             @SheldSkill.canceled -= instance.OnSheldSkill;
-            @Rolling.started -= instance.OnRolling;
-            @Rolling.performed -= instance.OnRolling;
-            @Rolling.canceled -= instance.OnRolling;
             @StrongAttackSkill.started -= instance.OnStrongAttackSkill;
             @StrongAttackSkill.performed -= instance.OnStrongAttackSkill;
             @StrongAttackSkill.canceled -= instance.OnStrongAttackSkill;
             @ChargeSklil.started -= instance.OnChargeSklil;
             @ChargeSklil.performed -= instance.OnChargeSklil;
             @ChargeSklil.canceled -= instance.OnChargeSklil;
+            @HighAttack.started -= instance.OnHighAttack;
+            @HighAttack.performed -= instance.OnHighAttack;
+            @HighAttack.canceled -= instance.OnHighAttack;
         }
 
         /// <summary>
@@ -1465,13 +1465,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSheldSkill(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Rolling" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnRolling(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "StrongAttackSkill" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -1485,6 +1478,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnChargeSklil(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "HighAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnHighAttack(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
