@@ -10,6 +10,7 @@ public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponet
 
     public Action OnAttackTriggerEnd, OnSwingAttackTrigger;
 
+    public event Action OnAttackFinalVFXTrigger;
     public event Action OnAttackVFXTrigger;
 
     public event Action OnStrongAttackTrigger;
@@ -29,6 +30,8 @@ public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponet
 
     private Entity _entity;
 
+    public event Action OnAttackMoveTrigger;
+
     public void Initialize(Entity entity)
     {
         _entity = entity;
@@ -39,6 +42,8 @@ public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponet
         OnAnimationEndTrigger?.Invoke();
     }
 
+    private void AttackMove() => OnAttackMoveTrigger?.Invoke();
+
     private void AttackDash() => OnAttackDash?.Invoke();
     private void RollingStart() => OnRollingStatusChange?.Invoke(true);
     private void RollingEnd() => OnRollingStatusChange?.Invoke(true);
@@ -48,6 +53,8 @@ public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponet
     private void PlayerStrongAttack() => OnStrongAttackTrigger?.Invoke();
     private void AttackEnd() => OnAttackTriggerEnd?.Invoke();
 
+    private void FinalAttack() => OnAttackFinalVFXTrigger?.Invoke();
+    
     private void SwingAttack() => OnSwingAttackTrigger?.Invoke();
     private void BarrierPressed() => OnBarrierPressed?.Invoke();
 

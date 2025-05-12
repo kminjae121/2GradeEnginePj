@@ -42,7 +42,6 @@ public abstract class PlayerCanAttackState : PlayerState
     {
         if (_player._attackCompo.IsAttack == false)
         {
-            _player._movement.StopImmediately();
             _player.ChangeState("ATTACK");
         }
     }

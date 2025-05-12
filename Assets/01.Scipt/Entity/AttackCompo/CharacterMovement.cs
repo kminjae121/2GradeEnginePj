@@ -19,6 +19,7 @@ public class CharacterMovement : MonoBehaviour, IEntityComponet
     public Vector3 Velocity => _velocity;
 
     public bool CanManualMovement { get; set; } = true;
+    
 
     public bool IsRolling { get; set; } = false;
     private Player _entity;
@@ -66,7 +67,7 @@ public class CharacterMovement : MonoBehaviour, IEntityComponet
         _entity.transform.position =
            Vector3.MoveTowards(_entity.transform.position, target, 60 * Time.deltaTime);
     }
-
+    
     public void LookAt(Vector3 entity)
     {
         Vector3 targetPos = entity;
@@ -88,7 +89,7 @@ public class CharacterMovement : MonoBehaviour, IEntityComponet
             
             else
             {
-                _velocity += _autoMovement * Time.fixedDeltaTime;
+                _velocity = _autoMovement * Time.fixedDeltaTime;
             }
 
             if(IsRolling)
@@ -99,6 +100,7 @@ public class CharacterMovement : MonoBehaviour, IEntityComponet
             
         }
     }
+    
 
     public void StopImmediately()
     {

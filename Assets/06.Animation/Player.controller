@@ -499,7 +499,7 @@ BlendTree:
   m_MaxThreshold: 7
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
-  m_BlendType: 1
+  m_BlendType: 2
 --- !u!1101 &859039734933961912
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Attack3
   m_EditorClassIdentifier: 
   attackName: Attack3
-  movementPower: 0.1
+  movementPower: 2.3
   damageMulitiplier: 1.2
   damageIncrease: 0
   isPowerAttack: 1

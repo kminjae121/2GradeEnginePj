@@ -19,6 +19,7 @@ public class PlayerAttackState : PlayerCanAttackState
     {
         base.Enter();
         _player._attackCompo.IsAttack = true;
+        
         _movement.StopImmediately();
         _attackCompo.Attack();
 

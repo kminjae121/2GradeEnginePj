@@ -37,6 +37,8 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
     private Player _player;
 
     private EntityAnimatorTrigger _triggerCompo;
+    
+    private EntityVFX _vfxCompo;
     private float attackHoldTime;
 
     public float atkDamage { get; set; }
@@ -68,8 +70,8 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
         _entityAnimator = entity.GetCompo<EntityAnimator>();
 
         atkDamage = _stat.GetStat(_atkDamage).Value;
-
-
+        
+        _vfxCompo = entity.GetCompo<EntityVFX>();
         AttackSpeed = 1.2f;
         //damageCast.InitCaster(_entity);
         _triggerCompo = entity.GetCompo<EntityAnimatorTrigger>();
@@ -77,14 +79,20 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
         _triggerCompo.OnSwingAttackTrigger += HandleSwing;
         _triggerCompo.OnAttackAnimEnd += EndAttack;
         _triggerCompo.OnAttackCancel += AttackCancel;
+        _triggerCompo.OnAttackVFXTrigger += HandleAttackVFXTrigger;
+        _triggerCompo.OnAttackFinalVFXTrigger += HandleFinalAttackTrigger;
         _player.PlayerInput.OnChargeAttackPressed += StartCharge;
         _player.PlayerInput.OnChargeAttackCanceled += StopCharge;
     }
 
+
     private void OnDisable()
     {
+        _triggerCompo.OnAttackVFXTrigger -= HandleAttackVFXTrigger; 
         _triggerCompo.OnAttackAnimEnd -= EndAttack;
         _triggerCompo.OnAttackCancel -= AttackCancel;
+        
+        _triggerCompo.OnAttackFinalVFXTrigger -= HandleFinalAttackTrigger;
         _player.PlayerInput.OnChargeAttackPressed -= StartCharge;
         _player.PlayerInput.OnChargeAttackCanceled -= StopCharge;
     }
@@ -108,6 +116,16 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
             {
                 print("왔는데 없음");
             }
+    }
+    
+    
+    private void HandleAttackVFXTrigger() 
+    {
+        _vfxCompo.PlayVfx($"AttackVFX{ComboCounter}", Vector3.zero, Quaternion.identity);
+    }
+    private void HandleFinalAttackTrigger()
+    {
+        _vfxCompo.PlayVfx($"FinalAttack", Vector3.zero, Quaternion.identity);
     }
 
     public void Attack()
@@ -144,6 +162,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
     {
         ComboCounter++;
         IsAttack = false;
+        _player._isSkilling = false;
         _lastAttackTime = Time.time;
     }
 
@@ -151,7 +170,8 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
     {
         IsAttack = true;
     }
-
+    
+    
     public AttackDataSO GetCurrentAttackData()
     {
         Debug.Assert(attackDataList.Length > ComboCounter, "Combo counter is out of range");

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 
 namespace _01.Scipt.Player.Skill
@@ -23,6 +24,8 @@ namespace _01.Scipt.Player.Skill
             {
                 _player.ChangeState("UP");
                 CurrentTimeClear("UpSkill");
+                
+                _player._attackCompo.IsAttack = true;
                 _player._isSkilling = true;
             }
             else
@@ -47,7 +50,7 @@ namespace _01.Scipt.Player.Skill
             {
                 item.GetComponentInChildren<IDamgable>().ApplyDamage(updamage, false, 0, _player);
                 
-                item.GetComponentInChildren<Rigidbody>().AddForce(Vector3.up * 4, ForceMode.Impulse);
+                item.GetComponentInChildren<Rigidbody>().AddForce(Vector3.up * 7, ForceMode.Impulse);
             }
             
         }
@@ -56,5 +59,6 @@ namespace _01.Scipt.Player.Skill
         {
             base.SkillFeedback();
         }
+
     }
 }
