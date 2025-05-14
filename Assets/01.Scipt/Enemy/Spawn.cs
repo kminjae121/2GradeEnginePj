@@ -1,4 +1,5 @@
 using System;
+using GondrLib.ObjectPool.Runtime;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -35,7 +36,7 @@ public class Spawn : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        IPoolable enemy = PoolManager.Instance.Pop(enemyPoolName);
+       /* IPoolable enemy = PoolManager.Instance.Pop(enemyPoolName);
 
         if (enemy == null) return;
         
@@ -43,6 +44,7 @@ public class Spawn : MonoBehaviour
         GameObject enemyObj = enemy.GetGameObject();
         enemyObj.transform.position = spawnPoint.position;
         enemyObj.transform.rotation = spawnPoint.rotation;
-        enemyObj.SetActive(true);
+        enemyObj.SetActive(true);*/
     }
 }
+

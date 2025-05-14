@@ -1,19 +1,24 @@
 using System;
 using System.Collections;
+using System.Numerics;
+using _01.Scipt.Blade.Combat;
 using _01.Scipt.Player.Player;
+using a;
+using Blade.Combat;
 using Member.Kmj._01.Scipt.Entity.AttackCompo;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
 {
     public AttackDataSO[] attackDataList;
-    [SerializeField] private DamageCaster damageCast;
 
     [SerializeField] private float comboWindow;
 
     [SerializeField] private LayerMask _whatIsEnemy;
 
-    [SerializeField] private StatSO _atkDamage;
+   
     [SerializeField] private EntityStat _stat;
 
     [SerializeField] private Vector3 _boxsize;
@@ -40,10 +45,11 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
     
     private EntityVFX _vfxCompo;
     private float attackHoldTime;
-
-    public float atkDamage { get; set; }
+    [SerializeField] private OverlapDamageCaster damageCaster;
 
     public int ComboCounter { get; set; }
+    
+    [field: SerializeField] public Transform FinalAttackEffect { get; set; }
 
 
     public float AttackSpeed
@@ -68,21 +74,21 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
         _entity = entity;
         _player = entity as Player;
         _entityAnimator = entity.GetCompo<EntityAnimator>();
-
-        atkDamage = _stat.GetStat(_atkDamage).Value;
+        
         
         _vfxCompo = entity.GetCompo<EntityVFX>();
-        AttackSpeed = 1.2f;
+        AttackSpeed = 1.6f;
         //damageCast.InitCaster(_entity);
         _triggerCompo = entity.GetCompo<EntityAnimatorTrigger>();
-        _triggerCompo.OnAttackTriggerEnd += HandleAttackTrigger;
         _triggerCompo.OnSwingAttackTrigger += HandleSwing;
         _triggerCompo.OnAttackAnimEnd += EndAttack;
+        _triggerCompo.OnAttackTriggerEnd += HandleDamageCasterTrigger;
         _triggerCompo.OnAttackCancel += AttackCancel;
         _triggerCompo.OnAttackVFXTrigger += HandleAttackVFXTrigger;
         _triggerCompo.OnAttackFinalVFXTrigger += HandleFinalAttackTrigger;
         _player.PlayerInput.OnChargeAttackPressed += StartCharge;
         _player.PlayerInput.OnChargeAttackCanceled += StopCharge;
+        _triggerCompo.LastAttackEffectEndTrigger += HandleStopFinalAttackTrigger;
     }
 
 
@@ -91,31 +97,12 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
         _triggerCompo.OnAttackVFXTrigger -= HandleAttackVFXTrigger; 
         _triggerCompo.OnAttackAnimEnd -= EndAttack;
         _triggerCompo.OnAttackCancel -= AttackCancel;
+        _triggerCompo.LastAttackEffectEndTrigger -= HandleStopFinalAttackTrigger;
+        _triggerCompo.OnAttackTriggerEnd -= HandleDamageCasterTrigger;
         
         _triggerCompo.OnAttackFinalVFXTrigger -= HandleFinalAttackTrigger;
         _player.PlayerInput.OnChargeAttackPressed -= StartCharge;
         _player.PlayerInput.OnChargeAttackCanceled -= StopCharge;
-    }
-
-    private void HandleAttackTrigger()
-    {
-       // var knockbackForce = new Vector2(6, 6);
-        //   bool success = damageCast.CastDamage(atkDamage);
-
-        var collider = Physics.OverlapBox(transform.position, _boxsize,
-            Quaternion.identity, _whatIsEnemy);
-
-
-        foreach (var Obj in collider)
-            if (Obj.TryGetComponent(out IDamgable damage))
-            {
-                Debug.Log("공격됨");
-                damage.ApplyDamage(10, true, 0, _player);
-            }
-            else
-            {
-                print("왔는데 없음");
-            }
     }
     
     
@@ -125,7 +112,17 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
     }
     private void HandleFinalAttackTrigger()
     {
-        _vfxCompo.PlayVfx($"FinalAttack", Vector3.zero, Quaternion.identity);
+        _vfxCompo.PlayVfx($"FinalAttack", FinalAttackEffect.position, Quaternion.identity);
+    }
+
+    private void HandleStopFinalAttackTrigger()
+    {
+        _vfxCompo.StopVfx("FinalAttack");
+    }
+    
+    private void HandleDamageCasterTrigger()
+    {
+        damageCaster.CastDamage(_player.transform.position,Vector3.forward,attackDataList[ComboCounter]);
     }
 
     public void Attack()
@@ -169,6 +166,10 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
     private void AttackCancel()
     {
         IsAttack = true;
+    }
+
+    private void AttackMove()
+    {
     }
     
     

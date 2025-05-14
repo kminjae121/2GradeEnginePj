@@ -1,9 +1,10 @@
 using System;
+using Blade.Combat;
 using Member.Kmj._01.Scipt.Entity;
 using Member.Kmj._01.Scipt.Entity.AttackCompo;
 using UnityEngine;
 
-public class EntityHealth : MonoBehaviour, IDamgable, IEntityComponet,IAfterInit
+public class EntityHealth : MonoBehaviour, IDamageable, IEntityComponet,IAfterInit
 {
     [SerializeField] private StatSO hpStat;
 //
@@ -47,9 +48,9 @@ public class EntityHealth : MonoBehaviour, IDamgable, IEntityComponet,IAfterInit
         Debug.Log(currentHealth);
         currentHealth = Mathf.Clamp(currentHealth + current - previous, 1f, maxHealth);
     }
+    
 
-
-    public void ApplyDamage(float damage, bool isHit,int StunLevel, Entity delear)
+    public void ApplyDamage(float damage, Vector3 hitPoint, Vector3 hitNormal, Blade.Combat.AttackDataSO _atkData, Entity dealer)
     {
         if (_entity.IsDead) return;
 

@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Gondrlib/ObjectPool/Editor/PollingSO.uss?fileID=7433441132597879392&amp;guid=a48111cd66bbd804099ad1ad9a8b2bb1&amp;type=3#PollingSO" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:TextField label="Polling Name" placeholder-text="풀링할 이름을 입력하세요" name="PoolingNameField" binding-path="poolingName" is-delayed="true" />
+        <uie:ObjectField label="Prefab" name="PrefabField" type="UnityEngine.GameObject, UnityEngine.CoreModule" binding-path="Prefab" />
+        <ui:IntegerField label="Init Count" value="0" binding-path="InitCount" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,16 @@
+{
+    "name": "ObjectPoolAssembly",
+    "rootNamespace": "",
+    "references": [
+        "GUID:37471771b19338c438dbc5c5ca42d490"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

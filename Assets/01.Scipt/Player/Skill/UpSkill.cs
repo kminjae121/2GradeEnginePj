@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using Blade.Combat;
+using Blade.Entities;
 using UnityEngine;
 
 namespace _01.Scipt.Player.Skill
@@ -10,11 +12,15 @@ namespace _01.Scipt.Player.Skill
 
         private Player.Player _player;
         
+        private ActionData _actionData;
+
+        [SerializeField] private UpSkillDamageCaster damageCaster;
         public override void GetSkill()
         {
             _player = _entity as Player.Player;
             updamage = _stat.GetStat(_skillDamage).Value;
             _player.PlayerInput.OnHighAttackPresssed += HandleHighAttack;
+            _triggerCompo.OnHighAttack += HandleSkillAttack;
             _triggerCompo.OnHighAttack += Skill;
         }
 
@@ -32,10 +38,16 @@ namespace _01.Scipt.Player.Skill
                 return;
         }
 
+        private void HandleSkillAttack()
+        {
+            damageCaster.CastDamage(_player.transform.position,Vector3.forward, null);
+        }
+
 
         public override void EventDefault()
         {
             _player.PlayerInput.OnHighAttackPresssed -= HandleHighAttack;
+            _triggerCompo.OnHighAttack -= HandleSkillAttack;
             _triggerCompo.OnHighAttack -= Skill;
         }
 
@@ -48,8 +60,6 @@ namespace _01.Scipt.Player.Skill
 
             foreach (var item in collider)
             {
-                item.GetComponentInChildren<IDamgable>().ApplyDamage(updamage, false, 0, _player);
-                
                 item.GetComponentInChildren<Rigidbody>().AddForce(Vector3.up * 7, ForceMode.Impulse);
             }
             

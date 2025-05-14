@@ -4,7 +4,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    [field: SerializeField] public PoolManager pool;
     public float gameTime;
     public float maxGameTime;
     public int level{ get; set; }

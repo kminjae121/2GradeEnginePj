@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Blade.Combat;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Member.Kmj._01.Scipt.Entity.AttackCompo
 {
-    public abstract class Entity : MonoBehaviour,IDamgable
+    public abstract class Entity : MonoBehaviour,IDamageable
     {
 
-        public delegate void OnDamageHandler(float damage, bool isHit,int stunLevel,Entity dealer);
+        public delegate void OnDamageHandler(float damage, Vector3 hitPoint, Vector3 hitNormal, Blade.Combat.AttackDataSO _atkData, Entity dealer);
         public event OnDamageHandler OnDamage;
 
         public UnityEvent OnHit;
@@ -29,11 +30,12 @@ namespace Member.Kmj._01.Scipt.Entity.AttackCompo
             AfterInitialize();
         }
 
-        private void AddComponets()
+        public virtual void AddComponets()
         {
             GetComponentsInChildren<IEntityComponet>().ToList().
                 ForEach(comp => _componets.Add(comp.GetType(), comp));
         }
+        
 
         protected virtual void AfterInitialize()
         {
@@ -49,6 +51,9 @@ namespace Member.Kmj._01.Scipt.Entity.AttackCompo
             OnDead.RemoveListener(HandleDead);
             OnStun.RemoveListener(HandleStun);
         }
+        
+        public IEntityComponet Getcompo(Type type)
+            => _componets.GetValueOrDefault(type);
 
         private void InitializeComponts()
         {
@@ -61,8 +66,9 @@ namespace Member.Kmj._01.Scipt.Entity.AttackCompo
         protected abstract void HandleHit();
         protected abstract void HandleDead();
         protected abstract void HandleStun();
+        
 
-        public void ApplyDamage(float damage, bool isHit, int stunLevel, Entity delear)
-            =>OnDamage?.Invoke(damage, isHit, stunLevel, delear);
+        public void ApplyDamage(float damage, Vector3 hitPoint, Vector3 hitNormal, Blade.Combat.AttackDataSO _atkData, Entity dealer)
+            =>OnDamage?.Invoke(damage,hitPoint, hitNormal,_atkData,dealer);
     }
 }

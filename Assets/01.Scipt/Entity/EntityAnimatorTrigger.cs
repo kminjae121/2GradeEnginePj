@@ -13,6 +13,8 @@ public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponet
     public event Action OnAttackFinalVFXTrigger;
     public event Action OnAttackVFXTrigger;
 
+    public event Action LastAttackEffectEndTrigger;
+
     public event Action OnStrongAttackTrigger;
 
     public event Action OnBarrierPressed;
@@ -62,6 +64,8 @@ public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponet
     private void CancelNextAttack() => OnAttackCancel?.Invoke();
 
     private void HighAttack() => OnHighAttack?.Invoke();
+    
+    private void EndLastAttackEffect() => LastAttackEffectEndTrigger?.Invoke();
 
     private void Attack()
     {
