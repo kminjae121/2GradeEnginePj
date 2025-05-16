@@ -1,6 +1,6 @@
 using _01.Scipt.Player.Player;
 using Blade.Entities;
-using Gondrlib.Dependencies;
+using GondrLib.Dependencies;
 using UnityEngine;
 
 namespace Blade.Managers

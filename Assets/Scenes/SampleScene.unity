@@ -175,10 +175,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 214906142}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9ec816a832b420784d0d4a35f7b0cde, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b0119aec45b4469b212f8ced07844ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitImpactItem: {fileID: 11400000, guid: e26b3c525c8215645a9e0726ec42281a, type: 2}
+  hitImpactItem: {fileID: 11400000, guid: 9f0d0df41885d2c468f1fb46928f0cd8, type: 2}
   playDuration: 0.5
   actionData: {fileID: 1890598931}
 --- !u!1 &219594556
@@ -1047,13 +1047,13 @@ MonoBehaviour:
     isUseOverride: 1
     overrideValue: 10
   - stat: {fileID: 11400000, guid: c7d72c92d575eb8408a9f8d4fb344732, type: 2}
-    isUseOverride: 0
+    isUseOverride: 1
     overrideValue: 0
   - stat: {fileID: 11400000, guid: a9f34a1dd4fc5cb468b42110d8ceeb39, type: 2}
-    isUseOverride: 0
+    isUseOverride: 1
     overrideValue: 0
   - stat: {fileID: 11400000, guid: 042c304eb0ab9e546869780a78a5e5f2, type: 2}
-    isUseOverride: 0
+    isUseOverride: 1
     overrideValue: 0
 --- !u!1 &1313654574
 GameObject:
@@ -1102,8 +1102,11 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128
+  atkDamage: 0
+  _Stat: {fileID: 1029044994}
+  _atkdamage: {fileID: 11400000, guid: 042c304eb0ab9e546869780a78a5e5f2, type: 2}
   boxSize: {x: 2, y: 2, z: 2}
-  _atkDamage: {fileID: 11400000, guid: 6b6ab291974143f49ba7fef018dcf6f6, type: 2}
+  _atkDamage: {fileID: 11400000, guid: 042c304eb0ab9e546869780a78a5e5f2, type: 2}
 --- !u!114 &1316514170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1476,7 +1479,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnHit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 214906144}
+        m_TargetAssemblyTypeName: Blade.Feedbacks.HitImpactFeedback, Assembly-CSharp
+        m_MethodName: CreateFeedback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDead:
     m_PersistentCalls:
       m_Calls: []
@@ -1903,6 +1918,9 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128
+  atkDamage: 10
+  _Stat: {fileID: 1029044994}
+  _atkdamage: {fileID: 11400000, guid: 6b6ab291974143f49ba7fef018dcf6f6, type: 2}
   boxSize: {x: 2, y: 1, z: 2}
 --- !u!114 &2146842304
 MonoBehaviour:

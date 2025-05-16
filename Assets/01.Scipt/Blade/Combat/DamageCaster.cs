@@ -1,6 +1,7 @@
 ﻿using Blade.Entities;
 using Member.Kmj._01.Scipt.Entity.AttackCompo;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Blade.Combat
 {
@@ -8,6 +9,9 @@ namespace Blade.Combat
     {
         [SerializeField] protected LayerMask whatIsEnemy;
 
+        //[SerializeField] protected float atkDamage;
+        [SerializeField] protected EntityStat _Stat;
+        [SerializeField] protected StatSO _atkdamage;
         protected Entity _owner;
 
         public virtual void InitCster(Entity owenr)

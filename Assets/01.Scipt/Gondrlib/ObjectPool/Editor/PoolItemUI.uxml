@@ -1,7 +1,0 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
-    <Style src="project://database/Assets/Gondrlib/ObjectPool/Editor/PoolItemUI.uss?fileID=7433441132597879392&amp;guid=5eddd9009f9ec4c43ac4fc49c566f660&amp;type=3#PoolItemUI" />
-    <ui:VisualElement name="PoolItem" class="pool_item" style="-unity-slice-scale: 0.9px;">
-        <ui:Label text="Name" name="ItemName" class="Item_name" style="overflow: hidden; flex-basis: 70px; flex-grow: 1; margin-right: 10px; text-overflow: ellipsis; margin-bottom: 5px;" />
-        <ui:Button text="X&#10;" name="DeleteBtn" class="det_btn" style="background-color: rgb(255, 0, 0); border-left-color: rgb(64, 0, 0); border-right-color: rgb(152, 0, 0); border-top-color: rgb(255, 0, 0); border-bottom-color: rgb(122, 0, 0);" />
-    </ui:VisualElement>
-</ui:UXML>

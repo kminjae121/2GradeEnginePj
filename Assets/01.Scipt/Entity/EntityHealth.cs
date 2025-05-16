@@ -49,8 +49,9 @@ public class EntityHealth : MonoBehaviour, IDamageable, IEntityComponet,IAfterIn
         currentHealth = Mathf.Clamp(currentHealth + current - previous, 1f, maxHealth);
     }
     
+    
 
-    public void ApplyDamage(float damage, Vector3 hitPoint, Vector3 hitNormal, Blade.Combat.AttackDataSO _atkData, Entity dealer)
+    public void ApplyDamage(float damage, AttackDataSO _atkData, Entity dealer)
     {
         if (_entity.IsDead) return;
 
@@ -60,6 +61,7 @@ public class EntityHealth : MonoBehaviour, IDamageable, IEntityComponet,IAfterIn
         //_feedbackData.LastEntityWhoHit = delear;
         //_feedbackData.LastStunLevel = StunLevel;
 
+        _entity.OnHit?.Invoke();    
         if (currentHealth <= 0)
         {
             Debug.Log("�ֱ�");

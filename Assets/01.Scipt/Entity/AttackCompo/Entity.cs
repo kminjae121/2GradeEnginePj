@@ -10,7 +10,7 @@ namespace Member.Kmj._01.Scipt.Entity.AttackCompo
     public abstract class Entity : MonoBehaviour,IDamageable
     {
 
-        public delegate void OnDamageHandler(float damage, Vector3 hitPoint, Vector3 hitNormal, Blade.Combat.AttackDataSO _atkData, Entity dealer);
+        public delegate void OnDamageHandler(float damage, AttackDataSO _atkData, Entity dealer);
         public event OnDamageHandler OnDamage;
 
         public UnityEvent OnHit;
@@ -66,9 +66,9 @@ namespace Member.Kmj._01.Scipt.Entity.AttackCompo
         protected abstract void HandleHit();
         protected abstract void HandleDead();
         protected abstract void HandleStun();
-        
 
-        public void ApplyDamage(float damage, Vector3 hitPoint, Vector3 hitNormal, Blade.Combat.AttackDataSO _atkData, Entity dealer)
-            =>OnDamage?.Invoke(damage,hitPoint, hitNormal,_atkData,dealer);
+        public void ApplyDamage(float damage, AttackDataSO _atkData, Entity dealer)
+            => OnDamage?.Invoke(damage, _atkData, dealer);
+
     }
 }

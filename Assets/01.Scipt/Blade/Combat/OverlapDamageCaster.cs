@@ -8,7 +8,6 @@ namespace _01.Scipt.Blade.Combat
     {
         [SerializeField] private Vector3 boxSize;
         
-        
 
         public override void CastDamage(Vector3 position, Vector3 direction, AttackDataSO attackData)
         {
@@ -22,7 +21,7 @@ namespace _01.Scipt.Blade.Combat
                 if (Obj.TryGetComponent(out IDamageable damage))
                 {
                     Debug.Log("공격됨");
-                    //   damage.ApplyDamage(atkDamage,Obj.transform.position,Obj.transform.forward,);
+                       damage.ApplyDamage(_atkdamage.Value,attackData,_owner);
                 }
                 else
                 {

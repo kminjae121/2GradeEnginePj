@@ -4,8 +4,7 @@ using UnityEngine;
 public class UpSkillDamageCaster : DamageCaster
 {
     [SerializeField] private Vector3 boxSize;
-        
-    [SerializeField] private StatSO _atkDamage;
+    
     
 
     public override void CastDamage(Vector3 position, Vector3 direction, AttackDataSO attackData)
