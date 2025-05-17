@@ -28,8 +28,6 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
 
     public bool useMouseDirection;
 
-    [field: SerializeField] public Transform swingTrm;
-
     private readonly int _attackSpeedHash = Animator.StringToHash("ATTACK_SPEED");
     private readonly int _comboCounterHash = Animator.StringToHash("COMBO_COUNTER");
 
@@ -122,6 +120,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
     
     private void HandleDamageCasterTrigger()
     {
+        print(damageCaster);
         damageCaster.CastDamage(_player.transform.position,Vector3.forward,attackDataList[ComboCounter]);
     }
 

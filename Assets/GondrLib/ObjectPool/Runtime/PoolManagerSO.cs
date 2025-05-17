@@ -20,6 +20,7 @@ namespace GondrLib.ObjectPool.Runtime
             foreach (var item in itemList)
             {
                 IPoolable poolable = item.prefab.GetComponent<IPoolable>();
+                
                 Debug.Assert(poolable != default(IPoolable), $"Pooling item {item.prefab.name} has no poolable component" );
 
                 GameObject newParent = new GameObject(poolable.PoolingType.poolingName);
@@ -27,6 +28,7 @@ namespace GondrLib.ObjectPool.Runtime
                 
                 Pool pool = new Pool(poolable, newParent.transform, item.initCount);
                 _pools.Add(item, pool); //딕셔너리에 추가한다.
+                Debug.unityLogger.Log(item.prefab.name + " created");
             }
         }
 

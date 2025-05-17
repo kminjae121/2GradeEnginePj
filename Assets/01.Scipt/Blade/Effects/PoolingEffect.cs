@@ -34,9 +34,9 @@ namespace Blade.Effects
 
         private void OnValidate()
         {
-            if (effectObject == null) return;
+            if (effectObject == null) return;   
             _playableVfx = effectObject.GetComponent<IPlayableVFX>();
-
+            
             if (_playableVfx == null)
             {
                 Debug.LogError("Error");

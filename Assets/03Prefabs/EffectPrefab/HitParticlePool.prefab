@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f157a113bb4639b6690445f0dfb8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <PoolingType>k__BackingField: {fileID: 11400000, guid: e26b3c525c8215645a9e0726ec42281a, type: 2}
-  effectObject: {fileID: 8983450272525339790}
+  <PoolingType>k__BackingField: {fileID: 11400000, guid: 9f0d0df41885d2c468f1fb46928f0cd8, type: 2}
+  effectObject: {fileID: 8235000547784083980, guid: f2c76359c83588346a1db620ad55512e, type: 3}
 --- !u!1001 &1072764028131149442
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4072308863457789973, guid: f2c76359c83588346a1db620ad55512e, type: 3}
       propertyPath: isOnPosition
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5199485526601488340, guid: f2c76359c83588346a1db620ad55512e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -131,10 +131,5 @@ PrefabInstance:
 --- !u!4 &5101296050821321046 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5199485526601488340, guid: f2c76359c83588346a1db620ad55512e, type: 3}
-  m_PrefabInstance: {fileID: 1072764028131149442}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8983450272525339790 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8235000547784083980, guid: f2c76359c83588346a1db620ad55512e, type: 3}
   m_PrefabInstance: {fileID: 1072764028131149442}
   m_PrefabAsset: {fileID: 0}

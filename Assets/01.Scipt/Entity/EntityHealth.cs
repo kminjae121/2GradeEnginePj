@@ -20,7 +20,6 @@ public class EntityHealth : MonoBehaviour, IDamageable, IEntityComponet,IAfterIn
     private void OnDestroy()
     {
         _statCompo.GetStat(hpStat).OnValueChange -= HandleHpChange;
-        _entity.OnDamage -= ApplyDamage;
     }
 
     private void Start()
@@ -39,7 +38,6 @@ public class EntityHealth : MonoBehaviour, IDamageable, IEntityComponet,IAfterIn
     {
         _statCompo.GetStat(hpStat).OnValueChange += HandleHpChange;
         currentHealth = maxHealth = _statCompo.GetStat(hpStat).Value;
-        _entity.OnDamage += ApplyDamage;
     }
 
     private void HandleHpChange(StatSO stat, float current, float previous)
@@ -53,6 +51,7 @@ public class EntityHealth : MonoBehaviour, IDamageable, IEntityComponet,IAfterIn
 
     public void ApplyDamage(float damage, AttackDataSO _atkData, Entity dealer)
     {
+        print("공격됨");
         if (_entity.IsDead) return;
 
         currentHealth = Mathf.Clamp(currentHealth -= damage, 0, maxHealth);
@@ -60,11 +59,9 @@ public class EntityHealth : MonoBehaviour, IDamageable, IEntityComponet,IAfterIn
         //_feedbackData.IsLastStopHit = isHit;
         //_feedbackData.LastEntityWhoHit = delear;
         //_feedbackData.LastStunLevel = StunLevel;
-
         _entity.OnHit?.Invoke();    
         if (currentHealth <= 0)
         {
-            Debug.Log("�ֱ�");
             _entity.OnDead?.Invoke();
         }
     }

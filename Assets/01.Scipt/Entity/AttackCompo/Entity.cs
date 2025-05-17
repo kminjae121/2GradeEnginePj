@@ -7,11 +7,8 @@ using UnityEngine.Events;
 
 namespace Member.Kmj._01.Scipt.Entity.AttackCompo
 {
-    public abstract class Entity : MonoBehaviour,IDamageable
+    public abstract class Entity : MonoBehaviour
     {
-
-        public delegate void OnDamageHandler(float damage, AttackDataSO _atkData, Entity dealer);
-        public event OnDamageHandler OnDamage;
 
         public UnityEvent OnHit;
         public UnityEvent OnDead;
@@ -66,9 +63,7 @@ namespace Member.Kmj._01.Scipt.Entity.AttackCompo
         protected abstract void HandleHit();
         protected abstract void HandleDead();
         protected abstract void HandleStun();
-
-        public void ApplyDamage(float damage, AttackDataSO _atkData, Entity dealer)
-            => OnDamage?.Invoke(damage, _atkData, dealer);
+        
 
     }
 }
