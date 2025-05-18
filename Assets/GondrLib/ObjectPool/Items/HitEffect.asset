@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolingName: HitEffect
   prefab: {fileID: 8158979324183018856, guid: f91e723afa292fd468a53d2e7299f3b1, type: 3}
-  initCount: 3
+  initCount: 1

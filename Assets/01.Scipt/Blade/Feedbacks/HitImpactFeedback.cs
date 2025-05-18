@@ -22,7 +22,8 @@ namespace Blade.Feedbacks
             _effect = _poolManager.Pop<PoolingEffect>(hitImpactItem);
             
            // Quaternion rotation = Quaternion.LookRotation(actionData.HitNormal * -1);
-            _effect.PlayVFX(Vector3.zero, Quaternion.identity);
+          // print(actionData.HitPoint);
+            _effect.PlayVFX(actionData.HitPoint, Quaternion.identity);
 
             DOVirtual.DelayedCall(playDuration, StopFeedback);
         }

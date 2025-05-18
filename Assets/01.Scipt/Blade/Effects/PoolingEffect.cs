@@ -22,6 +22,7 @@ namespace Blade.Effects
         public void SetUpPool(Pool pool)
         {
             _myPool = pool;
+            _playableVfx = effectObject.GetComponent<IPlayableVFX>();
         }
 
         public string PoolingName { get; }

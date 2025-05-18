@@ -1,5 +1,6 @@
 using System;
 using Blade.Combat;
+using Blade.Entities;
 using Member.Kmj._01.Scipt.Entity;
 using Member.Kmj._01.Scipt.Entity.AttackCompo;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class EntityHealth : MonoBehaviour, IDamageable, IEntityComponet,IAfterIn
     private Entity _entity;
     [SerializeField] private EntityStat _statCompo;
    // private EntityFeedbackData _feedbackData;
+   private ActionData _actionData;
 
     private void OnDestroy()
     {
@@ -32,12 +34,14 @@ public class EntityHealth : MonoBehaviour, IDamageable, IEntityComponet,IAfterIn
     {
         _entity = entity;
         _statCompo = entity.GetCompo<EntityStat>();
+        _actionData = entity.GetCompo<ActionData>();
     }
 
     public void AfterInit()
     {
         _statCompo.GetStat(hpStat).OnValueChange += HandleHpChange;
         currentHealth = maxHealth = _statCompo.GetStat(hpStat).Value;
+        
     }
 
     private void HandleHpChange(StatSO stat, float current, float previous)
@@ -49,16 +53,19 @@ public class EntityHealth : MonoBehaviour, IDamageable, IEntityComponet,IAfterIn
     
     
 
-    public void ApplyDamage(float damage, AttackDataSO _atkData, Entity dealer)
+    public void ApplyDamage(float damage, Vector3 hitPoint,AttackDataSO _atkData, Entity dealer)
     {
         print("공격됨");
         if (_entity.IsDead) return;
 
         currentHealth = Mathf.Clamp(currentHealth -= damage, 0, maxHealth);
-
+    
+        
         //_feedbackData.IsLastStopHit = isHit;
         //_feedbackData.LastEntityWhoHit = delear;
         //_feedbackData.LastStunLevel = StunLevel;
+        _actionData.HitPoint = hitPoint;
+        
         _entity.OnHit?.Invoke();    
         if (currentHealth <= 0)
         {

@@ -1,4 +1,5 @@
-﻿using Member.Kmj._01.Scipt.Entity.AttackCompo;
+﻿using System;
+using Member.Kmj._01.Scipt.Entity.AttackCompo;
 using UnityEngine;
 
 namespace Blade.Entities
@@ -13,6 +14,11 @@ namespace Blade.Entities
         public void Initialize(Entity entity)
         {
             _entity = entity;
+        }
+
+        private void Update()
+        {
+            print(HitPoint);
         }
     }
 }
