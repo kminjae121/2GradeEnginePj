@@ -25,7 +25,6 @@ namespace _01.Scipt.Blade.Combat
             foreach (var Obj in collider)
                 if (Obj.TryGetComponent(out IDamageable damage))
                 {
-                   // Obj.GetComponentInChildren<ActionData>().HitPoint = Obj.transform.position;
                     damage.ApplyDamage(_atkdamage.Value,Obj.transform.position,attackData,null);
                     Debug.Log("공격됨");
                 }

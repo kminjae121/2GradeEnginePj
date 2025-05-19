@@ -1,16 +1,24 @@
 using System;
+using Blade.Effects;
+using Blade.Enemies;
+using Blade.Entities;
+using GondrLib.Dependencies;
 using GondrLib.ObjectPool.Runtime;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Spawn : MonoBehaviour
 {
-    [SerializeField] private string enemyPoolName = "Enemy";
+    
     public Transform[] spawnPoints;
-
     private int level;
     private float timer;
+    
+    [SerializeField] private PoolingItemSO _enemyItem;
+    [Inject]  private PoolManagerMono _poolManager;
 
+    private Enemy _enemy;
+    
     private void Awake()
     {
         spawnPoints = GetComponentsInChildren<Transform>();
@@ -36,6 +44,8 @@ public class Spawn : MonoBehaviour
 
     private void SpawnEnemy()
     {
+        _enemy = _poolManager.Pop<Enemy>(_enemyItem);
+        
        /* IPoolable enemy = PoolManager.Instance.Pop(enemyPoolName);
 
         if (enemy == null) return;
@@ -45,6 +55,7 @@ public class Spawn : MonoBehaviour
         enemyObj.transform.position = spawnPoint.position;
         enemyObj.transform.rotation = spawnPoint.rotation;
         enemyObj.SetActive(true);*/
+       
     }
 }
 

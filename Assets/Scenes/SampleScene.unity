@@ -1283,7 +1283,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bd54ae3d2b502dd409a6e4b2424636be, type: 2}
   - {fileID: 11400000, guid: d1cef12cc51b29746a407f4ae1e8c024, type: 2}
   - {fileID: 11400000, guid: a4ee99b0801f4504b9b24400224da6af, type: 2}
-  comboWindow: 0.45
+  comboWindow: 0.6
   _whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128
