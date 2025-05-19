@@ -27,12 +27,12 @@ namespace a
                 if (hit.collider.TryGetComponent(out IDamageable damageable))
                 {
                     float damage = 5f;
-                    Debug.Log("아잉");
+                    
                 }
             }
             else
             {
-                Debug.Log("뿌잉");
+               
             }
         }
         

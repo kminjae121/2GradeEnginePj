@@ -17,6 +17,8 @@ public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponet
 
     public event Action OnStrongAttackTrigger;
 
+    public event Action PowerAttackTrigger;
+
     public event Action OnBarrierPressed;
     public event Action OnAttackDash;
 
@@ -64,7 +66,8 @@ public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponet
     private void CancelNextAttack() => OnAttackCancel?.Invoke();
 
     private void HighAttack() => OnHighAttack?.Invoke();
-    
+
+    private void PowerAttack() => PowerAttackTrigger?.Invoke();
     private void EndLastAttackEffect() => LastAttackEffectEndTrigger?.Invoke();
 
     private void Attack()

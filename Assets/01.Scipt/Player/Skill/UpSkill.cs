@@ -60,7 +60,16 @@ namespace _01.Scipt.Player.Skill
 
             foreach (var item in collider)
             {
-                item.GetComponentInChildren<Rigidbody>().AddForce(Vector3.up * 7, ForceMode.Impulse);
+                if (item.TryGetComponent(out IDamageable damage))
+                {
+                    damage.ApplyDamage(_skillDamage.Value,item.transform.position,null,null);
+                    item.GetComponentInChildren<Rigidbody>().AddForce(Vector3.up * 7, ForceMode.Impulse);
+                    Debug.Log("공격됨");
+                }
+                else
+                {
+                    print("왔는데 없음");
+                }
             }
             
         }

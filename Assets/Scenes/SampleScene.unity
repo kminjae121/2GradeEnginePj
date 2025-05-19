@@ -1310,6 +1310,7 @@ GameObject:
   - component: {fileID: 1662591776}
   - component: {fileID: 1662591777}
   - component: {fileID: 1662591778}
+  - component: {fileID: 1662591779}
   m_Layer: 0
   m_Name: SkillCompo
   m_TagString: Untagged
@@ -1369,6 +1370,29 @@ MonoBehaviour:
   <skillCoolTime>k__BackingField: 4
   <currentcoolTime>k__BackingField: 0
   damageCaster: {fileID: 1313654576}
+--- !u!114 &1662591779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662591775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b8456f6c644e9fb51ea2b062c538c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _triggerCompo: {fileID: 422754565}
+  _whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 128
+  _skillDamage: {fileID: 0}
+  _stat: {fileID: 1029044994}
+  _skillSize: {x: 3, y: 3, z: 3}
+  _entity: {fileID: 4147978964148158537}
+  <skillCoolTime>k__BackingField: 10
+  <currentcoolTime>k__BackingField: 10
+  damageCaster: {fileID: 0}
 --- !u!1 &1699039749
 GameObject:
   m_ObjectHideFlags: 0
@@ -1382,6 +1406,8 @@ GameObject:
   - component: {fileID: 1699039751}
   - component: {fileID: 1699039756}
   - component: {fileID: 1699039757}
+  - component: {fileID: 1699039758}
+  - component: {fileID: 1699039759}
   m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
@@ -1521,6 +1547,43 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1699039758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699039749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad958a3d53db90d4ea16c5e54806578c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpStat: {fileID: 11400000, guid: c7d72c92d575eb8408a9f8d4fb344732, type: 2}
+  maxHealth: 0
+  <currentHealth>k__BackingField: 0
+  _statCompo: {fileID: 341581430}
+--- !u!65 &1699039759
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699039749}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1782276425
 GameObject:
   m_ObjectHideFlags: 0
@@ -1969,8 +2032,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2118975885}
-  - component: {fileID: 2118975886}
-  - component: {fileID: 2118975888}
   m_Layer: 7
   m_Name: Health
   m_TagString: Untagged
@@ -1993,43 +2054,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1699039753}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2118975886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118975884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad958a3d53db90d4ea16c5e54806578c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpStat: {fileID: 11400000, guid: c7d72c92d575eb8408a9f8d4fb344732, type: 2}
-  maxHealth: 0
-  <currentHealth>k__BackingField: 0
-  _statCompo: {fileID: 1029044994}
---- !u!65 &2118975888
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118975884}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2146842304
 MonoBehaviour:
   m_ObjectHideFlags: 0

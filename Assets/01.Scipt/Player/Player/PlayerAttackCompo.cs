@@ -120,10 +120,9 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
     
     private void HandleDamageCasterTrigger()
     {
-        print(damageCaster);
         damageCaster.CastDamage(_player.transform.position,Vector3.forward,attackDataList[ComboCounter]);
     }
-
+    
     public void Attack()
     {
         var comboCounterOver = ComboCounter > 2;

@@ -26,11 +26,11 @@ namespace _01.Scipt.Blade.Combat
                 if (Obj.TryGetComponent(out IDamageable damage))
                 {
                     damage.ApplyDamage(_atkdamage.Value,Obj.transform.position,attackData,null);
-                    Debug.Log("공격됨");
+                    
                 }
                 else
                 {
-                    print("왔는데 없음");
+                    return;
                 }
         }
         
