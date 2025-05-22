@@ -27,8 +27,7 @@ namespace GondrLib.ObjectPool.Runtime
                 newParent.transform.SetParent(_rootTrm);
                 
                 Pool pool = new Pool(poolable, newParent.transform, item.initCount);
-                _pools.Add(item, pool); //딕셔너리에 추가한다.
-                Debug.unityLogger.Log(item.prefab.name + " created");
+                _pools.Add(item, pool); //딕셔너리에 추가한다.   
             }
         }
 

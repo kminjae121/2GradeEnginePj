@@ -87,6 +87,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
         _player.PlayerInput.OnChargeAttackPressed += StartCharge;
         _player.PlayerInput.OnChargeAttackCanceled += StopCharge;
         _triggerCompo.LastAttackEffectEndTrigger += HandleStopFinalAttackTrigger;
+        _triggerCompo.OnPowerAttackVFXTrigger += HandlePowerAttackTrigger;
     }
 
 
@@ -101,6 +102,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
         _triggerCompo.OnAttackFinalVFXTrigger -= HandleFinalAttackTrigger;
         _player.PlayerInput.OnChargeAttackPressed -= StartCharge;
         _player.PlayerInput.OnChargeAttackCanceled -= StopCharge;
+        _triggerCompo.OnPowerAttackVFXTrigger -= HandlePowerAttackTrigger;
     }
     
     
@@ -116,6 +118,11 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
     private void HandleStopFinalAttackTrigger()
     {
         _vfxCompo.StopVfx("FinalAttack");
+    }
+
+    private void HandlePowerAttackTrigger()
+    {
+        _vfxCompo.PlayVfx("PowerEffect", _entity.transform.position, Quaternion.identity);
     }
     
     private void HandleDamageCasterTrigger()

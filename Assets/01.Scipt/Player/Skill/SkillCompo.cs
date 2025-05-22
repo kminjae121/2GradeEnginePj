@@ -14,6 +14,7 @@ public abstract class SkillCompo : MonoBehaviour
     [SerializeField] protected EntityStat _stat;
 
     [SerializeField] protected Vector3 _skillSize;
+    [SerializeField] protected float _circleSize;
 
     [SerializeField] protected Entity _entity;
 

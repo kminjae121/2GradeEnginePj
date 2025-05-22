@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85592b5df258a0a4cbaa2a3c46f361e8, type: 3}
   m_Name: StrongAttackState
   m_EditorClassIdentifier: 
-  stateName: STRONGATTACK
-  className: PlayerStrongAttackState
-  animParamName: StrongAttack
-  animationHash: 1970486654
+  stateName: POWER
+  className: PlayerPowerUpState
+  animParamName: Strong
+  animationHash: -1650472147

@@ -11,13 +11,12 @@ namespace _01.Scipt.Player.Skill
         private Player.Player _player;
         
         private ActionData _actionData;
-
-        [SerializeField] private UpSkillDamageCaster damageCaster;
+        
         public override void GetSkill()
         {
             _player = _entity as Player.Player;
             updamage = _stat.GetStat(_skillDamage).Value;
-            _player.PlayerInput.OnHighAttackPresssed += HandleHighAttack;
+            _player.PlayerInput.OnStrongAttackPressed += HandleHighAttack;
             _triggerCompo.PowerAttackTrigger += Skill;
         }
 
@@ -54,7 +53,8 @@ namespace _01.Scipt.Player.Skill
                 if (item.TryGetComponent(out IDamageable damage))
                 {
                     damage.ApplyDamage(_skillDamage.Value,item.transform.position,null,null);
-                    item.GetComponentInChildren<Rigidbody>().AddForce(Vector3.up * 3, ForceMode.Impulse);
+                    
+                    item.GetComponentInChildren<Rigidbody>().AddForce(Vector3.up * 2.3f, ForceMode.Impulse);
                     Debug.Log("공격됨");
                 }
                 else
