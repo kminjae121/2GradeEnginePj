@@ -20,7 +20,6 @@ namespace Blade.BT.Actions
             
             EntityAnimator.Value.SetParam(Animator.StringToHash(OldBool.Value), false);
             EntityAnimator.Value.SetParam(Animator.StringToHash(NewBool.Value), true);
-             
 
             OldBool.Value = NewBool.Value; //이전값을 새로운 값으로 갱신해야 된다.
             return Status.Success; //성공을 리턴하면 이걸로 끝이다.

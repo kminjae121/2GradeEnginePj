@@ -1,38 +1,40 @@
-using Blade.Entities;
 using System;
+using Blade.Entities;
 using Unity.Behavior;
 using Unity.Properties;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
 
-[Serializable, GeneratePropertyBag]
-[NodeDescription(name: "WaitForAnimation", story: "Wait for end [Trigger]", category: "Enemy/Animation", id: "5d24179cb10cbc818feaa3c938c3b89a")]
-public partial class WaitForAnimationAction : Action
+namespace Blade.BT.Actions
 {
-    [SerializeReference] public BlackboardVariable<EntityAnimatorTrigger> Trigger;
-
-
-    private bool _isTrriggered;
-    protected override Status OnStart()
+    [Serializable, GeneratePropertyBag]
+    [NodeDescription(name: "WaitForAnimation", story: "wait for end [Trigger]", category: "Enemy/Animation", id: "77e0cb18d819ca86bb663538f1f271f9")]
+    public partial class WaitForAnimationAction : Action
     {
-        _isTrriggered = false;
-        Trigger.Value.OnAnimationEndTrigger += HandleAnimationEnd;
-        return Status.Running;
-    }
+        [SerializeReference] public BlackboardVariable<EntityAnimatorTrigger> Trigger;
 
-    private void HandleAnimationEnd() => _isTrriggered = true;
+        private bool _isTriggered;
+        
+        protected override Status OnStart()
+        {
+            _isTriggered = false;
+            Trigger.Value.OnAnimationEndTrigger += HandleAnimationEnd;
+            return Status.Running;
+        }
 
-    protected override Status OnUpdate()
-    {
-        if ((_isTrriggered))
-            return Status.Success;
+        protected override Status OnUpdate()
+        {
+            if(_isTriggered)
+                return Status.Success;
+            return Status.Running;
+        }
 
-        return Status.Running;
-    }
+        protected override void OnEnd()
+        {
+            Trigger.Value.OnAnimationEndTrigger -= HandleAnimationEnd;
+        }
 
-    protected override void OnEnd()
-    {
-        Trigger.Value.OnAnimationEndTrigger -= HandleAnimationEnd;
+        private void HandleAnimationEnd() => _isTriggered = true;
     }
 }
 

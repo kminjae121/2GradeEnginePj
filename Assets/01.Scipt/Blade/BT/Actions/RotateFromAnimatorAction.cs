@@ -7,7 +7,7 @@ using Action = Unity.Behavior.Action;
 using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "RotateFromAnimator", story: "[Movement] rotate to [Target] with [Trigger]", category: "Enemy/Move", id: "677b4f5a039effbe748977bfded41b31")]
+[NodeDescription(name: "RotateFromAnimator", story: "[Movement] rotate to [Target] with [Trigger]", category: "Enemy/Move", id: "e83c5432e2ddb3dca0d377e36445418d")]
 public partial class RotateFromAnimatorAction : Action
 {
     [SerializeReference] public BlackboardVariable<NavMovement> Movement;
@@ -15,26 +15,28 @@ public partial class RotateFromAnimatorAction : Action
     [SerializeReference] public BlackboardVariable<EntityAnimatorTrigger> Trigger;
 
     private bool _isRotate = false;
+    
     protected override Status OnStart()
     {
         Trigger.Value.OnManualRotationTrigger += HandleManualRotation;
         return Status.Running;
     }
 
-    private void HandleManualRotation(bool isRotate) => _isRotate = isRotate;
     protected override Status OnUpdate()
     {
-        if(_isRotate)
+        if (_isRotate)
         {
-            Movement.Value.LoookAtTarget(Target.Value.position);
+            Movement.Value.LookAtTarget(Target.Value.position);
         }
-        return Status.Success;
+        return Status.Running;
     }
 
     protected override void OnEnd()
     {
         Trigger.Value.OnManualRotationTrigger -= HandleManualRotation;
     }
-}
 
+    private void HandleManualRotation(bool isRotate)  => _isRotate = isRotate;
+    
+}
 

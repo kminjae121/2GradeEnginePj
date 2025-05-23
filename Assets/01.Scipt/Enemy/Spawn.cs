@@ -1,6 +1,5 @@
 using System;
 using Blade.Effects;
-using Blade.Enemies;
 using Blade.Entities;
 using GondrLib.Dependencies;
 using GondrLib.ObjectPool.Runtime;
@@ -17,7 +16,7 @@ public class Spawn : MonoBehaviour
     [SerializeField] private PoolingItemSO _enemyItem;
     [Inject]  private PoolManagerMono _poolManager;
 
-    private Enemy _enemy;
+    //private Enemy _enemy;
     
     private void Awake()
     {
@@ -44,7 +43,7 @@ public class Spawn : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        _enemy = _poolManager.Pop<Enemy>(_enemyItem);
+        //_enemy = _poolManager.Pop<Enemy>(_enemyItem);
         
        /* IPoolable enemy = PoolManager.Instance.Pop(enemyPoolName);
 

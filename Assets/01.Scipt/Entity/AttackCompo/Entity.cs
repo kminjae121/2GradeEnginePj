@@ -59,6 +59,9 @@ namespace Member.Kmj._01.Scipt.Entity.AttackCompo
 
         public T GetCompo<T>() where T : IEntityComponet
             => (T)_componets.GetValueOrDefault(typeof(T));
+        
+        public IEntityComponet GetCompo(Type type)
+            => _componets.GetValueOrDefault(type);
 
         protected abstract void HandleHit();
         protected abstract void HandleDead();
