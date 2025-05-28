@@ -24,6 +24,7 @@ namespace GondrLib.ObjectPool.Runtime
                 Debug.Assert(poolable != default(IPoolable), $"Pooling item {item.prefab.name} has no poolable component" );
 
                 GameObject newParent = new GameObject(poolable.PoolingType.poolingName);
+                
                 newParent.transform.SetParent(_rootTrm);
                 
                 Pool pool = new Pool(poolable, newParent.transform, item.initCount);

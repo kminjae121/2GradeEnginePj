@@ -9,7 +9,7 @@ namespace Blade.Combat
     {
         [SerializeField] protected LayerMask whatIsEnemy;
 
-        //[SerializeField] protected float atkDamage;
+        public float atkDamage;
         [SerializeField] protected EntityStat _Stat;
         [SerializeField] protected StatSO _atkdamage;
         protected Entity _owner;

@@ -1,60 +1,88 @@
 using System;
-using Blade.Effects;
-using Blade.Entities;
+using System.Collections;
+using _01.Scipt.Blade.Entities;
 using GondrLib.Dependencies;
 using GondrLib.ObjectPool.Runtime;
+using TMPro;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using UnityEngine.Serialization;
 
-public class Spawn : MonoBehaviour
+namespace _01.Scipt.Enemy
 {
-    
-    public Transform[] spawnPoints;
-    private int level;
-    private float timer;
-    
-    [SerializeField] private PoolingItemSO _enemyItem;
-    [Inject]  private PoolManagerMono _poolManager;
-
-    //private Enemy _enemy;
-    
-    private void Awake()
+    public class Spawn : MonoBehaviour
     {
-        spawnPoints = GetComponentsInChildren<Transform>();
-    }
-
-    private void Start()
-    {
+    
+        public Transform[] spawnPoints;
+        private int _level = 0;
+        private int _killCount = 0;
+    
+        [SerializeField] private PoolingItemSO _enemyItem;
+        [SerializeField] private TextMeshProUGUI _timetxt;
+        [Inject]  private PoolManagerMono _poolManager;
+        [SerializeField] private int _currentTime;
+        private bool _isTimer;
         
-    }
+        private float _startTime;
+        private float _countdownDuration = 10f; 
+        
+        private PollingEnemy _enemy;
 
-    private void Update()
-    {
-        timer += Time.deltaTime;
 
-        level = Mathf.FloorToInt(GameManager.instance.gameTime / 10f);
-
-        if (timer > (level == 0 ? 0.5f : 0.2f))
+        private void Update()
         {
-            timer = 0;
+            if (GameManager.instance.killCount == _killCount)
+            {
+                GameManager.instance.killCount = 0;
+                _killCount += 3;
+                _level++;
+                _isTimer = true;
+                _startTime = Time.time; 
+                print("턴 종료");
+                StartCoroutine(SpawnTime());
+            }
+
+            if (_isTimer)
+            {
+                float timeLeft = _countdownDuration - (Time.time - _startTime);
+
+                if (timeLeft <= 0)
+                {
+                    _timetxt.text = "";
+                    timeLeft = 0;
+                    _isTimer = false;
+                }
+
+                _timetxt.text = $"남은 시간 : {(int)timeLeft}";
+            }
+            else
+            {
+                _timetxt.text = "";
+            }
+        }
+
+        private IEnumerator SpawnTime()
+        {
+            yield return new WaitForSeconds(10f);
+            _isTimer = false;
             SpawnEnemy();
         }
-    }
 
-    private void SpawnEnemy()
-    {
-        //_enemy = _poolManager.Pop<Enemy>(_enemyItem);
-        
-       /* IPoolable enemy = PoolManager.Instance.Pop(enemyPoolName);
+        private void SpawnEnemy()
+        {
+            int a = 0;
+            
+            for (int i = 0; i < _killCount; ++i)
+            {
+                _enemy = _poolManager.Pop<PollingEnemy>(_enemyItem);
+                _enemy.transform.position = spawnPoints[a].position;
 
-        if (enemy == null) return;
-        
-        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        GameObject enemyObj = enemy.GetGameObject();
-        enemyObj.transform.position = spawnPoint.position;
-        enemyObj.transform.rotation = spawnPoint.rotation;
-        enemyObj.SetActive(true);*/
-       
+                ++a;
+                if (a >= spawnPoints.Length)
+                {
+                    a = 0;
+                }
+            }
+        }
     }
 }
 

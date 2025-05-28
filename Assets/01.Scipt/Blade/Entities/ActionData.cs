@@ -18,7 +18,6 @@ namespace Blade.Entities
 
         private void Update()
         {
-            print(HitPoint);
         }
     }
 }

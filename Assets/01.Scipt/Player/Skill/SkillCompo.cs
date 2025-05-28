@@ -17,9 +17,7 @@ public abstract class SkillCompo : MonoBehaviour
     [SerializeField] protected float _circleSize;
 
     [SerializeField] protected Entity _entity;
-
-
-
+    
     [field :SerializeField] public float skillCoolTime { get; set; }
     [field: SerializeField] public float currentcoolTime { get; private set; }
 

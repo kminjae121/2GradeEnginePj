@@ -1,9 +1,10 @@
+using GondrLib.Dependencies;
 using Member.Kmj._01.Scipt.Entity.AttackCompo;
 using UnityEngine;
 
 namespace _01.Scipt.Player.Player
 {
-    public class Player : Entity
+    public class Player : Entity, IDependencyProvider
     {
         [field: SerializeField] public PlayerInputSO PlayerInput { get; private set; }
 
@@ -30,7 +31,8 @@ namespace _01.Scipt.Player.Player
 
         [SerializeField] private LayerMask _whatIsEnemey;
     
-    
+        [Provide]
+        public Player ProvidePlayer() => this;
     
         private EntityStateMachine _stateMachine;
         public bool isUseSheld { get; private set; }

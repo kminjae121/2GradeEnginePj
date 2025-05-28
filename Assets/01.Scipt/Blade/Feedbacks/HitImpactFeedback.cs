@@ -18,7 +18,7 @@ namespace Blade.Feedbacks
         private PoolingEffect _effect;
         
         public override void CreateFeedback()
-        {
+        { 
             _effect = _poolManager.Pop<PoolingEffect>(hitImpactItem);
             
            // Quaternion rotation = Quaternion.LookRotation(actionData.HitNormal * -1);

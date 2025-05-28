@@ -52,8 +52,9 @@ namespace Member.Kmj._01.Scipt.Entity.AttackCompo
         public IEntityComponet Getcompo(Type type)
             => _componets.GetValueOrDefault(type);
 
-        private void InitializeComponts()
+        protected void InitializeComponts()
         {
+            print("이니셜라이즈 됨");
             _componets.Values.ToList().ForEach(comp => comp.Initialize(this));
         }
 

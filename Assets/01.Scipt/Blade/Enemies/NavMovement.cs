@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Blade.Combat;
 using Blade.Core;
 using Blade.Entities;
@@ -12,15 +13,23 @@ namespace Blade.Enemies
 {
     public class NavMovement : MonoBehaviour, IEntityComponet, IKnockBackable, IAfterInit
     {
-        [SerializeField] private NavMeshAgent agent;
+        [field : SerializeField] public NavMeshAgent agent {get; private set;}
         
-
+        private bool _isAirborne;
         private EntityStat _statCompo;
 
+        [SerializeField] private LayerMask _whatIsGround;
         [SerializeField] private StatSO _moveSpeedStat;
-        [SerializeField] private float stopOffset = 0.05f; //거리에 대한 오프셋
+        [SerializeField] private float stopOffset = 0.05f;
         [SerializeField] private float rotateSpeed = 10f;
         private Entity _entity;
+        
+        
+        private float airborneTime = 0f;
+        private float airborneDuration = 1f;
+        private float jumpHeight = 3f;
+        
+        private Vector3 basePosition;
         
         public bool IsArrived => !agent.pathPending && agent.remainingDistance < agent.stoppingDistance + stopOffset;
         public float RemainDistance => agent.pathPending ? -1 : agent.remainingDistance;
@@ -56,6 +65,7 @@ namespace Blade.Enemies
             }
         }
         
+
         /// <summary>
         /// 바라봐야할 최종 로테이션을 반환합니다.
         /// </summary>
@@ -80,27 +90,16 @@ namespace Blade.Enemies
 
             return lookRotation;
         }
-
+        
+        
         public void SetStop(bool isStop) => agent.isStopped = isStop;
+
         public void SetVelocity(Vector3 velocity) => agent.velocity = velocity; 
         public void SetSpeed(float speed) => agent.speed = speed;
         public void SetDestination(Vector3 destination) => agent.SetDestination(destination);
         
-        public void KnockBack(Vector3 force, float duration)
-        {
-            SetStop(true); //네비게이션을 정지시키고
-            Vector3 destination = GetKnockBackEndPoint(force);
-            //여기서부터는 다음주에 구현하자.
-            Vector3 delta = destination - _entity.transform.position; //거리 측정
-            float kbDuration = delta.magnitude * duration / force.magnitude; //비례식으로 시간 측정
-
-            _entity.transform.DOMove(destination, kbDuration).SetEase(Ease.OutCirc)
-                .OnComplete(() =>
-                {
-                    agent.Warp(transform.position); //이부분은 주석처리했다가 풀어서 결과를 보자.
-                    SetStop(false);
-                });
-        }
+        
+        
 
         private Vector3 GetKnockBackEndPoint(Vector3 force)
         {
@@ -112,12 +111,27 @@ namespace Blade.Enemies
                 return hitPoint;
             }
 
-            return _entity.transform.position + force; //장애물이 없다면 순수하게 밀어낸 위치까지 이동.
+            return _entity.transform.position + force;
+        }
+        
+        public bool IsGrounded()
+        {
+            return Physics.Raycast(transform.position, Vector3.down, 1.1f,_whatIsGround);
         }
 
-        public void KnockBack(System.Numerics.Vector3 force, float duration)
+        public void KnockBack(Vector3 force, float duration)
         {
-            throw new NotImplementedException();
+            SetStop(true); 
+            Vector3 destination = GetKnockBackEndPoint(force);
+            Vector3 delta = destination - _entity.transform.position; 
+            float kbDuration = delta.magnitude * duration / force.magnitude;
+
+            _entity.transform.DOMove(destination, kbDuration).SetEase(Ease.OutCirc)
+                .OnComplete(() =>
+                {
+                    agent.Warp(transform.position);
+                    SetStop(false);
+                });
         }
     }
 }

@@ -14,8 +14,6 @@ public class PlayerRotationWithCam : MonoBehaviour
     private void Start()
     {
         _movement = orientation.GetComponentInChildren<CharacterMovement>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     private void Update()

@@ -16,6 +16,7 @@ public class EntityHealth : MonoBehaviour, IDamageable, IEntityComponet,IAfterIn
 
     private Entity _entity;
     [SerializeField] private EntityStat _statCompo;
+    
    // private EntityFeedbackData _feedbackData;
    private ActionData _actionData;
 

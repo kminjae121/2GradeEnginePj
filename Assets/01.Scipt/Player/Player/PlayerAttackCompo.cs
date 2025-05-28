@@ -60,12 +60,6 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireCube(transform.position, _boxsize);
-        Gizmos.color = Color.white;
-    }
 
     public void Initialize(Entity entity)
     {
@@ -172,10 +166,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
     {
         IsAttack = true;
     }
-
-    private void AttackMove()
-    {
-    }
+    
     
     
     public AttackDataSO GetCurrentAttackData()
@@ -196,6 +187,12 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
             if (attackHoldTime >= MaxHoldTime) _player.isUsePowerAttack = true;
             yield return null;
         }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(transform.position, _boxsize);
+        Gizmos.color = Color.white;
     }
     
 }

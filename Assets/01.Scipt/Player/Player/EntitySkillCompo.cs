@@ -9,13 +9,17 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class EntitySkillCompo : MonoBehaviour, IEntityComponet
+public class EntitySkillCompo : MonoBehaviour, IEntityComponet, IAfterInit
 {
     [SerializeField] private List<SkillSO> _skillList;
 
-
+    public float skillDamage { get; set; }
+    
+    [SerializeField] private StatSO _skilldamageSo;
+    
     public Dictionary<string, SkillCompo> SkillList;
 
+    private EntityStat _statCompo;
     private Player player;
     public virtual void Initialize(Entity entity)
     {
@@ -92,5 +96,21 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponet
     private void OnDestroy()
     {
         DefaltSkill();
+        StatSO targetStat = _statCompo.GetStat(_skilldamageSo);
+        Debug.Assert(targetStat != null, $"{_skilldamageSo.statName} stat could not be found");
+        targetStat.OnValueChange -= HandleSkillChange;
+    }
+
+    private void HandleSkillChange(StatSO stat, float currentValue, float previousValue)
+    {
+        skillDamage = currentValue;
+    }
+
+    public void AfterInit()
+    {
+        StatSO targetStat = _statCompo.GetStat(_skilldamageSo);
+        Debug.Assert(targetStat != null, $"{_skilldamageSo.statName} stat could not be found");
+        targetStat.OnValueChange += HandleSkillChange;
+        skillDamage = targetStat.Value;
     }
 }

@@ -9,15 +9,13 @@ namespace _01.Scipt.Blade.Combat
     {
         [SerializeField] private Vector3 boxSize;
 
-
         private void Awake()
         {
-            
+            atkDamage = _Stat.GetStat(_atkdamage).Value;
         }
 
         public override void CastDamage(Vector3 position, Vector3 direction, AttackDataSO attackData)
         {
-            print("득옴");   
             var collider = Physics.OverlapBox(transform.position, boxSize,
                 Quaternion.identity,whatIsEnemy);
 
@@ -25,8 +23,8 @@ namespace _01.Scipt.Blade.Combat
             foreach (var Obj in collider)
                 if (Obj.TryGetComponent(out IDamageable damage))
                 {
-                    damage.ApplyDamage(_atkdamage.Value,Obj.transform.position,attackData,null);
-                    
+                    damage.ApplyDamage(atkDamage,Obj.transform.position,attackData,null);
+                    CameraShakingManager.instance.ShakeCam(0.1f,0.6f,5,20);
                 }
                 else
                 {

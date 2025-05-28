@@ -6,11 +6,12 @@ using Random = UnityEngine.Random;
 public class LevelSystem : MonoBehaviour
 {
     private RectTransform _rect;
-    private GameObject[] itemList;
+    [SerializeField] private GameObject[] itemList;
 
     private void Awake()
     {
         _rect = GetComponent<RectTransform>();
+        Hide();
     }
 
     public void Show()
@@ -18,6 +19,8 @@ public class LevelSystem : MonoBehaviour
         RandomItem();
         _rect.localScale = Vector3.one;
         Time.timeScale = 0;
+        Cursor.visible = true;         
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void Hide()
@@ -25,6 +28,8 @@ public class LevelSystem : MonoBehaviour
         _rect.localScale = Vector3.zero;
         Time.timeScale = 1;
         itemList.ToList().ForEach(UI => UI.SetActive(false));
+        Cursor.visible = false;         
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void RandomItem()

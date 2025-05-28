@@ -40,7 +40,7 @@ public abstract class PlayerCanAttackState : PlayerState
 
     private void HandleAttackKeyPressed()
     {
-        if (_player._attackCompo.IsAttack == false)
+        if (_player._attackCompo.IsAttack == false && _player._isSkilling == false)
         {
             _player.ChangeState("ATTACK");
         }
