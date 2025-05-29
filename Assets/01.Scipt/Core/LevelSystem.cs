@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -7,7 +8,7 @@ public class LevelSystem : MonoBehaviour
 {
     private RectTransform _rect;
     public static LevelSystem instance;
-    [field: SerializeField] public GameObject[] itemList {get; private set;}
+    [field: SerializeField] public List<GameObject> itemList { get; set; }
 
     private void Awake()
     {
@@ -36,7 +37,7 @@ public class LevelSystem : MonoBehaviour
 
     public void RandomItem()
     {
-        int maxCount = itemList.Length;
+        int maxCount = itemList.Count;
 
         int[] ran = new int[3];
         

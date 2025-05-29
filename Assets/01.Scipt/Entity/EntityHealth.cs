@@ -42,7 +42,12 @@ namespace Blade.Combat
         private void HandleMaxHPChanged(StatSO stat, float currentvalue, float previousvalue)
         {
             //float changed = currentvalue - previousvalue;
-            currentHealth += currentvalue;
+            currentHealth = currentvalue;
+
+            if (currentHealth >= maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
             //currentHealth = Mathf.Clamp(currentvalue + changed, 0, maxHealth);
         }
 

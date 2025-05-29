@@ -2850,6 +2850,7 @@ MonoBehaviour:
   _enemyItem: {fileID: 11400000, guid: fd328e62bfdbe914da6b8494d9ecb7ad, type: 2}
   _timetxt: {fileID: 1347736910}
   _currentTime: 0
+  _countdownDuration: 3
 --- !u!1 &809236845
 GameObject:
   m_ObjectHideFlags: 0
@@ -3080,6 +3081,7 @@ MonoBehaviour:
   _skillSO:
   - {fileID: 11400000, guid: 8175188295143d64db93d6d888feb6dc, type: 2}
   _skillCompo: {fileID: 1662591777}
+  _countIdx: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -3438,7 +3440,7 @@ MonoBehaviour:
     overrideBaseValue: 10
   - stat: {fileID: 11400000, guid: 7e73696e4a57a814fa4438aab51d73b2, type: 2}
     isUseOverride: 1
-    overrideBaseValue: 10
+    overrideBaseValue: 4
 --- !u!1 &1057196675
 GameObject:
   m_ObjectHideFlags: 0
@@ -4331,6 +4333,7 @@ MonoBehaviour:
   - {fileID: 831283494}
   - {fileID: 1986445084}
   - {fileID: 509138703}
+  - {fileID: 2041476409}
 --- !u!1 &1428208487
 GameObject:
   m_ObjectHideFlags: 0
@@ -4619,6 +4622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _skillSO: []
   _skillCompo: {fileID: 1662591777}
+  _countIdx: 3
 --- !u!1 &1493884909
 GameObject:
   m_ObjectHideFlags: 0
@@ -6927,6 +6931,7 @@ MonoBehaviour:
   _skillSO:
   - {fileID: 11400000, guid: 7a69a3d60b8e4da46b9e5d2ad33077c5, type: 2}
   _skillCompo: {fileID: 1662591777}
+  _countIdx: 1
 --- !u!1 &1992100796
 GameObject:
   m_ObjectHideFlags: 0
@@ -7391,6 +7396,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2101149313}
   - component: {fileID: 2101149314}
+  - component: {fileID: 2101149315}
   m_Layer: 0
   m_Name: DamageCaster
   m_TagString: Untagged
@@ -7430,6 +7436,21 @@ MonoBehaviour:
     m_Bits: 128
   attackCompo: {fileID: 1440356849}
   boxSize: {x: 2, y: 1, z: 2}
+--- !u!114 &2101149315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101149312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce87cb703ef62be44addd417cbf51914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetCompo: {fileID: 1029044994}
+  targetStat: {fileID: 11400000, guid: c7d72c92d575eb8408a9f8d4fb344732, type: 2}
+  _attackCompo: {fileID: 1440356849}
 --- !u!1 &2115712243
 GameObject:
   m_ObjectHideFlags: 0

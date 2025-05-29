@@ -10,6 +10,7 @@ namespace Blade.Combat
     {
         [SerializeField] protected LayerMask whatIsEnemy;
         [SerializeField] protected PlayerAttackCompo attackCompo;
+        protected Lifesteal _steal;
         protected Entity _owner;
 
         public virtual void InitCster(Entity owenr)

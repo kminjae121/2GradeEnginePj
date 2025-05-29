@@ -23,7 +23,7 @@ namespace _01.Scipt.Enemy
         private bool _isTimer;
         
         private float _startTime;
-        private float _countdownDuration = 10f; 
+        public float _countdownDuration; 
         
         private PollingEnemy _enemy;
 
@@ -62,7 +62,7 @@ namespace _01.Scipt.Enemy
 
         private IEnumerator SpawnTime()
         {
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(_countdownDuration);
             _isTimer = false;
             SpawnEnemy();
         }

@@ -11,6 +11,7 @@ namespace _01.Scipt.Blade.Combat
 
         private void Awake()
         {
+            _steal = GetComponent<Lifesteal>();
         }
 
         public override void CastDamage(Vector3 position, Vector3 direction, AttackDataSO attackData)
@@ -23,6 +24,7 @@ namespace _01.Scipt.Blade.Combat
                 if (Obj.TryGetComponent(out IDamageable damage))
                 {
                     damage.ApplyDamage(attackCompo.atkDamage,Obj.transform.position,attackData,null);
+                    _steal.UpGradeStat();
                     CameraShakingManager.instance.ShakeCam(0.1f,0.6f,5,20);
                 }
                 else
