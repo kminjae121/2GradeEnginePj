@@ -1,4 +1,5 @@
 ﻿using System;
+using Blade.Combat;
 using Blade.Entities;
 using UnityEngine;
 using UnityEngine.UI;

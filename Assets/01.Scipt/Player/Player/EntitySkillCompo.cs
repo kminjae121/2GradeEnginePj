@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using _01.Scipt.Player.Player;
+using Blade.Core.StatSystem;
 using Member.Kmj._01.Scipt.Entity.AttackCompo;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -55,7 +56,11 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponet, IAfterInit
             return;
         else
             SkillList.Values.ToList().ForEach(skill => skill.GetSkill());
+
+        _statCompo = entity.GetCompo<EntityStat>();
     }
+    
+    
     
     public void AddSkill(SkillSO skillSO)
     {
@@ -83,6 +88,7 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponet, IAfterInit
             return;
 
         SkillList.Values.ToList().ForEach(skill => skill.SkillUpdate());
+        print(skillDamage);
     }
 
 
@@ -98,19 +104,20 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponet, IAfterInit
         DefaltSkill();
         StatSO targetStat = _statCompo.GetStat(_skilldamageSo);
         Debug.Assert(targetStat != null, $"{_skilldamageSo.statName} stat could not be found");
-        targetStat.OnValueChange -= HandleSkillChange;
+        targetStat.OnValudeChanged -= HandleSkillChange;
     }
-
+   
     private void HandleSkillChange(StatSO stat, float currentValue, float previousValue)
     {
         skillDamage = currentValue;
     }
-
+   
     public void AfterInit()
     {
         StatSO targetStat = _statCompo.GetStat(_skilldamageSo);
         Debug.Assert(targetStat != null, $"{_skilldamageSo.statName} stat could not be found");
-        targetStat.OnValueChange += HandleSkillChange;
+        targetStat.OnValudeChanged += HandleSkillChange;
         skillDamage = targetStat.Value;
+        
     }
 }

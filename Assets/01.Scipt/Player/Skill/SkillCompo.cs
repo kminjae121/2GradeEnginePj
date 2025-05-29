@@ -1,4 +1,5 @@
 using Blade.Combat;
+using Blade.Core.StatSystem;
 using Member.Kmj._01.Scipt.Entity.AttackCompo;
 using UnityEngine;
 
@@ -8,10 +9,7 @@ public abstract class SkillCompo : MonoBehaviour
     public EntityAnimatorTrigger _triggerCompo;
 
     [SerializeField] protected LayerMask _whatIsEnemy;
-
-    [SerializeField] protected StatSO _skillDamage;
-
-    [SerializeField] protected EntityStat _stat;
+    
 
     [SerializeField] protected Vector3 _skillSize;
     [SerializeField] protected float _circleSize;

@@ -11,7 +11,6 @@ namespace _01.Scipt.Blade.Combat
 
         private void Awake()
         {
-            atkDamage = _Stat.GetStat(_atkdamage).Value;
         }
 
         public override void CastDamage(Vector3 position, Vector3 direction, AttackDataSO attackData)
@@ -23,7 +22,7 @@ namespace _01.Scipt.Blade.Combat
             foreach (var Obj in collider)
                 if (Obj.TryGetComponent(out IDamageable damage))
                 {
-                    damage.ApplyDamage(atkDamage,Obj.transform.position,attackData,null);
+                    damage.ApplyDamage(attackCompo.atkDamage,Obj.transform.position,attackData,null);
                     CameraShakingManager.instance.ShakeCam(0.1f,0.6f,5,20);
                 }
                 else

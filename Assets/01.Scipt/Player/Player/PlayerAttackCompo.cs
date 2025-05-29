@@ -5,12 +5,13 @@ using _01.Scipt.Blade.Combat;
 using _01.Scipt.Player.Player;
 using a;
 using Blade.Combat;
+using Blade.Core.StatSystem;
 using Member.Kmj._01.Scipt.Entity.AttackCompo;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
-public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
+public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
 {
     public AttackDataSO[] attackDataList;
 
@@ -18,8 +19,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
 
     [SerializeField] private LayerMask _whatIsEnemy;
 
-   
-    [SerializeField] private EntityStat _stat;
+    
 
     [SerializeField] private Vector3 _boxsize;
 
@@ -49,6 +49,15 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
     
     [field: SerializeField] public Transform FinalAttackEffect { get; set; }
 
+    [Space(10f)]
+    [Header("AttackStat")]
+    [SerializeField] private StatSO _atkDamageSO;
+
+    [SerializeField] private StatSO _bloodHpSO;
+    private EntityStat _statCompo;
+    public float atkDamage { get; private set; }
+    public float bloodHp { get; private set; }
+
 
     public float AttackSpeed
     {
@@ -66,7 +75,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
         _entity = entity;
         _player = entity as Player;
         _entityAnimator = entity.GetCompo<EntityAnimator>();
-        
+        _statCompo = entity.GetCompo<EntityStat>();
         
         _vfxCompo = entity.GetCompo<EntityVFX>();
         AttackSpeed = 1.6f;
@@ -97,6 +106,40 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
         _player.PlayerInput.OnChargeAttackPressed -= StartCharge;
         _player.PlayerInput.OnChargeAttackCanceled -= StopCharge;
         _triggerCompo.OnPowerAttackVFXTrigger -= HandlePowerAttackTrigger;
+        StatSO targetStat = _statCompo.GetStat(_atkDamageSO);
+        Debug.Assert(targetStat != null, $"{_atkDamageSO.statName} stat could not be found");
+        targetStat.OnValudeChanged -= HandleAttackStatChange;
+        
+        
+        StatSO targetStat2 = _statCompo.GetStat(_bloodHpSO);
+        Debug.Assert(targetStat != null, $"{_bloodHpSO.statName} stat could not be found");
+        targetStat.OnValudeChanged -= HandleAttackStatChange;
+    }
+    
+   
+    private void HandleAttackStatChange(StatSO stat, float currentValue, float previousValue)
+    {
+        atkDamage = currentValue;
+    }
+    
+    private void HandleBloodStatChange(StatSO stat, float currentValue, float previousValue)
+    {
+        bloodHp = currentValue;
+    }
+
+   
+    public void AfterInit()
+    {
+        StatSO targetStat = _statCompo.GetStat(_atkDamageSO);
+        Debug.Assert(targetStat != null, $"{_atkDamageSO.statName} stat could not be found");
+        targetStat.OnValudeChanged += HandleAttackStatChange;
+        atkDamage = targetStat.Value;
+        
+        StatSO targetStat2 = _statCompo.GetStat(_bloodHpSO);
+        Debug.Assert(targetStat != null, $"{_bloodHpSO.statName} stat could not be found");
+        targetStat.OnValudeChanged += HandleBloodStatChange;
+        bloodHp = targetStat.Value;
+        
     }
     
     
@@ -166,9 +209,13 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet
     {
         IsAttack = true;
     }
-    
-    
-    
+
+    private void Update()
+    {
+        print(atkDamage);
+    }
+
+
     public AttackDataSO GetCurrentAttackData()
     {
         Debug.Assert(attackDataList.Length > ComboCounter, "Combo counter is out of range");

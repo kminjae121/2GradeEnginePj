@@ -16,7 +16,7 @@ MonoBehaviour:
   description: PlayerMoveStat
   icon: {fileID: 0}
   displayName: moveSpeedStat
-  baseValue: 10
+  baseValue: 5
   minValue: 0
   maxValue: 100
   <IsPercent>k__BackingField: 0

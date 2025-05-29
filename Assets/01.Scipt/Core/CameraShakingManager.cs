@@ -15,7 +15,6 @@ public class CameraShakingManager : MonoBehaviour
 
     public void ShakeCam(float duration,float strength, int vibrato,float randomness)
     {
-        print("너 왜 안됨 ");
         _camPos.DOShakePosition(duration,strength,vibrato,randomness);
     }
 }

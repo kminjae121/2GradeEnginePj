@@ -4840,10 +4840,10 @@ MonoBehaviour:
   statOverrides:
   - stat: {fileID: 11400000, guid: c7d72c92d575eb8408a9f8d4fb344732, type: 2}
     isUseOverride: 1
-    overrideValue: 300
+    overrideBaseValue: 300
   - stat: {fileID: 11400000, guid: 37197b27ffab7694fa83cb499161314a, type: 2}
     isUseOverride: 1
-    overrideValue: 3
+    overrideBaseValue: 10
 --- !u!1 &5471331141218399961
 GameObject:
   m_ObjectHideFlags: 0
@@ -6248,9 +6248,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpStat: {fileID: 11400000, guid: c7d72c92d575eb8408a9f8d4fb344732, type: 2}
-  maxHealth: 0
+  <maxHealth>k__BackingField: 0
   <currentHealth>k__BackingField: 0
-  _statCompo: {fileID: 4038228663160753502}
 --- !u!195 &2076984245279964856
 NavMeshAgent:
   m_ObjectHideFlags: 0

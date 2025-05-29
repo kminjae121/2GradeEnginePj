@@ -1,3 +1,4 @@
+using Blade.Core.StatSystem;
 using UnityEngine;
 
 public class StatUpCompo : MonoBehaviour
@@ -10,6 +11,7 @@ public class StatUpCompo : MonoBehaviour
     public void UpGradeStat()
     {
         targetCompo.AddModifier(targetStat, this, modifyValue);
+        
     }
             
 }

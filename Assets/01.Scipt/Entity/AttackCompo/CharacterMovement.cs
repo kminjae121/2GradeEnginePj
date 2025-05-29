@@ -1,10 +1,11 @@
 
 using System;
 using _01.Scipt.Player.Player;
+using Blade.Core.StatSystem;
 using Member.Kmj._01.Scipt.Entity.AttackCompo;
 using UnityEngine;
 
-public class CharacterMovement : MonoBehaviour, IEntityComponet
+public class CharacterMovement : MonoBehaviour, IEntityComponet, IAfterInit
 {
     [field: SerializeField] public Rigidbody _rbcompo { get; private set; }
     [SerializeField] private float rotationSpeed = 8f;
@@ -38,7 +39,6 @@ public class CharacterMovement : MonoBehaviour, IEntityComponet
     {
         _animatorCompo = _entity.GetCompo<EntityAnimator>();
         moveSpeed = _stat.GetStat(_moveSpeedStat).Value;
-        rollingSpeed = _stat.GetStat(_rollingSpeedStat).Value;
     }
 
 
@@ -105,5 +105,10 @@ public class CharacterMovement : MonoBehaviour, IEntityComponet
     public void StopImmediately()
     {
         _velocity = Vector3.zero;
+    }
+
+    public void AfterInit()
+    {
+        
     }
 }

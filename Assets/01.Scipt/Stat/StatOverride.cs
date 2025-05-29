@@ -1,24 +1,27 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Member.Kmj._01.Scipt.Stat
+namespace Blade.Core.StatSystem
 {
     [Serializable]
     public class StatOverride
     {
         [SerializeField] private StatSO stat;
         [SerializeField] private bool isUseOverride;
-        [SerializeField] private float overrideValue;
+        [SerializeField] private float overrideBaseValue;
 
+        public StatSO Stat => stat;
         public StatOverride(StatSO stat) => this.stat = stat;
 
-        public StatSO CreateStat()
+        public StatSO CreateStat() //스탯 복제후 오버라이드 값을 넣어서 리턴해준다.
         {
             StatSO newStat = stat.Clone() as StatSO;
-            Debug.Assert(newStat != null, $"{stat.statName} clone failed");
+            Debug.Assert(newStat != null, $"{nameof(newStat)} stat clone failed");
 
             if (isUseOverride)
-                newStat.BaseValue = overrideValue;
+            {
+                newStat.BaseValue = overrideBaseValue;
+            }
 
             return newStat;
         }

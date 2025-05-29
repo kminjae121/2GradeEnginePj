@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Blade.Combat;
 using Blade.Core;
+using Blade.Core.StatSystem;
 using Blade.Entities;
 using DG.Tweening;
 using Member.Kmj._01.Scipt.Entity.AttackCompo;
@@ -44,7 +45,7 @@ namespace Blade.Enemies
         public void AfterInit()
         {
             StatSO targetSO = _statCompo.GetStat(_moveSpeedStat);
-            targetSO.OnValueChange += HandleMoveSpeedChange; 
+            targetSO.OnValudeChanged += HandleMoveSpeedChange; 
         }
 
         private void HandleMoveSpeedChange(StatSO stat, float currentValue, float previousValue)

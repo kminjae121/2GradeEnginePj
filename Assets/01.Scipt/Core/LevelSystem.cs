@@ -6,10 +6,12 @@ using Random = UnityEngine.Random;
 public class LevelSystem : MonoBehaviour
 {
     private RectTransform _rect;
-    [SerializeField] private GameObject[] itemList;
+    public static LevelSystem instance;
+    [field: SerializeField] public GameObject[] itemList {get; private set;}
 
     private void Awake()
     {
+        instance = this;
         _rect = GetComponent<RectTransform>();
         Hide();
     }
