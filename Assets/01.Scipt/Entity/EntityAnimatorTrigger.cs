@@ -16,6 +16,8 @@ public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponet
     public event Action OnPowerAttackVFXTrigger;
 
     public event Action OnUpSkillVFXTrigger;
+    
+    public event Action SlashVFXTrigger;
 
     public event Action LastAttackEffectEndTrigger;
 
@@ -76,6 +78,7 @@ public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponet
 
     private void PowerAttackEffect() => OnPowerAttackVFXTrigger?.Invoke();
     private void OnUpSkillEffect() => OnUpSkillVFXTrigger?.Invoke();
+    private void SlashVFX() => SlashVFXTrigger?.Invoke();
 
     private void Attack()
     {

@@ -87,8 +87,6 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
         _triggerCompo.OnAttackCancel += AttackCancel;
         _triggerCompo.OnAttackVFXTrigger += HandleAttackVFXTrigger;
         _triggerCompo.OnAttackFinalVFXTrigger += HandleFinalAttackTrigger;
-        _player.PlayerInput.OnChargeAttackPressed += StartCharge;
-        _player.PlayerInput.OnChargeAttackCanceled += StopCharge;
         _triggerCompo.LastAttackEffectEndTrigger += HandleStopFinalAttackTrigger;
     }
 
@@ -102,7 +100,6 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
         _triggerCompo.OnAttackTriggerEnd -= HandleDamageCasterTrigger;
         
         _triggerCompo.OnAttackFinalVFXTrigger -= HandleFinalAttackTrigger;
-        _player.PlayerInput.OnChargeAttackPressed -= StartCharge;
         _player.PlayerInput.OnChargeAttackCanceled -= StopCharge;
         StatSO targetStat = _statCompo.GetStat(_atkDamageSO);
         Debug.Assert(targetStat != null, $"{_atkDamageSO.statName} stat could not be found");

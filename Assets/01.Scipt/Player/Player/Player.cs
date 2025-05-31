@@ -45,7 +45,7 @@ namespace _01.Scipt.Player.Player
             _skillCompo = GetCompo<EntitySkillCompo>();
             _movement = GetCompo<CharacterMovement>();
             _triggerCompo = GetCompo<EntityAnimatorTrigger>();
-        
+            OnDead.AddListener(PlayerDie);
         }
 
 
@@ -89,13 +89,6 @@ namespace _01.Scipt.Player.Player
             _isSkilling = true;
             ChangeState("DIE");
         }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (((1 << collision.gameObject.layer) & _whatIsEnemey) != 0 && isDoingFollow)
-            {
-                ChangeState("STRONGATTACK");
-            }
-        }
+        
     }
 }

@@ -11,7 +11,7 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
         OnInteracetPressd,
         OnSheldPressd,
         OnSheldCanceld,
-        OnChargeAttackPressed,
+        OnSlashPressed,
         OnChargeAttackCanceled,
         OnStrongAttackPressed,
         OnHighAttackPresssed;
@@ -82,9 +82,7 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     public void OnChargeSklil(InputAction.CallbackContext context)
     {
         if (context.performed)
-            OnChargeAttackPressed?.Invoke();
-        else if (context.canceled)
-            OnChargeAttackCanceled?.Invoke();
+            OnSlashPressed?.Invoke();
     }
 
     public void OnHighAttack(InputAction.CallbackContext context)

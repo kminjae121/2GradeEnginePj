@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85592b5df258a0a4cbaa2a3c46f361e8, type: 3}
-  m_Name: SwingState
+  m_Script: {fileID: 11500000, guid: 1e7463397e0ec8e4794ebe84d4b367ce, type: 3}
+  m_Name: SlashSkill
   m_EditorClassIdentifier: 
-  stateName: SWING
-  className: Member.Kmj._01.Scipt.Player.State.Player.PlayerSwingAttackState
-  animParamName: SWING
-  animationHash: 373454314
+  skillName: SlashSkill
+  skillUIImage: {fileID: 0}
+  className: _01.Scipt.Player.Skill.SlashSkill
+  skillType: 0

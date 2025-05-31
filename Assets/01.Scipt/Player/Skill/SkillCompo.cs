@@ -23,6 +23,7 @@ public abstract class SkillCompo : MonoBehaviour
     [field:  SerializeField] public List<string> skillEffectName { get; set; } 
 
     public int currentSkillEffectNameIdx { get; set; }
+    
 
     public void SkillUpdate()
     {

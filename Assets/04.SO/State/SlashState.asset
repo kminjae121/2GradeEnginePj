@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85592b5df258a0a4cbaa2a3c46f361e8, type: 3}
-  m_Name: FollowSoulState
+  m_Name: SlashState
   m_EditorClassIdentifier: 
-  stateName: FOLLOW
-  className: PlayerFollowState
-  animParamName: Move
-  animationHash: 1326225478
+  stateName: SLASH
+  className: _01.Scipt.Player.State.Player.PlayerSlashState
+  animParamName: Slash
+  animationHash: -972068619
