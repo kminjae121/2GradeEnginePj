@@ -1,15 +1,14 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Blade.BT.Events;
-using Blade.Core;
 using Blade.Effects;
 using GondrLib.Dependencies;
 using GondrLib.ObjectPool.Runtime;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using IPoolable = GondrLib.ObjectPool.Runtime.IPoolable;
+using System.Collections;
+using Random = UnityEngine.Random;
+
 
 namespace Blade.Enemies.Skeletons
 {
@@ -67,6 +66,18 @@ namespace Blade.Enemies.Skeletons
             GameManager.instance.GetExp();
             GameManager.instance.killCount++;
             IsDead = true;
+            int random = Random.Range(0, 100);
+            
+            print(random);
+            print(GameManager.instance.GetBallPercent);
+            if (GameManager.instance.GetBallPercent == 0)
+            {
+            }
+            else if (random <= GameManager.instance.GetBallPercent)
+            {
+                GameManager.instance.SpawnHpBall(transform.position, Quaternion.identity);
+            }
+            
             _collider.enabled = false;
             
             _StateChangeChannel.SendEventMessage(EnemyState.DEAD);

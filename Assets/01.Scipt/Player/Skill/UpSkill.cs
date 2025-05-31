@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Blade.Combat;
 using Blade.Enemies;
@@ -14,16 +15,27 @@ namespace _01.Scipt.Player.Skill
         
         
         private ActionData _actionData;
-
-        [SerializeField] private UpSkillDamageCaster damageCaster;
+        
+        private EntityVFX _vfxCompo;
+        
 
         public override void GetSkill()
         {
             _player = _entity as Player.Player;
             skillCompo = GetComponent<EntitySkillCompo>();
+            _vfxCompo = _entity.GetCompo<EntityVFX>();
             _player.PlayerInput.OnHighAttackPresssed += HandleHighAttack;
-            _triggerCompo.OnHighAttack += HandleSkillAttack;
+            
+            _triggerCompo.OnPowerAttackVFXTrigger += HandleUpSkillTrigger;
             _triggerCompo.OnHighAttack += Skill;
+        }
+        
+        private void HandleUpSkillTrigger()
+        {
+            if (skillEffectName[currentSkillEffectNameIdx] == null)
+                return;
+            else
+                _vfxCompo.PlayVfx(skillEffectName[currentSkillEffectNameIdx], _entity.transform.position, Quaternion.identity);
         }
 
         private void HandleHighAttack()
@@ -39,17 +51,13 @@ namespace _01.Scipt.Player.Skill
             else
                 return;
         }
-
-        private void HandleSkillAttack()
-        {
-            damageCaster.CastDamage(_player.transform.position,Vector3.forward, null);
-        }
+        
 
 
         public override void EventDefault()
         {
+            _triggerCompo.OnPowerAttackVFXTrigger -= HandleUpSkillTrigger;
             _player.PlayerInput.OnHighAttackPresssed -= HandleHighAttack;
-            _triggerCompo.OnHighAttack -= HandleSkillAttack;
             _triggerCompo.OnHighAttack -= Skill;
         }
 

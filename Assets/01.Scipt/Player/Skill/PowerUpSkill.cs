@@ -1,4 +1,6 @@
-﻿using Blade.Combat;
+﻿using System;
+using System.Collections.Generic;
+using Blade.Combat;
 using Blade.Enemies;
 using Blade.Entities;
 using UnityEngine;
@@ -12,16 +14,30 @@ namespace _01.Scipt.Player.Skill
         private Player.Player _player;
         
         private ActionData _actionData;
+        
+        private EntityVFX _vfxCompo;
+        
 
         public override void GetSkill()
         {
             _player = _entity as Player.Player;
             skillCompo = GetComponent<EntitySkillCompo>();
+            _vfxCompo = _entity.GetCompo<EntityVFX>();
             _player.PlayerInput.OnStrongAttackPressed += HandleHighAttack;
             _triggerCompo.PowerAttackTrigger += Skill;
+            _triggerCompo.OnPowerAttackVFXTrigger += HandlePowerAttackTrigger;
 
         }
 
+        
+        private void HandlePowerAttackTrigger()
+        {  
+            if (skillEffectName[currentSkillEffectNameIdx] == String.Empty)
+                return;
+            else
+                _vfxCompo.PlayVfx(skillEffectName[currentSkillEffectNameIdx], _entity.transform.position, Quaternion.identity);
+        }
+        
         private void HandleHighAttack()
         {
             if (CanUseSkill("PowerSkill") && !_player._isSkilling)
@@ -41,6 +57,7 @@ namespace _01.Scipt.Player.Skill
         {
             _player.PlayerInput.OnHighAttackPresssed -= HandleHighAttack;
             _triggerCompo.PowerAttackTrigger -= Skill;
+            _triggerCompo.OnPowerAttackVFXTrigger -= HandlePowerAttackTrigger;
         }
 
 

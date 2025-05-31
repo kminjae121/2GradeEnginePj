@@ -90,7 +90,6 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
         _player.PlayerInput.OnChargeAttackPressed += StartCharge;
         _player.PlayerInput.OnChargeAttackCanceled += StopCharge;
         _triggerCompo.LastAttackEffectEndTrigger += HandleStopFinalAttackTrigger;
-        _triggerCompo.OnPowerAttackVFXTrigger += HandlePowerAttackTrigger;
     }
 
 
@@ -105,7 +104,6 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
         _triggerCompo.OnAttackFinalVFXTrigger -= HandleFinalAttackTrigger;
         _player.PlayerInput.OnChargeAttackPressed -= StartCharge;
         _player.PlayerInput.OnChargeAttackCanceled -= StopCharge;
-        _triggerCompo.OnPowerAttackVFXTrigger -= HandlePowerAttackTrigger;
         StatSO targetStat = _statCompo.GetStat(_atkDamageSO);
         Debug.Assert(targetStat != null, $"{_atkDamageSO.statName} stat could not be found");
         targetStat.OnValudeChanged -= HandleAttackStatChange;
@@ -152,16 +150,12 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
         _vfxCompo.PlayVfx($"FinalAttack", FinalAttackEffect.position, Quaternion.identity);
     }
 
+    
+    
     private void HandleStopFinalAttackTrigger()
     {
         _vfxCompo.StopVfx("FinalAttack");
     }
-
-    private void HandlePowerAttackTrigger()
-    {
-        _vfxCompo.PlayVfx("PowerEffect", _entity.transform.position, Quaternion.identity);
-    }
-    
     private void HandleDamageCasterTrigger()
     {
         damageCaster.CastDamage(_player.transform.position,Vector3.forward,attackDataList[ComboCounter]);

@@ -20,10 +20,11 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private TextMeshProUGUI _levelTxt;
     [SerializeField] private TextMeshProUGUI _currentExptxt;
-
+    [SerializeField] private GameObject _ballPrefab;
 
     public int nextLevel = 4;
 
+    public float GetBallPercent { get; set; }
     [SerializeField] private LevelSystem levelSystem;
     [SerializeField] private Slider _slider;
     private void Awake()
@@ -58,7 +59,7 @@ public class GameManager : MonoBehaviour
            {
                level++;
                exp = 0;
-               nextLevel += 12;
+               nextLevel += 1;
                _slider.maxValue = nextLevel;
                _levelTxt.text = $"현재 레벨:{level}";
                _currentExptxt.text = $"경험치 : {exp} : {nextLevel}";
@@ -71,5 +72,11 @@ public class GameManager : MonoBehaviour
           exp = 0;
           nextLevel = 3;
           level = 0;
+      }
+
+
+      public void SpawnHpBall(Vector3 transform, Quaternion rotation)
+      {
+          Instantiate(_ballPrefab,transform,rotation);
       }
 }

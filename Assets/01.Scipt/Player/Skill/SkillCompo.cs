@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Blade.Combat;
 using Blade.Core.StatSystem;
 using Member.Kmj._01.Scipt.Entity.AttackCompo;
@@ -9,15 +10,19 @@ public abstract class SkillCompo : MonoBehaviour
     public EntityAnimatorTrigger _triggerCompo;
 
     [SerializeField] protected LayerMask _whatIsEnemy;
-    
 
-    [SerializeField] protected Vector3 _skillSize;
+    public int skillLevel { get; set; } = 1;
+    [field: SerializeField] public Vector3 _skillSize { get; set; }
     [SerializeField] protected float _circleSize;
 
     [SerializeField] protected Entity _entity;
     
     [field :SerializeField] public float skillCoolTime { get; set; }
     [field: SerializeField] public float currentcoolTime { get; private set; }
+    
+    [field:  SerializeField] public List<string> skillEffectName { get; set; } 
+
+    public int currentSkillEffectNameIdx { get; set; }
 
     public void SkillUpdate()
     {
