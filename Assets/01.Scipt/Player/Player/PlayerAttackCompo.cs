@@ -200,11 +200,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
     {
         IsAttack = true;
     }
-
-    private void Update()
-    {
-        print(bloodHp);
-    }
+    
 
 
     public AttackDataSO GetCurrentAttackData()

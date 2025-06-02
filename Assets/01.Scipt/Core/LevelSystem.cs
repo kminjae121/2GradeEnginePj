@@ -29,8 +29,8 @@ public class LevelSystem : MonoBehaviour
     public void Hide()
     {
         _rect.localScale = Vector3.zero;
-        Time.timeScale = 1;
         itemList.ToList().ForEach(UI => UI.SetActive(false));
+        Time.timeScale = 1;
         Cursor.visible = false;         
         Cursor.lockState = CursorLockMode.Locked;
     }

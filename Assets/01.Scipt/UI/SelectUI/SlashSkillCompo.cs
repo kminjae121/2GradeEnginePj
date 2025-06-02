@@ -1,14 +1,16 @@
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using UnityEngine;
+using System;
+using System.Collections.Generic;
+using _01.Scipt.Player.Skill;
+using UnityEngine;
 
-    public class SkillUpCompo : MonoBehaviour
+namespace _01.Scipt.UI.SelectUI
+{
+    public class SlashSkillCompo  : MonoBehaviour
     {
         [SerializeField] private SkillSO _skillSO;
         [SerializeField] private EntitySkillCompo _skillCompo;
         [SerializeField] private string skillCompoName;
-        private SkillCompo _skill;
+        private SlashSkill _skill;
         [SerializeField] private int _countIdx;
         [SerializeField] private List<Vector3> _skillRange;
         private int _currentSkill = 0;
@@ -21,7 +23,7 @@
 
             if (components.Length > 0)
             {
-                _skill = components[0] as SkillCompo;
+                _skill = components[0] as SlashSkill;
             }
 
 
@@ -35,9 +37,8 @@
             if (_skillSO == null)
             {
                 _skill.skillLevel++;
-                _skill.currentSkillEffectNameIdx++;
+                _skill.currentEffectNum++;
                 _currentSkill++;
-                _skill._skillSize = _skillRange[_currentSkill];
                 
                 if (_currentSkill >= 2)
                 {
@@ -54,3 +55,4 @@
             
         }
     }
+}

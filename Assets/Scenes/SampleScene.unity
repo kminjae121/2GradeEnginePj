@@ -19458,13 +19458,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <itemList>k__BackingField:
   - {fileID: 831283494}
+  - {fileID: 1986445084}
+  - {fileID: 1469882885}
   - {fileID: 509138703}
   - {fileID: 2041476409}
   - {fileID: 23851950}
-  - {fileID: 1986445084}
   - {fileID: 711883444}
   - {fileID: 1854223643}
-  - {fileID: 1469882885}
 --- !u!1 &1428208487
 GameObject:
   m_ObjectHideFlags: 0
@@ -19551,6 +19551,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1376187705}
         m_TargetAssemblyTypeName: LevelSystem, Assembly-CSharp
         m_MethodName: Hide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1469882889}
+        m_TargetAssemblyTypeName: _01.Scipt.UI.SelectUI.SlashSkillCompo, Assembly-CSharp
+        m_MethodName: UpSkillLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19748,12 +19760,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1469882885}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dfe99cfea205cb46ba34d7d35202d96, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a94fea71e493f042b4c5da93c49f82d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _skillSO: {fileID: 11400000, guid: db752b805a7cffc4793557670024bc90, type: 2}
   _skillCompo: {fileID: 1662591777}
-  skillCompoName: _01.Scipt.Player.Skill.SlashSkill
+  skillCompoName: _01.Scipt.UI.SelectUI.SlashSkillCompo
   _countIdx: 2
   _skillRange: []
 --- !u!1 &1493884909
@@ -25380,7 +25392,10 @@ MonoBehaviour:
   _entity: {fileID: 4147978964148158537}
   <skillCoolTime>k__BackingField: 4
   <currentcoolTime>k__BackingField: 0
-  <skillEffectName>k__BackingField: []
+  <skillEffectName>k__BackingField:
+  - 
+  - 
+  - 
 --- !u!114 &1662591779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25427,12 +25442,13 @@ MonoBehaviour:
   _entity: {fileID: 4147978964148158537}
   <skillCoolTime>k__BackingField: 2
   <currentcoolTime>k__BackingField: 0
-  <skillEffectName>k__BackingField: []
+  <skillEffectName>k__BackingField:
+  - 
+  - 
+  - 
   SlashTrans:
   - {fileID: 679395302}
-  _slashEffect:
-  - {fileID: 1181024495779317320, guid: 6f73f6b5ad9c2c4498e3aa202ffb896f, type: 3}
-  - {fileID: 5945911907073210940, guid: 4f5e3f0ac6738274c9ae980090a16039, type: 3}
+  <_slashEffectt>k__BackingField: []
 --- !u!1 &1672366437
 GameObject:
   m_ObjectHideFlags: 0
@@ -31455,6 +31471,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3849526959291984153, guid: 83b6883e8bdf257418fa3b809bc13617, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849526959291984153, guid: 83b6883e8bdf257418fa3b809bc13617, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6178013343620309357, guid: 83b6883e8bdf257418fa3b809bc13617, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -31498,6 +31522,10 @@ PrefabInstance:
     - target: {fileID: 7811320588465090697, guid: 83b6883e8bdf257418fa3b809bc13617, type: 3}
       propertyPath: m_Name
       value: Enemy1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7811320588465090697, guid: 83b6883e8bdf257418fa3b809bc13617, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

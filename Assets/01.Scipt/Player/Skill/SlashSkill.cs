@@ -16,8 +16,8 @@ namespace _01.Scipt.Player.Skill
         
         
         private EntityVFX _vfxCompo;
-        
-        [SerializeField] private List<GameObject> _slashEffect;
+
+        [field: SerializeField] public List<GameObject> _slashEffectt { get; set; }
 
         public int currentEffectNum { get; set; } = 0;
         
@@ -49,7 +49,7 @@ namespace _01.Scipt.Player.Skill
 
         public void MakeSlashEffect()
         {
-            SlashTrans.ForEach(ts => Instantiate(_slashEffect[currentEffectNum],ts.position, Quaternion.Euler(0,0,90)));
+            SlashTrans.ForEach(ts => Instantiate(_slashEffectt[currentEffectNum],ts.position, Quaternion.Euler(0,0,90)));
         }
         
 

@@ -54,7 +54,6 @@ namespace Member.Kmj._01.Scipt.Entity.AttackCompo
 
         protected void InitializeComponts()
         {
-            print("이니셜라이즈 됨");
             _componets.Values.ToList().ForEach(comp => comp.Initialize(this));
         }
 

@@ -11,7 +11,6 @@ public class StatUpCompo : MonoBehaviour
     public void UpGradeStat()
     {
         targetCompo.AddModifier(targetStat, this, modifyValue);
-        
     }
             
 }
