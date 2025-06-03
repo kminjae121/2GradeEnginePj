@@ -49,7 +49,29 @@ namespace _01.Scipt.Player.Skill
 
         public void MakeSlashEffect()
         {
-            SlashTrans.ForEach(ts => Instantiate(_slashEffectt[currentEffectNum],ts.position, Quaternion.Euler(0,0,90)));
+            if (skillLevel < 3)
+            {
+                GameObject slash = Instantiate(_slashEffectt[currentEffectNum], SlashTrans[0].position, Quaternion.Euler(0, 0, 90));
+                
+                SlashCompo slashCompo = slash.GetComponent<SlashCompo>();
+                if (slashCompo != null)
+                {
+                    slashCompo.TargetRotationSource = SlashTrans[0];
+                }
+            }
+            else
+            {
+                foreach (Transform ts in SlashTrans)
+                {
+                    GameObject slash = Instantiate(_slashEffectt[currentEffectNum], ts.position, Quaternion.identity);
+                    
+                    SlashCompo slashCompo = slash.GetComponent<SlashCompo>();
+                    if (slashCompo != null)
+                    {
+                        slashCompo.TargetRotationSource = ts;
+                    }
+                }
+            }
         }
         
 

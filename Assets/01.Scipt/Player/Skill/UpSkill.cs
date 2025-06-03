@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Blade.Combat;
 using Blade.Enemies;
+using Blade.Enemies.Skeletons;
 using Blade.Entities;
 using UnityEngine;
 
@@ -16,8 +17,9 @@ namespace _01.Scipt.Player.Skill
         
         private ActionData _actionData;
         
+        [field: SerializeField] public List<GameObject> _slashEffectt { get; set; }
         private EntityVFX _vfxCompo;
-        
+        public List<Transform> SlashTrans;
 
         public override void GetSkill()
         {
@@ -26,16 +28,38 @@ namespace _01.Scipt.Player.Skill
             _vfxCompo = _entity.GetCompo<EntityVFX>();
             _player.PlayerInput.OnHighAttackPresssed += HandleHighAttack;
             
-            _triggerCompo.OnPowerAttackVFXTrigger += HandleUpSkillTrigger;
+            _triggerCompo.OnHighAttackVFXTrigger += HandleUpSkillTrigger;
             _triggerCompo.OnHighAttack += Skill;
         }
         
         private void HandleUpSkillTrigger()
         {
-            if (skillEffectName[currentSkillEffectNameIdx] == null)
+            if (skillEffectName[currentSkillEffectNameIdx] == String.Empty)
                 return;
-            else
-                _vfxCompo.PlayVfx(skillEffectName[currentSkillEffectNameIdx], _entity.transform.position, Quaternion.identity);
+            if (skillLevel == 2)
+            {
+                GameObject slash = Instantiate(_slashEffectt[currentSkillEffectNameIdx], SlashTrans[0].position, Quaternion.identity);
+
+                // TargetRotationSource 설정
+                UpSkillSlashCompo slashCompo = slash.GetComponent<UpSkillSlashCompo>();
+                if (slashCompo != null)
+                {
+                    slashCompo.TargetRotationSource = SlashTrans[0];
+                }
+            }
+            else if (skillLevel == 3)
+            {
+                foreach (Transform ts in SlashTrans)
+                {
+                    GameObject slash = Instantiate(_slashEffectt[currentSkillEffectNameIdx], ts.position, Quaternion.identity);
+                    
+                    UpSkillSlashCompo slashCompo = slash.GetComponent<UpSkillSlashCompo>();
+                    if (slashCompo != null)
+                    {
+                        slashCompo.TargetRotationSource = ts;
+                    }
+                }
+            }
         }
 
         private void HandleHighAttack()
@@ -74,6 +98,14 @@ namespace _01.Scipt.Player.Skill
                 {
                     damage.ApplyDamage(skillCompo.skillDamage,item.transform.position,null,null);
                     CameraShakingManager.instance.ShakeCam(0.1f,0.7f,5,40);
+                    if (skillEffectName[currentSkillEffectNameIdx] != String.Empty)
+                    {
+                        item.GetComponent<EnemySkeletonSlave>().ChangeJumpChannelEvent();
+                    }
+                    else
+                    {
+                        return;
+                    }
                     //item.GetComponentInChildren<Rigidbody>().AddForce(Vector3.up * 7, ForceMode.Impulse);
                     Debug.Log("공격됨");
                 }

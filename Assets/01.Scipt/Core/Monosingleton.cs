@@ -1,11 +1,9 @@
 using UnityEngine;
 
-using UnityEngine;
-
 public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T _instance;
-    
+
     public static T Instance
     {
         get
@@ -34,7 +32,11 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
         if (managers.Length > 1)
         {
             Destroy(gameObject);
+            return;
         }
+
+        // DontDestroy 처리
+        DontDestroyOnLoad(gameObject);
     }
 
     protected virtual void OnDestroy()

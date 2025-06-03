@@ -6,36 +6,36 @@ public class SlashCompo : MonoBehaviour
 {
     public float speed = 3f;
     public float lifetime = 10f;
+
     private EntitySkillCompo _skillCompo;
 
     [SerializeField] private LayerMask _whatIsPlayer;
 
-    private void Awake()
-    {
-        GameObject player = GameObject.FindWithTag("Player");
-        if (player != null)
-        {
-            Transform playerTransform = player.transform;
-            _skillCompo = player.GetComponentInChildren<EntitySkillCompo>();
-            
-            Vector3 currentRotation = transform.rotation.eulerAngles;
-            float playerY = playerTransform.rotation.eulerAngles.y;
-            transform.rotation = Quaternion.Euler(currentRotation.x, playerY, currentRotation.z);
-        }
-        else
-        {
-            Debug.LogWarning("Player not found with tag.");
-        }
-    }
+    // 회전을 참조할 외부 오브젝트 (프로퍼티로 설정)
+    public Transform TargetRotationSource { get; set; }
+    
+    
 
     private void Start()
     {
+        GameObject player = GameObject.FindWithTag("Player");
+        
+        if (player != null)
+        {
+            _skillCompo = player.GetComponentInChildren<EntitySkillCompo>();
+        }
+        
+        if (TargetRotationSource != null)
+        {
+            Vector3 currentRotation = transform.rotation.eulerAngles;
+            float targetY = TargetRotationSource.rotation.eulerAngles.y;
+            transform.rotation = Quaternion.Euler(currentRotation.x, targetY, currentRotation.z);
+        }
         Destroy(gameObject, lifetime);
     }
 
     private void Update()
     {
-        // 설정된 회전 방향 기준으로 앞으로 이동
         transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
     }
 

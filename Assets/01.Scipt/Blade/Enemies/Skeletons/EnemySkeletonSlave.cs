@@ -7,19 +7,25 @@ using GondrLib.ObjectPool.Runtime;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using _01.Scipt.Core;
 using Random = UnityEngine.Random;
 
 
 namespace Blade.Enemies.Skeletons
 {
-    public class EnemySkeletonSlave : Enemy
+    public class EnemySkeletonSlave : Enemy, IPoolable
     {
         private NavMovement _movement;
         public UnityEvent<Vector3,float> OnKnockBackEvent;
         private StateChange _StateChangeChannel;
         private CapsuleCollider _collider;
+        
+        [SerializeField] private PoolingItemSO poolingTypeSO; // Pool 타입 명시
 
-        [SerializeField] private PoolingItemSO hitImpactItem;
+        private Pool _myPool;
+
+        public PoolingItemSO PoolingType => poolingTypeSO;
+        public GameObject GameObject => gameObject;
         
         [Inject]  private PoolManagerMono _poolManager;
 
@@ -34,10 +40,15 @@ namespace Blade.Enemies.Skeletons
         }
         
 
-        protected override void Start()
+        public override void Start()
         {
             base.Start();
             _StateChangeChannel = GetBlackboardVariable<StateChange>("StateChannel").Value;
+            
+            _collider.enabled = true;
+            
+            _StateChangeChannel.SendEventMessage(EnemyState.IDLE);
+            IsDead = false;
         }
 
         private void OnDestroy()
@@ -60,6 +71,15 @@ namespace Blade.Enemies.Skeletons
             
         }
 
+        public void HandleHaveToStun()
+        {
+            _StateChangeChannel.SendEventMessage(EnemyState.STUN);
+        }
+
+        public void HandleJumpAndStun()
+        {
+            _StateChangeChannel.SendEventMessage(EnemyState.JUMPANDSTUN);
+        }
         private void HandleDeathEvent()
         {
             if (IsDead) return;
@@ -102,12 +122,18 @@ namespace Blade.Enemies.Skeletons
         private IEnumerator WaitDie()
         {
             yield return new WaitForSeconds(1.3f);
-            
-            gameObject.SetActive(false);
+            GoodsManager.Instance.GetCoin(2);
+            EnemyDieCompo.Instance.PushEnemy(this);
+        }
+        
+        public void SetUpPool(Pool pool)
+        {
+            _myPool = pool;
         }
 
-        public PoolingItemSO PoolingType { get; }
-        public GameObject GameObject { get; }
-        
+        public void ResetItem()
+        {
+            
+        }
     }
 }

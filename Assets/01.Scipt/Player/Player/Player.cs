@@ -1,6 +1,7 @@
 using GondrLib.Dependencies;
 using Member.Kmj._01.Scipt.Entity.AttackCompo;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _01.Scipt.Player.Player
 {
@@ -9,7 +10,8 @@ namespace _01.Scipt.Player.Player
         [field: SerializeField] public PlayerInputSO PlayerInput { get; private set; }
 
         [SerializeField] private StateDataSO[] stateDatas;
-
+        [field: SerializeField] public GameObject FailUI {get; private set;}
+ 
         public CharacterMovement _movement { get; private set; }
 
         public EntityAnimatorTrigger _triggerCompo { get; private set; }

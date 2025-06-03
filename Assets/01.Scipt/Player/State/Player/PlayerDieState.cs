@@ -17,11 +17,16 @@ public class PlayerDieState : PlayerState
     {
         base.Update();
         if (_isTriggerCall)
-            Exit();
+        {
+            _player.FailUI.SetActive(true);
+            Time.timeScale = 0;
+            Cursor.visible = true;         
+            Cursor.lockState = CursorLockMode.None;
+            _player.gameObject.SetActive(false);
+        }
     }
     public override void Exit()
     {
-        _player.gameObject.SetActive(false);
         base.Exit();
     }
 }

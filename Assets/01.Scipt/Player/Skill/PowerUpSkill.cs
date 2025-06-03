@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Blade.Combat;
 using Blade.Enemies;
+using Blade.Enemies.Skeletons;
 using Blade.Entities;
 using UnityEngine;
 
@@ -71,9 +72,16 @@ namespace _01.Scipt.Player.Skill
             {
                 if (item.TryGetComponent(out IDamageable damage))
                 {
-                    damage.ApplyDamage(skillCompo.skillDamage,item.transform.position,null,null);
+                    damage.ApplyDamage(skillCompo.skillDamage / 3,item.transform.position,null,null);
                     CameraShakingManager.instance.ShakeCam(0.1f,0.3f,5,20);
-                    //item.GetComponentInChildren<Rigidbody>().AddForce(Vector3.up * 2.3f, ForceMode.Impulse);
+                    if (skillLevel == 2)
+                    {
+                        item.GetComponent<EnemySkeletonSlave>().ChangeJumpChannelEvent();
+                    }
+                    else if (skillLevel == 3)
+                    {
+                        item.GetComponent<EnemySkeletonSlave>().HandleJumpAndStun();
+                    }
                     Debug.Log("공격됨");
                 }
                 else
@@ -81,7 +89,6 @@ namespace _01.Scipt.Player.Skill
                     print("왔는데 없음");
                 }
             }
-            
         }
 
         public override void SkillFeedback()

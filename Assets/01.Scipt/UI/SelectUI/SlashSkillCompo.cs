@@ -25,9 +25,6 @@ namespace _01.Scipt.UI.SelectUI
             {
                 _skill = components[0] as SlashSkill;
             }
-
-
-            print(_skill);
         }
         
 
@@ -49,7 +46,6 @@ namespace _01.Scipt.UI.SelectUI
             else
             {
                 _skillCompo.AddSkill(_skillSO);
-                _skill._skillSize = _skillRange[_currentSkill];
                 _skillSO = null;
             }
             

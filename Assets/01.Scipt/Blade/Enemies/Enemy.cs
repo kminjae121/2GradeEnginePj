@@ -20,7 +20,7 @@ namespace Blade.Enemies
 
         #endregion
 
-        protected virtual void Start()
+        public virtual void Start()
         {
             BlackboardVariable<Transform> target = GetBlackboardVariable<Transform>("Target");  
             target.Value = PlayerFinder.Target.transform; //플레이어를 타겟으로 넣어준다. 

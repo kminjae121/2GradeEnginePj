@@ -1,4 +1,4 @@
-using System;
+ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -43,11 +43,10 @@ public class GameManager : MonoBehaviour
     
        private void Update()
        {
+           gameTime += Time.deltaTime;
            endTime += (int)Time.deltaTime;
     
            _slider.value = exp;
-           
-           
        }
     
        public void GetExp()
@@ -70,7 +69,7 @@ public class GameManager : MonoBehaviour
       public void SetStartValue()
       {
           exp = 0;
-          nextLevel = 3;
+          nextLevel = 1;
           level = 0;
       }
 

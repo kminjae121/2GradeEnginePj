@@ -2,15 +2,19 @@
 
 namespace _01.Scipt.Core
 {
-    public class GoodsManager : MonoBehaviour
+    public class GoodsManager : MonoSingleton<GoodsManager>
     {
-        public static GoodsManager instance;
-        
-        public int bloodCoin { get; set; }
+
+        public int bloodCoin { get; set; } = 10;
 
         public void UseCoin(int coin)
         {
-            bloodCoin = coin;
+            if (bloodCoin <= 0)
+                return;
+            if (bloodCoin - coin <= 0)
+                return;
+            
+            bloodCoin -= coin;
         }
         public void GetCoin(int coin)
         {

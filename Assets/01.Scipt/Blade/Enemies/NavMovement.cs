@@ -117,7 +117,7 @@ namespace Blade.Enemies
         
         public bool IsGrounded()
         {
-            return Physics.Raycast(transform.position, Vector3.down, 1.1f,_whatIsGround);
+            return Physics.Raycast(transform.position, Vector3.down, 0.1f,_whatIsGround);
         }
 
         public void KnockBack(Vector3 force, float duration)
@@ -134,5 +134,13 @@ namespace Blade.Enemies
                     SetStop(false);
                 });
         }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(transform.position, Vector3.down);
+            Gizmos.color = Color.white;
+        }
     }
+    
 }

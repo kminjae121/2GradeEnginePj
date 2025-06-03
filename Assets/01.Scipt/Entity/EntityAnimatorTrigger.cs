@@ -37,6 +37,7 @@ public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponet
     public event Action<bool> OnManualRotationTrigger;
 
     public event Action OnHighAttack;
+    public event Action OnHighAttackVFXTrigger;
 
     private Entity _entity;
 
@@ -72,6 +73,8 @@ public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponet
     private void CancelNextAttack() => OnAttackCancel?.Invoke();
 
     private void HighAttack() => OnHighAttack?.Invoke();
+
+    private void OnHighAttackVFX() => OnHighAttackVFXTrigger?.Invoke();
 
     private void PowerAttack() => PowerAttackTrigger?.Invoke();
     private void EndLastAttackEffect() => LastAttackEffectEndTrigger?.Invoke();

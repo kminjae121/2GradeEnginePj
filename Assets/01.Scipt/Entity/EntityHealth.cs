@@ -22,6 +22,7 @@ namespace Blade.Combat
             _entity = entity;
             _actionData = entity.GetCompo<ActionData>();
             _statCompo = entity.GetCompo<EntityStat>();
+            
         }
         public void AfterInit()
         {
@@ -41,27 +42,21 @@ namespace Blade.Combat
 
         private void HandleMaxHPChanged(StatSO stat, float currentvalue, float previousvalue)
         {
-            //float changed = currentvalue - previousvalue;
             currentHealth += currentvalue -= previousvalue;
 
             if (currentHealth >= maxHealth)
             {
                 currentHealth = maxHealth;
             }
-            //currentHealth = Mathf.Clamp(currentvalue + changed, 0, maxHealth);
         }
 
         public void ApplyDamage(float damage, Vector3 hitPoint,AttackDataSO _atkData, Entity dealer)
         {
-            print("공격됨");
             if (_entity.IsDead) return;
 
+            print(currentHealth);
             currentHealth = Mathf.Clamp(currentHealth -= damage, 0, maxHealth);
-    
-        
-            //_feedbackData.IsLastStopHit = isHit;
-            //_feedbackData.LastEntityWhoHit = delear;
-            //_feedbackData.LastStunLevel = StunLevel;
+            
             _actionData.HitPoint = hitPoint;
         
             _entity.OnHit?.Invoke();    
@@ -70,9 +65,6 @@ namespace Blade.Combat
                 _entity.OnDead?.Invoke();
             }
         }
-
-
-        
     }
 }
   

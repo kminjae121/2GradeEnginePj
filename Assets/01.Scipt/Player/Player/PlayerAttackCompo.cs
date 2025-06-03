@@ -128,12 +128,12 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
         StatSO targetStat = _statCompo.GetStat(_atkDamageSO);
         Debug.Assert(targetStat != null, $"{_atkDamageSO.statName} stat could not be found");
         targetStat.OnValudeChanged += HandleAttackStatChange;
-        atkDamage = targetStat.Value;
+        atkDamage = targetStat.BaseValue;
         
         StatSO targetStat2 = _statCompo.GetStat(_bloodHpSO);
         Debug.Assert(targetStat2 != null, $"{_bloodHpSO.statName} stat could not be found");
         targetStat2.OnValudeChanged += HandleBloodStatChange;
-        bloodHp = targetStat2.Value;
+        bloodHp = targetStat2.BaseValue;
         
     }
     

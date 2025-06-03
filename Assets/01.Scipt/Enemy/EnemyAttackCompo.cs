@@ -1,5 +1,6 @@
 using System;
 using Blade.Combat;
+using Blade.Enemies.Skeletons;
 using UnityEngine;
 
 namespace _01.Scipt.Enemy
@@ -28,11 +29,14 @@ namespace _01.Scipt.Enemy
         {
             var collider = Physics.OverlapBox(transform.position, boxSize,
                 Quaternion.identity,whatIsEnemy);
-
-
+            
+            if(collider == null)
+                return;
+            
             foreach (var Obj in collider)
             {
-                Obj.GetComponentInChildren<EntityHealth>().ApplyDamage(10,Obj.transform.position,attackData,null);
+                print(Obj.name);
+                Obj.GetComponentInChildren<EntityHealth>().ApplyDamage(5,Obj.transform.position,attackData,null);
                 CameraShakingManager.instance.ShakeCam(0.1f,0.6f,5,20);
             }
         }

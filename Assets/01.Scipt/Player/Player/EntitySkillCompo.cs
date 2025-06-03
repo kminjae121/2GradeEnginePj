@@ -88,7 +88,6 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponet, IAfterInit
             return;
 
         SkillList.Values.ToList().ForEach(skill => skill.SkillUpdate());
-        print(skillDamage);
     }
 
 
@@ -117,7 +116,9 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponet, IAfterInit
         StatSO targetStat = _statCompo.GetStat(_skilldamageSo);
         Debug.Assert(targetStat != null, $"{_skilldamageSo.statName} stat could not be found");
         targetStat.OnValudeChanged += HandleSkillChange;
-        skillDamage = targetStat.Value;
+        skillDamage = targetStat.BaseValue;
+        
+        print(skillDamage);
         
     }
 }

@@ -9,7 +9,6 @@ public class Lifesteal : MonoBehaviour
 
     public void UpGradeStat()
     {
-        print(_attackCompo.bloodHp);
         targetCompo.AddModifier(targetStat, this, _attackCompo.bloodHp);
     }
 }
