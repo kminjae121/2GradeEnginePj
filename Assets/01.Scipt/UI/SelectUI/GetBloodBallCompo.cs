@@ -2,8 +2,18 @@ using UnityEngine;
 
 public class GetBloodBallCompo : MonoBehaviour
 {
-    public void UpBloodGetPercent()
+    private int _currentAtkCnt = 0;
+    [SerializeField] private int thisIdx;
+
+    public void UpSkillLevel()
     {
-        GameManager.instance.GetBallPercent += 15;
+        if (_currentAtkCnt == 4)
+        {
+            LevelSystem.instance.itemList.RemoveAt(thisIdx);
+            gameObject.SetActive(false);
+            return;
+        }
+        GameManager.instance.GetBallPercent += 20;
+        _currentAtkCnt++;
     }
 }

@@ -15,11 +15,16 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
         OnChargeAttackCanceled,
         OnStrongAttackPressed,
         OnHighAttackPresssed;
+
+    public event Action OnFirstSelect;
+    public event Action OnSecondSelect;
+    public event Action OnThridSelect;
     
 
     private Controls _control;
     private Vector2 _screenPos;
     private Vector3 _worldPos;
+    public Action OnRollPressed;
 
     public Vector2 MovementKey { get; set; }
 
@@ -89,6 +94,30 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     {
         if(context.performed)
             OnHighAttackPresssed?.Invoke();
+    }
+
+    public void OnSelectFirst(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+            OnFirstSelect?.Invoke();
+    }
+
+    public void OnSelectSecond(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+            OnSecondSelect?.Invoke();
+    }
+
+    public void OnSelectThird(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+            OnThridSelect?.Invoke();
+    }
+
+    public void OnRoll(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+            OnRollPressed?.Invoke();
     }
 
 

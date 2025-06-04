@@ -10,8 +10,7 @@ public class SlashCompo : MonoBehaviour
     private EntitySkillCompo _skillCompo;
 
     [SerializeField] private LayerMask _whatIsPlayer;
-
-    // 회전을 참조할 외부 오브젝트 (프로퍼티로 설정)
+    
     public Transform TargetRotationSource { get; set; }
     
     

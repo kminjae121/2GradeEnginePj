@@ -23,9 +23,9 @@ namespace _01.Scipt.Blade.Combat
             foreach (var Obj in collider)
                 if (Obj.TryGetComponent(out IDamageable damage))
                 {
-                    damage.ApplyDamage(attackCompo.atkDamage,Obj.transform.position,attackData,null);
                     _steal.UpGradeStat();
-                    CameraShakingManager.instance.ShakeCam(0.1f,0.6f,5,20);
+                    damage.ApplyDamage(attackCompo.atkDamage,Obj.transform.position,attackData,null);
+                    CameraShakingManager.instance.ShakeCam(0.1f,0.2f,5,10);
                 }
                 else
                 {

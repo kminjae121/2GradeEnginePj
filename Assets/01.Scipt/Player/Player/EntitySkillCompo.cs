@@ -118,7 +118,5 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponet, IAfterInit
         targetStat.OnValudeChanged += HandleSkillChange;
         skillDamage = targetStat.BaseValue;
         
-        print(skillDamage);
-        
     }
 }

@@ -71,6 +71,11 @@ namespace Blade.Enemies.Skeletons
             
         }
 
+        public void HandleStop()
+        {
+            _StateChangeChannel.SendEventMessage(EnemyState.STOP);
+        }
+
         public void HandleHaveToStun()
         {
             _StateChangeChannel.SendEventMessage(EnemyState.STUN);
@@ -88,7 +93,6 @@ namespace Blade.Enemies.Skeletons
             IsDead = true;
             int random = Random.Range(0, 100);
             
-            print(random);
             print(GameManager.instance.GetBallPercent);
             if (GameManager.instance.GetBallPercent == 0)
             {

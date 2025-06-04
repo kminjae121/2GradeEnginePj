@@ -43,6 +43,8 @@ namespace _01.Scipt.Player.Skill
         {
             if (CanUseSkill("PowerSkill") && !_player._isSkilling)
             {
+                _player._movement.CanMove = false;
+                _stealCompo.MinusHealth();
                 _player.ChangeState("POWER");
                 _player._attackCompo.IsAttack = true;
                 _player._isSkilling = true;

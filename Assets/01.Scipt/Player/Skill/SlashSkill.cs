@@ -37,6 +37,8 @@ namespace _01.Scipt.Player.Skill
             if (CanUseSkill("SlashSkill") && !_player._isSkilling)
             {
                 print("실행됨");
+                _player._movement.CanMove = false;
+                _stealCompo.MinusHealth();
                 _player.ChangeState("SLASH");
                 _player._attackCompo.IsAttack = true;
                 _player._isSkilling = true;
@@ -51,24 +53,28 @@ namespace _01.Scipt.Player.Skill
         {
             if (skillLevel < 3)
             {
-                GameObject slash = Instantiate(_slashEffectt[currentEffectNum], SlashTrans[0].position, Quaternion.Euler(0, 0, 90));
-                
+                Quaternion rot = Quaternion.Euler(0f, SlashTrans[0].rotation.eulerAngles.y, 0f);
+                GameObject slash = Instantiate(_slashEffectt[currentEffectNum], SlashTrans[0].position, rot);
+        
                 SlashCompo slashCompo = slash.GetComponent<SlashCompo>();
                 if (slashCompo != null)
                 {
-                    slashCompo.TargetRotationSource = SlashTrans[0];
+                    slashCompo.TargetRotationSource = SlashTrans[0]; // 정보용으로 유지
+                    CameraShakingManager.instance.ShakeCam(0.1f, 0.3f, 5, 20);
                 }
             }
             else
             {
                 foreach (Transform ts in SlashTrans)
                 {
-                    GameObject slash = Instantiate(_slashEffectt[currentEffectNum], ts.position, Quaternion.identity);
-                    
+                    Quaternion rot = Quaternion.Euler(0f, ts.rotation.eulerAngles.y, 0f);
+                    GameObject slash = Instantiate(_slashEffectt[currentEffectNum], ts.position, rot);
+            
                     SlashCompo slashCompo = slash.GetComponent<SlashCompo>();
                     if (slashCompo != null)
                     {
-                        slashCompo.TargetRotationSource = ts;
+                        slashCompo.TargetRotationSource = ts; // 정보용으로 유지
+                        CameraShakingManager.instance.ShakeCam(0.1f, 0.3f, 5, 20);
                     }
                 }
             }

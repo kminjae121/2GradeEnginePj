@@ -140748,7 +140748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09844c193a254a64b9fcda62d9f6eb6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 25
   lifetime: 10
   _whatIsPlayer:
     serializedVersion: 2

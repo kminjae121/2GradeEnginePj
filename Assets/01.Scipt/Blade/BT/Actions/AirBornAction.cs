@@ -7,7 +7,7 @@ using Action = Unity.Behavior.Action;
 using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "AirBorn", story: "[Self] fast jump and fall", category: "Action", id: "7d66595fe3c2d8ee7e109ab9de392128")]
+[NodeDescription(name: "AirBorn", story: "[Self] fast jump and fall (with hover)", category: "Action", id: "7d66595fe3c2d8ee7e109ab9de392128")]
 public partial class AirBornAction : Action
 {
     [SerializeReference] public BlackboardVariable<Enemy> Self;
@@ -16,11 +16,14 @@ public partial class AirBornAction : Action
     private Transform _transform;
 
     private float _verticalVelocity;
-    private float _gravity = -30f;         // 중력 가속도
-    private float _initialJumpVelocity = 10f;
-    private float _currentHeight;
+    private float _gravity = -28f;   
+    private float _jumpPower = 10f;    
     private float _startY;
+
     private bool _isJumping = false;
+    private bool _isHovering = true;
+    private float _hoverTime = 0.3f;   
+    private float _hoverTimer = 0f;
 
     protected override Status OnStart()
     {
@@ -34,30 +37,45 @@ public partial class AirBornAction : Action
             return Status.Failure;
 
         _agent.enabled = false;
+
         _startY = _transform.position.y;
-        _verticalVelocity = _initialJumpVelocity;
+        _verticalVelocity = _jumpPower;
+
         _isJumping = true;
+        _isHovering = true;
+        _hoverTimer = 0f;
 
         return Status.Running;
     }
 
     protected override Status OnUpdate()
     {
-        if (!_isJumping) return Status.Success;
+        if (!_isJumping)
+            return Status.Success;
 
         float deltaTime = Time.deltaTime;
-
-        _verticalVelocity += _gravity * deltaTime;
         Vector3 pos = _transform.position;
-        pos.y += _verticalVelocity * deltaTime;
 
-        if (pos.y <= _startY)
+        if (_isHovering)
         {
-            // 바닥 도달
-            pos.y = _startY;
-            _transform.position = pos;
-            _isJumping = false;
-            return Status.Success;
+            _hoverTimer += deltaTime;
+            pos.y += _verticalVelocity * deltaTime;
+
+            if (_hoverTimer >= _hoverTime)
+                _isHovering = false;
+        }
+        else
+        {
+            _verticalVelocity += _gravity * deltaTime;
+            pos.y += _verticalVelocity * deltaTime;
+
+            if (pos.y <= _startY)
+            {
+                pos.y = _startY;
+                _transform.position = pos;
+                _isJumping = false;
+                return Status.Success;
+            }
         }
 
         _transform.position = pos;

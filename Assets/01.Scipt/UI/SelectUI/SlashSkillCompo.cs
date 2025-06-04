@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using _01.Scipt.Player.Skill;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _01.Scipt.UI.SelectUI
 {
@@ -14,7 +15,7 @@ namespace _01.Scipt.UI.SelectUI
         [SerializeField] private int _countIdx;
         [SerializeField] private List<Vector3> _skillRange;
         private int _currentSkill = 0;
-
+        [SerializeField] private Image _skillimage;
         private void Awake()
         {
             var type = Type.GetType(skillCompoName);
@@ -46,6 +47,9 @@ namespace _01.Scipt.UI.SelectUI
             else
             {
                 _skillCompo.AddSkill(_skillSO);
+                Color color = _skillimage.color;
+                color.a = Mathf.Clamp01(1);
+                _skillimage.color = color;
                 _skillSO = null;
             }
             

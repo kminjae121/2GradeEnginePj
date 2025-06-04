@@ -7,6 +7,7 @@ using GondrLib.Dependencies;
 using GondrLib.ObjectPool.Runtime;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
@@ -33,31 +34,39 @@ namespace _01.Scipt.Enemy
         
         private EnemySkeletonSlave _enemy;
 
+        [SerializeField] private int _endLevel;
+
 
         private void Update()
         {
-                if (GameManager.instance.gameTime > _currentTime)
+            if (GameManager.instance.gameTime > _currentTime)
+            {
+                if (_level == _endLevel)
                 {
-                    if (_level == 5)
+                    GameManager.instance.gameTime = 0;
+            
+                    if (FindObjectsOfType<EnemySkeletonSlave>().Length == 0)
                     {
-                        GameManager.instance.gameTime = 0;
                         Time.timeScale = 0;
+                        string currentSceneName = SceneManager.GetActiveScene().name;
+                        StageManager.Instance.ClearStage(currentSceneName);
                         _clearUI.SetActive(true);
                         Cursor.visible = true;         
-                        Cursor.lockState = CursorLockMode.None;
-                    }
-                    else
-                    {
-                        GameManager.instance.gameTime = 0;
-                        _currentTime += 3.5f;
-                        _killCount *= 1.6f;
-                        _level++;
-                        _isTimer = true;
-                        _startTime = Time.time; 
-                        _timetxt.text = $"현재 남은 라운드 : {5 - _level}";
-                        StartCoroutine(SpawnTime());
+                        Cursor.lockState = CursorLockMode.None;   
                     }
                 }
+                else
+                {
+                    GameManager.instance.gameTime = 0;
+                    _currentTime += 2.2f;
+                    _killCount *= 1.2f;
+                    _level++;
+                    _isTimer = true;
+                    _startTime = Time.time; 
+                    _timetxt.text = $"현재 남은 라운드 : {_endLevel - _level}";
+                    StartCoroutine(SpawnTime());
+                }
+            }
         }
 
         private IEnumerator SpawnTime()

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class LevelSystem : MonoBehaviour
@@ -10,33 +11,60 @@ public class LevelSystem : MonoBehaviour
     public static LevelSystem instance;
     [field: SerializeField] public List<GameObject> itemList { get; set; }
 
+    public bool isShow { get; set; } = false;
+    [SerializeField] private PlayerInputSO _inputReader;
+
+    [SerializeField] private List<GameObject> _selectObj;
     private void Awake()
     {
         instance = this;
         _rect = GetComponent<RectTransform>();
+        _inputReader.OnFirstSelect += SelectFirst;
+        _inputReader.OnSecondSelect += SelectSecond;
+        _inputReader.OnThridSelect += SelectThrid;
         Hide();
+    }
+
+    private void SelectSecond()
+    {
+        if(!isShow)
+            return;
+        _selectObj[1].GetComponentInChildren<Button>().onClick?.Invoke();
+    }
+
+    private void SelectFirst()
+    {
+        if(!isShow)
+            return;
+        _selectObj[0].GetComponentInChildren<Button>().onClick?.Invoke();
+    }
+
+    private void SelectThrid()
+    {
+        if(!isShow)
+            return;
+        _selectObj[2].GetComponentInChildren<Button>().onClick?.Invoke();
     }
 
     public void Show()
     {
         RandomItem();
         _rect.localScale = Vector3.one;
-        Time.timeScale = 0;
-        Cursor.visible = true;         
-        Cursor.lockState = CursorLockMode.None;
+        isShow = true;
     }
 
     public void Hide()
     {
         _rect.localScale = Vector3.zero;
         itemList.ToList().ForEach(UI => UI.SetActive(false));
-        Time.timeScale = 1;
-        Cursor.visible = false;         
+        isShow = false;
+        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void RandomItem()
     {
+        itemList.ToList().ForEach(UI => UI.SetActive(false));
         int maxCount = itemList.Count;
 
         int[] ran = new int[3];
@@ -51,10 +79,11 @@ public class LevelSystem : MonoBehaviour
                 break;
         }
 
-        for (int i = 0; i < ran.Length; i++)
+        for (int i = 0; i < 3; i++)
         {
             GameObject obj = itemList[ran[i]];
-            
+            _selectObj[i] = obj;
+            print(obj.name);
             obj.SetActive(true);
         }
     }

@@ -2,6 +2,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
+    using UnityEngine.UI;
 
     public class SkillUpCompo : MonoBehaviour
     {
@@ -12,6 +13,7 @@
         [SerializeField] private int _countIdx;
         [SerializeField] private List<Vector3> _skillRange;
         private int _currentSkill = 0;
+        [SerializeField] private Image _skillimage;
 
         private void Awake()
         {
@@ -48,6 +50,10 @@
             else
             {
                 _skillCompo.AddSkill(_skillSO);
+                Color color = _skillimage.color;
+                color.a = Mathf.Clamp01(1);
+                _skillimage.color = color;
+                
                 _skill._skillSize = _skillRange[_currentSkill];
                 _skillSO = null;
             }

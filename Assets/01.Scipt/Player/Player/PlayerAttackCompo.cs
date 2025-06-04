@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Numerics;
 using _01.Scipt.Blade.Combat;
 using _01.Scipt.Player.Player;
@@ -9,6 +10,7 @@ using Blade.Core.StatSystem;
 using Member.Kmj._01.Scipt.Entity.AttackCompo;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
+using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
 public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
@@ -57,8 +59,11 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
     private EntityStat _statCompo;
     public float atkDamage { get; private set; }
     public float bloodHp { get; private set; }
-
-
+    private Lifesteal _StealCompo;
+        
+    [SerializeField] private List<GameObject> _attackSlash;
+    [SerializeField] private Transform _bladeTransform;
+    public int slashPercent { get; set; } = 20;
     public float AttackSpeed
     {
         get => _attackSpeed;
@@ -79,6 +84,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
         
         _vfxCompo = entity.GetCompo<EntityVFX>();
         AttackSpeed = 1.6f;
+        _StealCompo = GetComponentInChildren<Lifesteal>();
         //damageCast.InitCaster(_entity);
         _triggerCompo = entity.GetCompo<EntityAnimatorTrigger>();
         _triggerCompo.OnSwingAttackTrigger += HandleSwing;
@@ -146,7 +152,8 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
     {
         _vfxCompo.PlayVfx($"FinalAttack", FinalAttackEffect.position, Quaternion.identity);
     }
-
+    
+    
     
     
     private void HandleStopFinalAttackTrigger()
@@ -155,6 +162,8 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
     }
     private void HandleDamageCasterTrigger()
     {
+        _StealCompo.MinusHealth();
+        IntilalizeAttackSlash();
         damageCaster.CastDamage(_player.transform.position,Vector3.forward,attackDataList[ComboCounter]);
     }
     
@@ -166,6 +175,22 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
         _entityAnimator.SetParam(_comboCounterHash, ComboCounter);
     }
 
+    private void IntilalizeAttackSlash()
+    {
+        int rand = Random.Range(0, 101);
+
+        if (rand <= slashPercent)
+        {
+            Quaternion rot = Quaternion.Euler(0f, _bladeTransform.rotation.eulerAngles.y, 0f);
+            GameObject slash = Instantiate(_attackSlash[ComboCounter], _bladeTransform.position, rot);
+        
+            SlashCompo slashCompo = slash.GetComponent<SlashCompo>();
+            if (slashCompo != null)
+            {
+                slashCompo.TargetRotationSource = _bladeTransform;
+            }
+        }
+    }
     private void StartCharge()
     {
         if (_chargeRoutine == null)

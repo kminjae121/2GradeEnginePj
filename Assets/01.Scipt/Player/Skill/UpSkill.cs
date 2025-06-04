@@ -27,7 +27,6 @@ namespace _01.Scipt.Player.Skill
             skillCompo = GetComponent<EntitySkillCompo>();
             _vfxCompo = _entity.GetCompo<EntityVFX>();
             _player.PlayerInput.OnHighAttackPresssed += HandleHighAttack;
-            
             _triggerCompo.OnHighAttackVFXTrigger += HandleUpSkillTrigger;
             _triggerCompo.OnHighAttack += Skill;
         }
@@ -38,25 +37,28 @@ namespace _01.Scipt.Player.Skill
                 return;
             if (skillLevel == 2)
             {
-                GameObject slash = Instantiate(_slashEffectt[currentSkillEffectNameIdx], SlashTrans[0].position, Quaternion.identity);
-
-                // TargetRotationSource 설정
-                UpSkillSlashCompo slashCompo = slash.GetComponent<UpSkillSlashCompo>();
+                Quaternion rot = Quaternion.Euler(0f, SlashTrans[0].rotation.eulerAngles.y, 0f);
+                GameObject slash = Instantiate(_slashEffectt[currentSkillEffectNameIdx], SlashTrans[0].position, rot);
+        
+                SlashCompo slashCompo = slash.GetComponent<SlashCompo>();
                 if (slashCompo != null)
                 {
-                    slashCompo.TargetRotationSource = SlashTrans[0];
+                    slashCompo.TargetRotationSource = SlashTrans[0]; // 정보용으로 유지
+                    CameraShakingManager.instance.ShakeCam(0.1f, 0.3f, 5, 20);
                 }
             }
-            else if (skillLevel == 3)
+            else if(skillLevel == 3)
             {
                 foreach (Transform ts in SlashTrans)
                 {
-                    GameObject slash = Instantiate(_slashEffectt[currentSkillEffectNameIdx], ts.position, Quaternion.identity);
-                    
-                    UpSkillSlashCompo slashCompo = slash.GetComponent<UpSkillSlashCompo>();
+                    Quaternion rot = Quaternion.Euler(0f, ts.rotation.eulerAngles.y, 0f);
+                    GameObject slash = Instantiate(_slashEffectt[currentSkillEffectNameIdx], ts.position, rot);
+            
+                    SlashCompo slashCompo = slash.GetComponent<SlashCompo>();
                     if (slashCompo != null)
                     {
-                        slashCompo.TargetRotationSource = ts;
+                        slashCompo.TargetRotationSource = ts; // 정보용으로 유지
+                        CameraShakingManager.instance.ShakeCam(0.1f, 0.3f, 5, 20);
                     }
                 }
             }
@@ -65,7 +67,9 @@ namespace _01.Scipt.Player.Skill
         private void HandleHighAttack()
         {
             if (CanUseSkill("UpSkill") && !_player._isSkilling)
-            {
+            { 
+                _player._movement.CanMove = false;
+                _stealCompo.MinusHealth();
                 _player.ChangeState("UP");
                 _player._attackCompo.IsAttack = true;
                 _player._isSkilling = true;
@@ -97,16 +101,8 @@ namespace _01.Scipt.Player.Skill
                 if (item.TryGetComponent(out IDamageable damage))
                 {
                     damage.ApplyDamage(skillCompo.skillDamage,item.transform.position,null,null);
-                    CameraShakingManager.instance.ShakeCam(0.1f,0.7f,5,40);
-                    if (skillEffectName[currentSkillEffectNameIdx] != String.Empty)
-                    {
-                        item.GetComponent<EnemySkeletonSlave>().ChangeJumpChannelEvent();
-                    }
-                    else
-                    {
-                        return;
-                    }
-                    //item.GetComponentInChildren<Rigidbody>().AddForce(Vector3.up * 7, ForceMode.Impulse);
+                    CameraShakingManager.instance.ShakeCam(0.1f,0.1f,5,40);
+                    item.GetComponent<EnemySkeletonSlave>().ChangeJumpChannelEvent();
                     Debug.Log("공격됨");
                 }
                 else

@@ -44,17 +44,25 @@ namespace Blade.Combat
         {
             currentHealth += currentvalue -= previousvalue;
 
-            if (currentHealth >= maxHealth)
+           if (currentHealth >= maxHealth)
             {
                 currentHealth = maxHealth;
+            }
+        }
+
+        public void HealHp(float Value)
+        {
+            currentHealth += Value;
+            
+            if (currentHealth >= maxHealth)
+            {
+                currentHealth = maxHealth;  
             }
         }
 
         public void ApplyDamage(float damage, Vector3 hitPoint,AttackDataSO _atkData, Entity dealer)
         {
             if (_entity.IsDead) return;
-
-            print(currentHealth);
             currentHealth = Mathf.Clamp(currentHealth -= damage, 0, maxHealth);
             
             _actionData.HitPoint = hitPoint;

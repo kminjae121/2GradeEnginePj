@@ -162,6 +162,42 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectFirst"",
+                    ""type"": ""Button"",
+                    ""id"": ""eeae6280-7274-48bd-ba51-7aa7183addd1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectSecond"",
+                    ""type"": ""Button"",
+                    ""id"": ""66f6e556-748c-4636-980d-87e079631c8c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectThird"",
+                    ""type"": ""Button"",
+                    ""id"": ""6a18ee9a-4574-42fa-8115-84b3c40d0e37"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Roll"",
+                    ""type"": ""Button"",
+                    ""id"": ""3c157bd4-4687-47f1-9bdf-2721de9fec5a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -305,6 +341,50 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""HighAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3403b531-d941-4383-9bd7-7330724edc56"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectFirst"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e0583ea-4dac-47e7-b821-5dc07b6456a4"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectSecond"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb44df11-ca96-423e-b5b7-a74afbfc8b96"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectThird"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1dc9a3ac-9835-4ff7-b201-8839754faec5"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -900,6 +980,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_StrongAttackSkill = m_Player.FindAction("StrongAttackSkill", throwIfNotFound: true);
         m_Player_ChargeSklil = m_Player.FindAction("ChargeSklil", throwIfNotFound: true);
         m_Player_HighAttack = m_Player.FindAction("HighAttack", throwIfNotFound: true);
+        m_Player_SelectFirst = m_Player.FindAction("SelectFirst", throwIfNotFound: true);
+        m_Player_SelectSecond = m_Player.FindAction("SelectSecond", throwIfNotFound: true);
+        m_Player_SelectThird = m_Player.FindAction("SelectThird", throwIfNotFound: true);
+        m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1001,6 +1085,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_StrongAttackSkill;
     private readonly InputAction m_Player_ChargeSklil;
     private readonly InputAction m_Player_HighAttack;
+    private readonly InputAction m_Player_SelectFirst;
+    private readonly InputAction m_Player_SelectSecond;
+    private readonly InputAction m_Player_SelectThird;
+    private readonly InputAction m_Player_Roll;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1044,6 +1132,22 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/HighAttack".
         /// </summary>
         public InputAction @HighAttack => m_Wrapper.m_Player_HighAttack;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/SelectFirst".
+        /// </summary>
+        public InputAction @SelectFirst => m_Wrapper.m_Player_SelectFirst;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/SelectSecond".
+        /// </summary>
+        public InputAction @SelectSecond => m_Wrapper.m_Player_SelectSecond;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/SelectThird".
+        /// </summary>
+        public InputAction @SelectThird => m_Wrapper.m_Player_SelectThird;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Roll".
+        /// </summary>
+        public InputAction @Roll => m_Wrapper.m_Player_Roll;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1094,6 +1198,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @HighAttack.started += instance.OnHighAttack;
             @HighAttack.performed += instance.OnHighAttack;
             @HighAttack.canceled += instance.OnHighAttack;
+            @SelectFirst.started += instance.OnSelectFirst;
+            @SelectFirst.performed += instance.OnSelectFirst;
+            @SelectFirst.canceled += instance.OnSelectFirst;
+            @SelectSecond.started += instance.OnSelectSecond;
+            @SelectSecond.performed += instance.OnSelectSecond;
+            @SelectSecond.canceled += instance.OnSelectSecond;
+            @SelectThird.started += instance.OnSelectThird;
+            @SelectThird.performed += instance.OnSelectThird;
+            @SelectThird.canceled += instance.OnSelectThird;
+            @Roll.started += instance.OnRoll;
+            @Roll.performed += instance.OnRoll;
+            @Roll.canceled += instance.OnRoll;
         }
 
         /// <summary>
@@ -1129,6 +1245,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @HighAttack.started -= instance.OnHighAttack;
             @HighAttack.performed -= instance.OnHighAttack;
             @HighAttack.canceled -= instance.OnHighAttack;
+            @SelectFirst.started -= instance.OnSelectFirst;
+            @SelectFirst.performed -= instance.OnSelectFirst;
+            @SelectFirst.canceled -= instance.OnSelectFirst;
+            @SelectSecond.started -= instance.OnSelectSecond;
+            @SelectSecond.performed -= instance.OnSelectSecond;
+            @SelectSecond.canceled -= instance.OnSelectSecond;
+            @SelectThird.started -= instance.OnSelectThird;
+            @SelectThird.performed -= instance.OnSelectThird;
+            @SelectThird.canceled -= instance.OnSelectThird;
+            @Roll.started -= instance.OnRoll;
+            @Roll.performed -= instance.OnRoll;
+            @Roll.canceled -= instance.OnRoll;
         }
 
         /// <summary>
@@ -1485,6 +1613,34 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnHighAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SelectFirst" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSelectFirst(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SelectSecond" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSelectSecond(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SelectThird" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSelectThird(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Roll" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRoll(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

@@ -39,6 +39,8 @@ namespace _01.Scipt.Player.Player
         private EntityStateMachine _stateMachine;
         public bool isUseSheld { get; private set; }
 
+        [field: SerializeField] public Transform _camPos { get; private set; } 
+
         protected override void Awake()
         {
             base.Awake();
