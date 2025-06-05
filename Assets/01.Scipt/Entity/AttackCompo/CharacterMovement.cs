@@ -24,6 +24,9 @@ public class CharacterMovement : MonoBehaviour, IEntityComponet, IAfterInit
 
     public bool IsRolling { get; set; } = false;
     private Player _entity;
+    
+    Vector2 currentBlend;
+    [SerializeField] float blendSpeed = 10f;
 
     [SerializeField] private StatSO _moveSpeedStat;
     [SerializeField] private StatSO _rollingSpeedStat;
@@ -50,8 +53,12 @@ public class CharacterMovement : MonoBehaviour, IEntityComponet, IAfterInit
 
     private void Update()
     {
-        _animatorCompo.animator.SetFloat("Horizon", _movementDirection.x);
-        _animatorCompo.animator.SetFloat("Vertical", _movementDirection.z);
+        Vector2 rawInput = _entity.PlayerInput.MovementKey.normalized;
+        
+        currentBlend = Vector2.Lerp(currentBlend, rawInput, Time.deltaTime * blendSpeed);
+        
+        _animatorCompo.animator.SetFloat("Horizon", currentBlend.x);
+        _animatorCompo.animator.SetFloat("Vertical", currentBlend.y);
     }
 
     private void FixedUpdate()

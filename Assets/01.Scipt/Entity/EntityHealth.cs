@@ -1,4 +1,5 @@
 using System;
+using _01.Scipt.UI;
 using Blade.Core.StatSystem;
 using Blade.Entities;
 using Member.Kmj._01.Scipt.Entity.AttackCompo;
@@ -16,7 +17,10 @@ namespace Blade.Combat
         [SerializeField] private StatSO hpStat;
         [field:SerializeField] public float maxHealth {get; set;}
         [field:SerializeField] public float currentHealth  {get; set;}
-        
+
+        [SerializeField] private SliderCompo _sliderCompo;
+        private float displayedHealth;
+        [SerializeField] float smoothSpeed = 3f;
         public void Initialize(Entity entity)
         {
             _entity = entity;
@@ -33,6 +37,8 @@ namespace Blade.Combat
         }
         
 
+        
+        
         private void OnDestroy()
         {
             StatSO target = _statCompo.GetStat(hpStat);
@@ -49,7 +55,7 @@ namespace Blade.Combat
                 currentHealth = maxHealth;
             }
         }
-
+        
         public void HealHp(float Value)
         {
             currentHealth += Value;
@@ -60,13 +66,21 @@ namespace Blade.Combat
             }
         }
 
+        private void Update()
+        {
+            displayedHealth = Mathf.Lerp(displayedHealth, currentHealth, Time.deltaTime * smoothSpeed);
+            _sliderCompo._slider.value = displayedHealth;
+        }
         public void ApplyDamage(float damage, Vector3 hitPoint,AttackDataSO _atkData, Entity dealer)
         {
             if (_entity.IsDead) return;
+
+            
             currentHealth = Mathf.Clamp(currentHealth -= damage, 0, maxHealth);
+            _sliderCompo._slider.value = currentHealth;
             
             _actionData.HitPoint = hitPoint;
-        
+
             _entity.OnHit?.Invoke();    
             if (currentHealth <= 0)
             {

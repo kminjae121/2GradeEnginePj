@@ -15,6 +15,7 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponet, IAfterInit
     [SerializeField] private List<SkillSO> _skillList;
 
     public float skillDamage { get; set; }
+    public float BaseskillDamage { get; private set; }
     
     [SerializeField] private StatSO _skilldamageSo;
     
@@ -108,7 +109,8 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponet, IAfterInit
    
     private void HandleSkillChange(StatSO stat, float currentValue, float previousValue)
     {
-        skillDamage = currentValue;
+        skillDamage += currentValue - previousValue;
+        BaseskillDamage += currentValue - previousValue;
     }
    
     public void AfterInit()
@@ -117,6 +119,6 @@ public class EntitySkillCompo : MonoBehaviour, IEntityComponet, IAfterInit
         Debug.Assert(targetStat != null, $"{_skilldamageSo.statName} stat could not be found");
         targetStat.OnValudeChanged += HandleSkillChange;
         skillDamage = targetStat.BaseValue;
-        
+        BaseskillDamage = targetStat.BaseValue;
     }
 }

@@ -17,12 +17,12 @@ public partial class AirBornAction : Action
 
     private float _verticalVelocity;
     private float _gravity = -28f;   
-    private float _jumpPower = 10f;    
+    private float _jumpPower = 7f;    
     private float _startY;
 
     private bool _isJumping = false;
     private bool _isHovering = true;
-    private float _hoverTime = 0.3f;   
+    private float _hoverTime = 4f;   
     private float _hoverTimer = 0f;
 
     protected override Status OnStart()
@@ -47,6 +47,7 @@ public partial class AirBornAction : Action
 
         return Status.Running;
     }
+    
 
     protected override Status OnUpdate()
     {
@@ -59,10 +60,12 @@ public partial class AirBornAction : Action
         if (_isHovering)
         {
             _hoverTimer += deltaTime;
-            pos.y += _verticalVelocity * deltaTime;
-
+        
+            // 수직 속도 적용 없이 위치 유지 (정지)
             if (_hoverTimer >= _hoverTime)
+            {
                 _isHovering = false;
+            }
         }
         else
         {
@@ -81,7 +84,6 @@ public partial class AirBornAction : Action
         _transform.position = pos;
         return Status.Running;
     }
-
     protected override void OnEnd()
     {
         if (_agent != null)

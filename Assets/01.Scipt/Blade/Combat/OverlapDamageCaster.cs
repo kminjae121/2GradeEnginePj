@@ -1,5 +1,6 @@
 ﻿using System;
 using Blade.Combat;
+using Blade.Enemies.Skeletons;
 using Blade.Entities;
 using UnityEngine;
 
@@ -25,7 +26,12 @@ namespace _01.Scipt.Blade.Combat
                 {
                     _steal.UpGradeStat();
                     damage.ApplyDamage(attackCompo.atkDamage,Obj.transform.position,attackData,null);
+                    PlayerFuryManager.Instance.RaiseFury(4f);
                     CameraShakingManager.instance.ShakeCam(0.1f,0.2f,5,10);
+                    if (PlayerFuryManager.Instance.isInRange == true)
+                    {
+                        Obj.GetComponent<EnemySkeletonSlave>().HandleHaveToStun();
+                    }
                 }
                 else
                 {

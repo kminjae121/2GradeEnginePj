@@ -93,7 +93,6 @@ namespace Blade.Enemies.Skeletons
             IsDead = true;
             int random = Random.Range(0, 100);
             
-            print(GameManager.instance.GetBallPercent);
             if (GameManager.instance.GetBallPercent == 0)
             {
             }

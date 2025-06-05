@@ -5451,7 +5451,7 @@ RectTransform:
   m_Father: {fileID: 4564433077338204251}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 5.2, y: 0}
   m_SizeDelta: {x: 0.02, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6131,7 +6131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6178013343620309357
 Transform:
   m_ObjectHideFlags: 0
@@ -6299,6 +6299,7 @@ MonoBehaviour:
   hpStat: {fileID: 11400000, guid: c7d72c92d575eb8408a9f8d4fb344732, type: 2}
   <maxHealth>k__BackingField: 0
   <currentHealth>k__BackingField: 0
+  _sliderCompo: {fileID: 3574616841563649410}
 --- !u!195 &2076984245279964856
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -6437,7 +6438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthCompo: {fileID: 4277823021422854370}
-  _slider: {fileID: 878464386417312755}
+  <_slider>k__BackingField: {fileID: 878464386417312755}
   _playerFinder: {fileID: 11400000, guid: 85816dd192818be4485e3aaa2716d82a, type: 2}
 --- !u!1 &7882640003340284245
 GameObject:

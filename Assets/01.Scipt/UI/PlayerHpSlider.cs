@@ -1,22 +1,21 @@
 using System;
+using _01.Scipt.UI;
 using Blade.Combat;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHpSlider : MonoBehaviour
+public class PlayerHpSlider : SliderCompo
 {
-    [SerializeField] private Slider _slider;
-
-
     [SerializeField] private EntityHealth _health;
 
     private void Start()
     {
         _slider.maxValue = _health.maxHealth;
+        _slider.value = _health.currentHealth;
     }
 
     private void Update()
     {
-        _slider.value = _health.currentHealth;
+        
     }
 }

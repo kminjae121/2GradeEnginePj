@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85592b5df258a0a4cbaa2a3c46f361e8, type: 3}
-  m_Name: StrongAttackState 1
+  m_Name: StunState
   m_EditorClassIdentifier: 
-  stateName: ROLL
-  className: PlayerRollState
-  animParamName: Roll
-  animationHash: -1903714832
+  stateName: STUN
+  className: PlayerStunState
+  animParamName: Stun
+  animationHash: 1397128752

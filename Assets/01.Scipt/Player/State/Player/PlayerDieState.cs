@@ -11,6 +11,7 @@ public class PlayerDieState : PlayerState
     {
         base.Enter();
         _player._movement.StopImmediately();
+        _player._movement.CanMove = false;
     }
 
     public override void Update()

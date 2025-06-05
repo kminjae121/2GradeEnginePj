@@ -57,13 +57,15 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
 
     [SerializeField] private StatSO _bloodHpSO;
     private EntityStat _statCompo;
-    public float atkDamage { get; private set; }
+    public float atkDamage { get; set; }
     public float bloodHp { get; private set; }
     private Lifesteal _StealCompo;
         
     [SerializeField] private List<GameObject> _attackSlash;
     [SerializeField] private Transform _bladeTransform;
     public int slashPercent { get; set; } = 20;
+    
+    public float baseAtkDamage { get; private set; }
     public float AttackSpeed
     {
         get => _attackSpeed;
@@ -87,7 +89,6 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
         _StealCompo = GetComponentInChildren<Lifesteal>();
         //damageCast.InitCaster(_entity);
         _triggerCompo = entity.GetCompo<EntityAnimatorTrigger>();
-        _triggerCompo.OnSwingAttackTrigger += HandleSwing;
         _triggerCompo.OnAttackAnimEnd += EndAttack;
         _triggerCompo.OnAttackTriggerEnd += HandleDamageCasterTrigger;
         _triggerCompo.OnAttackCancel += AttackCancel;
@@ -106,7 +107,6 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
         _triggerCompo.OnAttackTriggerEnd -= HandleDamageCasterTrigger;
         
         _triggerCompo.OnAttackFinalVFXTrigger -= HandleFinalAttackTrigger;
-        _player.PlayerInput.OnChargeAttackCanceled -= StopCharge;
         StatSO targetStat = _statCompo.GetStat(_atkDamageSO);
         Debug.Assert(targetStat != null, $"{_atkDamageSO.statName} stat could not be found");
         targetStat.OnValudeChanged -= HandleAttackStatChange;
@@ -120,12 +120,13 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
    
     private void HandleAttackStatChange(StatSO stat, float currentValue, float previousValue)
     {
-        atkDamage = currentValue;
+        atkDamage += currentValue - previousValue;
+        baseAtkDamage += currentValue - previousValue;
     }
     
     private void HandleBloodStatChange(StatSO stat, float currentValue, float previousValue)
     {
-        bloodHp = currentValue;
+        bloodHp += currentValue;
     }
 
    
@@ -135,6 +136,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
         Debug.Assert(targetStat != null, $"{_atkDamageSO.statName} stat could not be found");
         targetStat.OnValudeChanged += HandleAttackStatChange;
         atkDamage = targetStat.BaseValue;
+        baseAtkDamage = targetStat.BaseValue;
         
         StatSO targetStat2 = _statCompo.GetStat(_bloodHpSO);
         Debug.Assert(targetStat2 != null, $"{_bloodHpSO.statName} stat could not be found");
@@ -162,7 +164,6 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
     }
     private void HandleDamageCasterTrigger()
     {
-        _StealCompo.MinusHealth();
         IntilalizeAttackSlash();
         damageCaster.CastDamage(_player.transform.position,Vector3.forward,attackDataList[ComboCounter]);
     }
@@ -191,26 +192,6 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
             }
         }
     }
-    private void StartCharge()
-    {
-        if (_chargeRoutine == null)
-            _chargeRoutine = StartCoroutine(HoldAttackCoroutine());
-    }
-
-    private void StopCharge()
-    {
-        if (_chargeRoutine != null)
-        {
-            StopCoroutine(_chargeRoutine);
-            _chargeRoutine = null;
-        }
-    }
-
-    private void HandleSwing()
-    {
-        _player._movement.StopImmediately();
-        _player._movement.CanMove = false;
-    }
 
 
     public void EndAttack()
@@ -233,20 +214,7 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
         Debug.Assert(attackDataList.Length > ComboCounter, "Combo counter is out of range");
         return attackDataList[ComboCounter];
     }
-
-    private IEnumerator HoldAttackCoroutine()
-    {
-        _player.isUsePowerAttack = false;
-        _player.ChangeState("CHARGE");
-        attackHoldTime = 0f;
-
-        while (true)
-        {
-            attackHoldTime += Time.deltaTime;
-            if (attackHoldTime >= MaxHoldTime) _player.isUsePowerAttack = true;
-            yield return null;
-        }
-    }
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;

@@ -13,10 +13,31 @@ public class PlayerRollCompo : MonoBehaviour, IEntityComponet, IAfterInit
 
     private Player _entity;
 
+    private CharacterMovement _movement;
+
+    private EntityAnimatorTrigger _triggerCompo;
+
     public void Initialize(Entity entity)
     {
         _entity = entity as Player;
+        _triggerCompo = _entity.GetCompo<EntityAnimatorTrigger>();
         _inputReader.OnRollPressed += HandleRoll;
+    }
+    
+
+    public void AfterInit()
+    {
+        rollSpeed = _rollStat.BaseValue;
+        _movement = _entity.GetCompo<CharacterMovement>();
+        _triggerCompo.OnRollStart += StartRoll;
+        _triggerCompo.OnRollingStopping += SlowSpeed;
+    }
+
+    private void OnDestroy()
+    {
+        _inputReader.OnRollPressed -= HandleRoll;
+        _triggerCompo.OnRollStart -= StartRoll;
+        _triggerCompo.OnRollingStopping -= SlowSpeed;
     }
 
     public void HandleRoll()
@@ -25,8 +46,14 @@ public class PlayerRollCompo : MonoBehaviour, IEntityComponet, IAfterInit
         _entity.ChangeState("ROLL");
     }
 
-    public void AfterInit()
+
+    public void StartRoll()
     {
-        rollSpeed = _rollStat.BaseValue;
+        _movement._rbcompo.AddForce(_entity.transform.forward * rollSpeed, ForceMode.VelocityChange);
+    }
+
+    public void SlowSpeed()
+    {
+        _movement._rbcompo.linearDamping = 1.2f;
     }
 }

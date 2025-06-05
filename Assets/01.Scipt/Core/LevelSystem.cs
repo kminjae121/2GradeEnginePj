@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -82,9 +83,14 @@ public class LevelSystem : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             GameObject obj = itemList[ran[i]];
-            _selectObj[i] = obj;
-            print(obj.name);
+            obj.transform.SetSiblingIndex(i);
             obj.SetActive(true);
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            _selectObj[i] = transform.GetChild(i).gameObject;
+            print(transform.GetChild(i).gameObject.name);
         }
     }
 }

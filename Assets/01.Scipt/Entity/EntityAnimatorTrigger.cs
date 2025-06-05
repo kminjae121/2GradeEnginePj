@@ -13,6 +13,8 @@ public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponet
     public event Action OnAttackFinalVFXTrigger;
     public event Action OnAttackVFXTrigger;
 
+    public event Action OnShakingCamTriegger;
+
     public event Action OnPowerAttackVFXTrigger;
 
     public event Action OnUpSkillVFXTrigger;
@@ -32,7 +34,8 @@ public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponet
 
     public event Action OnAttackCancel;
 
-    public event Action<bool> OnRollingStatusChange;
+    public event Action OnRollStart;
+    public event Action OnRollingStopping;
 
     public event Action<bool> OnManualRotationTrigger;
 
@@ -56,8 +59,8 @@ public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponet
     private void AttackMove() => OnAttackMoveTrigger?.Invoke();
 
     private void AttackDash() => OnAttackDash?.Invoke();
-    private void RollingStart() => OnRollingStatusChange?.Invoke(true);
-    private void RollingEnd() => OnRollingStatusChange?.Invoke(true);
+    private void RollingStart() => OnRollStart?.Invoke();
+    private void RollingEnd() => OnRollingStopping?.Invoke();
 
     private void PlayAttackVFX() => OnAttackVFXTrigger?.Invoke();
 
@@ -65,7 +68,8 @@ public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponet
     private void AttackEnd() => OnAttackTriggerEnd?.Invoke();
 
     private void FinalAttack() => OnAttackFinalVFXTrigger?.Invoke();
-    
+
+    private void ShakeCam() => OnShakingCamTriegger?.Invoke();
     private void SwingAttack() => OnSwingAttackTrigger?.Invoke();
     private void BarrierPressed() => OnBarrierPressed?.Invoke();
 

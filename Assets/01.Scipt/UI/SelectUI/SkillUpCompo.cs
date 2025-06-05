@@ -29,8 +29,13 @@
 
             print(_skill);
         }
-        
 
+        private void Update()
+        {
+            int myIndex = transform.GetSiblingIndex();
+            _countIdx = myIndex;
+        }
+        
         public void UpSkillLevel()
         {
             

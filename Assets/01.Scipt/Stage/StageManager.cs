@@ -16,6 +16,6 @@ public class StageManager : MonoSingleton<StageManager>
 
     public void ClearStage(string stageName)
     {
-       // _stageDictionary.GetValueOrDefault(stageName)._isClearStage = true;
+        //_stageDictionary.GetValueOrDefault(stageName)._isClearStage = true;
     }
 }

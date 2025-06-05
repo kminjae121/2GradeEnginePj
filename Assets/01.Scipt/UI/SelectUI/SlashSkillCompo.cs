@@ -27,7 +27,12 @@ namespace _01.Scipt.UI.SelectUI
                 _skill = components[0] as SlashSkill;
             }
         }
-        
+
+        private void Update()
+        {
+            int count = transform.GetSiblingIndex();
+            _countIdx = count;
+        }
 
         public void UpSkillLevel()
         {

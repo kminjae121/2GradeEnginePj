@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     public int nextLevel = 4;
 
+    public float expValue;
     public float GetBallPercent { get; set; }
     [SerializeField] private LevelSystem levelSystem;
     [SerializeField] private Slider _slider;
@@ -46,7 +47,9 @@ public class GameManager : MonoBehaviour
            gameTime += Time.deltaTime;
            endTime += (int)Time.deltaTime;
     
-           _slider.value = exp;
+           expValue = Mathf.Lerp(expValue, exp,  10 * Time.deltaTime);
+
+           _slider.value = expValue;
        }
     
        public void GetExp()

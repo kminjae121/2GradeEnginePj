@@ -6,22 +6,19 @@ using UnityEngine.UI;
 
 namespace _01.Scipt.UI
 {
-    public class EnemyHpBar : MonoBehaviour
+    public class EnemyHpBar : SliderCompo
     {
-        [SerializeField] private EntityHealth _healthCompo;
-        [SerializeField] private Slider _slider;
         [SerializeField] private EntityFinderSO _playerFinder;
 
         private void Start()
         {
             _slider.maxValue = _healthCompo.maxHealth;
+            _slider.value = _healthCompo.currentHealth;
         }
 
         private void Update()
         {
             _slider.transform.LookAt(_playerFinder.Target.transform.position);
-            
-            _slider.value = _healthCompo.currentHealth;
         }
     }
 }

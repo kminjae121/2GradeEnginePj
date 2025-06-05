@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthCompo: {fileID: 5427511285754274269}
-  _slider: {fileID: 7733651032770264481}
+  <_slider>k__BackingField: {fileID: 7733651032770264481}
   _playerFinder: {fileID: 11400000, guid: 85816dd192818be4485e3aaa2716d82a, type: 2}
 --- !u!1 &487889846038162290
 GameObject:
@@ -4469,6 +4469,7 @@ MonoBehaviour:
   hpStat: {fileID: 11400000, guid: c7d72c92d575eb8408a9f8d4fb344732, type: 2}
   <maxHealth>k__BackingField: 0
   <currentHealth>k__BackingField: 0
+  _sliderCompo: {fileID: 4620534366838318591}
 --- !u!195 &3536109869444345382
 NavMeshAgent:
   m_ObjectHideFlags: 0

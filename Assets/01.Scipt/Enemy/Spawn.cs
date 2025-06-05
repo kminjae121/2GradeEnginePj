@@ -23,6 +23,7 @@ namespace _01.Scipt.Enemy
         [SerializeField] private PoolingItemSO _enemyItem;
         [SerializeField] private PoolingItemSO _enemy2Item;
         [SerializeField] private PoolingItemSO _enemy3Item;
+        [SerializeField] private PoolingItemSO _longRangeEnemy;
         [SerializeField] private TextMeshProUGUI _timetxt;
         [SerializeField] private GameObject _clearUI;
         [Inject]  private PoolManagerMono _poolManager;
@@ -58,8 +59,8 @@ namespace _01.Scipt.Enemy
                 else
                 {
                     GameManager.instance.gameTime = 0;
-                    _currentTime += 2.2f;
-                    _killCount *= 1.2f;
+                    _currentTime += 5.3f;
+                    _killCount += 1.3f;
                     _level++;
                     _isTimer = true;
                     _startTime = Time.time; 
@@ -81,7 +82,7 @@ namespace _01.Scipt.Enemy
             
             for (int i = 0; i < (int)_killCount; ++i)
             {
-                int rand = Random.Range(1, 4);
+                int rand = Random.Range(1, 5);
                 
                 if (rand == 1)
                 {
@@ -94,6 +95,10 @@ namespace _01.Scipt.Enemy
                 else if (rand == 3)
                 {
                     _enemy = _poolManager.Pop<EnemySkeletonSlave>(_enemy3Item);
+                }
+                else if (rand == 4)
+                {
+                    _enemy = _poolManager.Pop<EnemySkeletonSlave>(_longRangeEnemy);
                 }
                 
                 _enemy.GetCompo<EntityHealth>().Initialize(_enemy);
