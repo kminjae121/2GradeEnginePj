@@ -28,7 +28,7 @@ namespace Blade.Enemies
         
         
         private float airborneTime = 0f;
-        private float airborneDuration = 1f;
+        private float airborneDuration = 0.2f;
         private float jumpHeight = 3f;
         
         private Vector3 basePosition;
