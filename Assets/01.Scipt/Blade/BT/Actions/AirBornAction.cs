@@ -24,7 +24,7 @@ public partial class AirBornAction : Action
     private bool _isHovering = false;
     private bool _isFalling = false;
 
-    private float _hoverDuration = 0.5f;
+    private float _hoverDuration = 0.4f;
     private float _hoverTimer = 0f;
 
     protected override Status OnStart()

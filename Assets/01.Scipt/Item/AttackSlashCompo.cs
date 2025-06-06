@@ -48,7 +48,7 @@ public class AttackSlashCompo : MonoBehaviour
             {
                 health.ApplyDamage(_skillCompo.skillDamage, Vector3.zero, null, null);
                 CameraShakingManager.instance.ShakeCam(0.1f, 0.3f, 5, 20);
-                other.GetComponent<EnemySkeletonSlave>().ChangeHitChannelEvent();
+                other.GetComponent<EnemySkeletonSlave>().ChangeJumpChannelEvent();
             }
         }
     }

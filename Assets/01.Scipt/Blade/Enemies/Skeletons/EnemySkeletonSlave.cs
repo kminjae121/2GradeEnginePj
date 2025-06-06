@@ -122,7 +122,6 @@ namespace Blade.Enemies.Skeletons
         public void ChangeJumpChannelEvent()
         {
             _StateChangeChannel.SendEventMessage(EnemyState.AIRBORN);
-            _State = EnemyState.AIRBORN;
         }
         public void ChangeHitChannelEvent()
         {
@@ -133,7 +132,6 @@ namespace Blade.Enemies.Skeletons
             else
             {
                 _StateChangeChannel.SendEventMessage(EnemyState.HIT);   
-                _State = EnemyState.HIT;
             }
         }
 

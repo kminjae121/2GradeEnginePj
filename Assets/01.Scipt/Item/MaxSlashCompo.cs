@@ -48,7 +48,7 @@ public class MaxSlashCompo : MonoBehaviour
             if (health != null && _skillCompo != null)
             {
                 health.ApplyDamage(_skillCompo.skillDamage * 3, Vector3.zero, null, null);
-                other.GetComponent<EnemySkeletonSlave>().HandleHaveToStun();
+                other.GetComponent<EnemySkeletonSlave>().ChangeJumpChannelEvent();
             }
         }
     }

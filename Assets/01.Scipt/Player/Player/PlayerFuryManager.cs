@@ -103,7 +103,7 @@ public class PlayerFuryManager : MonoBehaviour, IEntityComponet
         _player._movement.CanMove = false;
         _player.ChangeState("FURY");
         
-        StartCoroutine(RageDuration(8f));
+        StartCoroutine(RageDuration(10f));
     }
 
     private IEnumerator RageDuration(float duration)
@@ -125,7 +125,6 @@ public class PlayerFuryManager : MonoBehaviour, IEntityComponet
         _player._movement._rbcompo.linearVelocity = Vector3.zero;
         _player._movement.StopImmediately();
         _player._movement.CanMove = false;
-        _player.ChangeState("STUN");
         _vfxCompo.StopVfx("FuryEffect");
     }
     

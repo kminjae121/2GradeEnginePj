@@ -6351,7 +6351,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.16, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.83, y: 0.83, z: 0.83}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7947264493824427464}
@@ -6437,6 +6437,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _State: 0
   poolingTypeSO: {fileID: 11400000, guid: fd328e62bfdbe914da6b8494d9ecb7ad, type: 2}
 --- !u!114 &7463091900797769618
 MonoBehaviour:
@@ -7301,7 +7302,7 @@ RectTransform:
   m_Father: {fileID: 5947542276592373376}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 5.2, y: 0}
   m_SizeDelta: {x: 0.02, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

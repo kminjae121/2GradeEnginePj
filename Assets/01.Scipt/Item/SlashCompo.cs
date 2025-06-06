@@ -47,6 +47,7 @@ public class SlashCompo : MonoBehaviour
             if (health != null && _skillCompo != null)
             {
                 health.ApplyDamage(_skillCompo.skillDamage, Vector3.zero, null, null);
+                other.GetComponentInChildren<EnemySkeletonSlave>().ChangeJumpChannelEvent();
             }
         }
     }
