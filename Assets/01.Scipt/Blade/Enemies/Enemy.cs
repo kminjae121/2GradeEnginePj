@@ -13,6 +13,9 @@ namespace Blade.Enemies
         public BehaviorGraphAgent BtAgent => _btAgent;
         protected BehaviorGraphAgent _btAgent;
 
+        public int hitCoun { get; set; } = 0;
+        
+
         #region Temp region
 
         public float detectRange;
@@ -23,7 +26,7 @@ namespace Blade.Enemies
         public virtual void Start()
         {
             BlackboardVariable<Transform> target = GetBlackboardVariable<Transform>("Target");  
-            target.Value = PlayerFinder.Target.transform; //플레이어를 타겟으로 넣어준다. 
+            target.Value = PlayerFinder.Target.transform; 
         }
 
         public override void AddComponets()

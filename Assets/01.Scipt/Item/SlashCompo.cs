@@ -1,5 +1,6 @@
 using System;
 using Blade.Combat;
+using Blade.Enemies.Skeletons;
 using UnityEngine;
 
 public class SlashCompo : MonoBehaviour
@@ -46,6 +47,7 @@ public class SlashCompo : MonoBehaviour
             if (health != null && _skillCompo != null)
             {
                 health.ApplyDamage(_skillCompo.skillDamage, Vector3.zero, null, null);
+                other.GetComponentInChildren<EnemySkeletonSlave>().hitCoun += 1;
             }
         }
     }

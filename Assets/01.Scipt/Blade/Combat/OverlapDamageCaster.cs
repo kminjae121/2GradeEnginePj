@@ -28,6 +28,7 @@ namespace _01.Scipt.Blade.Combat
                     damage.ApplyDamage(attackCompo.atkDamage,Obj.transform.position,attackData,null);
                     PlayerFuryManager.Instance.RaiseFury(4f);
                     CameraShakingManager.instance.ShakeCam(0.1f,0.2f,5,10);
+                    Obj.GetComponentInChildren<EnemySkeletonSlave>().hitCoun += 1;
                     if (PlayerFuryManager.Instance.isInRange == true)
                     {
                         Obj.GetComponent<EnemySkeletonSlave>().HandleHaveToStun();

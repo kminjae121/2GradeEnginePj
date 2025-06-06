@@ -7,7 +7,7 @@ using Action = Unity.Behavior.Action;
 using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "AirBorn", story: "[Self] fast jump and fall (with hover)", category: "Action", id: "7d66595fe3c2d8ee7e109ab9de392128")]
+[NodeDescription(name: "AirBorn", story: "[Self] jump and hover at apex before falling", category: "Action", id: "7d66595fe3c2d8ee7e109ab9de392128")]
 public partial class AirBornAction : Action
 {
     [SerializeReference] public BlackboardVariable<Enemy> Self;
@@ -16,14 +16,20 @@ public partial class AirBornAction : Action
     private Transform _transform;
 
     private float _verticalVelocity;
-    private float _gravity = -28f;   
-    private float _jumpPower = 7f;    
-    private float _startY;
+    private float _gravity = -15f;
+    private float _jumpPower = 5.5f;
 
+    private float _startY;
     private bool _isJumping = false;
-    private bool _isHovering = true;
-    private float _hoverTime = 4f;   
+    private bool _isHovering = false;
+    private bool _isFalling = false;
+
+    
+    private float _hoverY = 0f;
+    private float _hoverDuration = 0.3f;
     private float _hoverTimer = 0f;
+    
+    private bool _wasHit = false;
 
     protected override Status OnStart()
     {
@@ -38,16 +44,16 @@ public partial class AirBornAction : Action
 
         _agent.enabled = false;
 
-        _startY = _transform.position.y;
+        _startY = Self.Value.transform.position.y;
+
         _verticalVelocity = _jumpPower;
-
         _isJumping = true;
-        _isHovering = true;
+        _isHovering = false;
+        _isFalling = false;
         _hoverTimer = 0f;
-
+        
         return Status.Running;
     }
-    
 
     protected override Status OnUpdate()
     {
@@ -55,33 +61,53 @@ public partial class AirBornAction : Action
             return Status.Success;
 
         float deltaTime = Time.deltaTime;
-        Vector3 pos = _transform.position;
 
-        if (_isHovering)
+        if (!_isHovering && !_isFalling)
         {
-            _hoverTimer += deltaTime;
-        
-            // 수직 속도 적용 없이 위치 유지 (정지)
-            if (_hoverTimer >= _hoverTime)
+            _transform.position += Vector3.up * _verticalVelocity * deltaTime;
+            
+            _verticalVelocity += _gravity * deltaTime;
+
+            if (_verticalVelocity <= 0f)
             {
-                _isHovering = false;
+                _isHovering = true;
+                _verticalVelocity = 0f;
+                
+                _hoverY = _transform.position.y;
             }
         }
-        else
+        else if (_isHovering)
+        {
+            
+            Vector3 pos = _transform.position;
+            pos.y = _hoverY;
+            _transform.position = pos;
+
+            _hoverTimer += deltaTime;
+
+            if (_hoverTimer >= _hoverDuration)
+            {
+                _isHovering = false;
+                _isFalling = true;
+                _verticalVelocity = 0f;
+            }
+        }
+        else if (_isFalling)
         {
             _verticalVelocity += _gravity * deltaTime;
-            pos.y += _verticalVelocity * deltaTime;
+            _transform.position += Vector3.up * _verticalVelocity * deltaTime;
 
-            if (pos.y <= _startY)
+            if (_transform.position.y <= _startY)
             {
+                Vector3 pos = _transform.position;
                 pos.y = _startY;
                 _transform.position = pos;
+
                 _isJumping = false;
                 return Status.Success;
             }
         }
 
-        _transform.position = pos;
         return Status.Running;
     }
     protected override void OnEnd()

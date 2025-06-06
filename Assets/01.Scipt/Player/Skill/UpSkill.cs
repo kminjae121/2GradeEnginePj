@@ -102,6 +102,7 @@ namespace _01.Scipt.Player.Skill
                 {
                     damage.ApplyDamage(skillCompo.skillDamage,item.transform.position,null,null);
                     CameraShakingManager.instance.ShakeCam(0.1f,0.1f,5,40);
+                    item.GetComponentInChildren<EnemySkeletonSlave>().hitCoun += 1;
                     item.GetComponent<EnemySkeletonSlave>().ChangeJumpChannelEvent();
                     Debug.Log("공격됨");
                 }

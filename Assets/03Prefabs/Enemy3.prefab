@@ -6340,7 +6340,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3161167879409850526
 Transform:
   m_ObjectHideFlags: 0
@@ -6509,6 +6509,7 @@ MonoBehaviour:
   <maxHealth>k__BackingField: 0
   <currentHealth>k__BackingField: 0
   _sliderCompo: {fileID: 670808176130898816}
+  smoothSpeed: 10
 --- !u!195 &2094177382394650316
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7300,7 +7301,7 @@ RectTransform:
   m_Father: {fileID: 5947542276592373376}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 5.2, y: 0}
   m_SizeDelta: {x: 0.02, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

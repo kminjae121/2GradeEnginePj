@@ -117,6 +117,7 @@ namespace Blade.Enemies
         
         public bool IsGrounded()
         {
+            print( !Physics.Raycast(transform.position, Vector3.down, 0.1f,_whatIsGround));
             return !Physics.Raycast(transform.position, Vector3.down, 0.1f,_whatIsGround);
         }
 
