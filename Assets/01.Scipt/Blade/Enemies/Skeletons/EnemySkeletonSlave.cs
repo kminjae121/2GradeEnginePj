@@ -18,6 +18,7 @@ namespace Blade.Enemies.Skeletons
         private NavMovement _movement;
         public UnityEvent<Vector3,float> OnKnockBackEvent;
         private StateChange _StateChangeChannel;
+        public EnemyState _State;
         private CapsuleCollider _collider;
         
         [SerializeField] private PoolingItemSO poolingTypeSO; // Pool 타입 명시
@@ -45,10 +46,15 @@ namespace Blade.Enemies.Skeletons
             base.Start();
             _StateChangeChannel = GetBlackboardVariable<StateChange>("StateChannel").Value;
             
+            
             _collider.enabled = true;
             
             _StateChangeChannel.SendEventMessage(EnemyState.IDLE);
+            
             IsDead = false;
+            
+            
+            print(_State.ToString());
         }
 
         private void OnDestroy()
@@ -116,10 +122,19 @@ namespace Blade.Enemies.Skeletons
         public void ChangeJumpChannelEvent()
         {
             _StateChangeChannel.SendEventMessage(EnemyState.AIRBORN);
+            _State = EnemyState.AIRBORN;
         }
         public void ChangeHitChannelEvent()
-        {   
-            _StateChangeChannel.SendEventMessage(EnemyState.HIT);
+        {
+            if (_State == EnemyState.AIRBORN)
+            {
+                _StateChangeChannel.SendEventMessage(EnemyState.AIRBORN);
+            }
+            else
+            {
+                _StateChangeChannel.SendEventMessage(EnemyState.HIT);   
+                _State = EnemyState.HIT;
+            }
         }
 
         private IEnumerator WaitDie()
@@ -137,6 +152,11 @@ namespace Blade.Enemies.Skeletons
         public void ResetItem()
         {
             
+        }
+
+        private void Update()
+        {
+            print(_State);
         }
     }
 }

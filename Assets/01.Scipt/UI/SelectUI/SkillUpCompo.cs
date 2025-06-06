@@ -28,6 +28,9 @@
 
 
             print(_skill);
+            Color color = _skillimage.color;
+            color.a = Mathf.Clamp01(1);
+            _skillimage.color = color;
         }
 
         private void Update()
@@ -38,30 +41,15 @@
         
         public void UpSkillLevel()
         {
-            
-            if (_skillSO == null)
-            {
                 _skill.skillLevel++;
                 _skill.currentSkillEffectNameIdx++;
                 _currentSkill++;
                 _skill._skillSize = _skillRange[_currentSkill];
                 
-                if (_currentSkill >= 2)
+                if (_currentSkill >= 1)
                 {
                     LevelSystem.instance.itemList.RemoveAt(_countIdx);
                     gameObject.SetActive(false);
                 }
-            }
-            else
-            {
-                _skillCompo.AddSkill(_skillSO);
-                Color color = _skillimage.color;
-                color.a = Mathf.Clamp01(1);
-                _skillimage.color = color;
-                
-                _skill._skillSize = _skillRange[_currentSkill];
-                _skillSO = null;
-            }
-            
         }
     }

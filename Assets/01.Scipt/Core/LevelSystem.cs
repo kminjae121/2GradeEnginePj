@@ -90,7 +90,6 @@ public class LevelSystem : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             _selectObj[i] = transform.GetChild(i).gameObject;
-            print(transform.GetChild(i).gameObject.name);
         }
     }
 }

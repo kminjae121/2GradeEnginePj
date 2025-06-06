@@ -180,7 +180,18 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
     {
         int rand = Random.Range(0, 101);
 
-        if (rand <= slashPercent)
+        if (PlayerFuryManager.Instance.isInRange)
+        {
+            Quaternion rot = Quaternion.Euler(0f, _bladeTransform.rotation.eulerAngles.y, 0f);
+            GameObject slash = Instantiate(_attackSlash[ComboCounter], _bladeTransform.position, rot);
+        
+            SlashCompo slashCompo = slash.GetComponent<SlashCompo>();
+            if (slashCompo != null)
+            {
+                slashCompo.TargetRotationSource = _bladeTransform;
+            }
+        }
+        else if (rand <= slashPercent)
         {
             Quaternion rot = Quaternion.Euler(0f, _bladeTransform.rotation.eulerAngles.y, 0f);
             GameObject slash = Instantiate(_attackSlash[ComboCounter], _bladeTransform.position, rot);

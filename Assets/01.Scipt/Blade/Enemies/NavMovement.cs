@@ -9,6 +9,7 @@ using DG.Tweening;
 using Member.Kmj._01.Scipt.Entity.AttackCompo;
 using UnityEngine;
 using UnityEngine.AI;
+using Debug = UnityEngine.Debug;
 
 namespace Blade.Enemies
 {
@@ -19,7 +20,7 @@ namespace Blade.Enemies
         private bool _isAirborne;
         private EntityStat _statCompo;
 
-        [SerializeField] private LayerMask _whatIsGround;
+        [field : SerializeField] public LayerMask _whatIsGround { get; private set; }
         [SerializeField] private StatSO _moveSpeedStat;
         [SerializeField] private float stopOffset = 0.05f;
         [SerializeField] private float rotateSpeed = 10f;
@@ -117,8 +118,14 @@ namespace Blade.Enemies
         
         public bool IsGrounded()
         {
-            print( !Physics.Raycast(transform.position, Vector3.down, 0.1f,_whatIsGround));
-            return !Physics.Raycast(transform.position, Vector3.down, 0.1f,_whatIsGround);
+            Vector3 origin = _entity.transform.position + Vector3.up * 0.1f;
+            float distance = 0.2f; 
+
+            bool hit = Physics.Raycast(origin, Vector3.down, out RaycastHit hitInfo, distance, _whatIsGround);
+            
+            print(hit);
+
+            return hit;
         }
 
         public void KnockBack(Vector3 force, float duration)
@@ -139,7 +146,7 @@ namespace Blade.Enemies
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawRay(transform.position, Vector3.down);
+            Gizmos.DrawRay(transform.position, Vector3.down * 0.5f);
             Gizmos.color = Color.white;
         }
     }

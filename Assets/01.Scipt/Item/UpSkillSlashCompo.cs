@@ -46,7 +46,6 @@ public class UpSkillSlashCompo : MonoBehaviour
             if (health != null && _skillCompo != null)
             {
                 health.ApplyDamage(_skillCompo.skillDamage, Vector3.zero, null, null);
-                other.GetComponentInChildren<EnemySkeletonSlave>().hitCoun += 1;
                 other.GetComponent<EnemySkeletonSlave>().ChangeJumpChannelEvent();
             }
         }

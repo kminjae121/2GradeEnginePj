@@ -1,4 +1,6 @@
 using System;
+using Blade.Enemies;
+using Blade.Enemies.Skeletons;
 using Blade.Entities;
 using Unity.Behavior;
 using Unity.Properties;
@@ -17,7 +19,6 @@ namespace Blade.BT.Actions
 
         protected override Status OnStart()
         {
-            
             EntityAnimator.Value.SetParam(Animator.StringToHash(OldBool.Value), false);
             EntityAnimator.Value.SetParam(Animator.StringToHash(NewBool.Value), true);
 

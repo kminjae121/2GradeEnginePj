@@ -12,8 +12,7 @@ namespace Blade.Enemies
 
         public BehaviorGraphAgent BtAgent => _btAgent;
         protected BehaviorGraphAgent _btAgent;
-
-        public int hitCoun { get; set; } = 0;
+        
         
 
         #region Temp region

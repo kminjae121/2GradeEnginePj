@@ -16,20 +16,16 @@ public partial class AirBornAction : Action
     private Transform _transform;
 
     private float _verticalVelocity;
-    private float _gravity = -15f;
-    private float _jumpPower = 5.5f;
+    private float _gravity = -28f;
+    private float _jumpPower = 10f;
 
     private float _startY;
     private bool _isJumping = false;
     private bool _isHovering = false;
     private bool _isFalling = false;
 
-    
-    private float _hoverY = 0f;
-    private float _hoverDuration = 0.3f;
+    private float _hoverDuration = 0.5f;
     private float _hoverTimer = 0f;
-    
-    private bool _wasHit = false;
 
     protected override Status OnStart()
     {
@@ -44,14 +40,14 @@ public partial class AirBornAction : Action
 
         _agent.enabled = false;
 
-        _startY = Self.Value.transform.position.y;
-
+        _startY = _transform.position.y;
         _verticalVelocity = _jumpPower;
+
         _isJumping = true;
         _isHovering = false;
         _isFalling = false;
         _hoverTimer = 0f;
-        
+
         return Status.Running;
     }
 
@@ -61,55 +57,48 @@ public partial class AirBornAction : Action
             return Status.Success;
 
         float deltaTime = Time.deltaTime;
+        Vector3 pos = _transform.position;
 
         if (!_isHovering && !_isFalling)
         {
-            _transform.position += Vector3.up * _verticalVelocity * deltaTime;
-            
             _verticalVelocity += _gravity * deltaTime;
-
+            pos.y += _verticalVelocity * deltaTime;
+            
             if (_verticalVelocity <= 0f)
             {
                 _isHovering = true;
                 _verticalVelocity = 0f;
-                
-                _hoverY = _transform.position.y;
             }
         }
         else if (_isHovering)
         {
-            
-            Vector3 pos = _transform.position;
-            pos.y = _hoverY;
-            _transform.position = pos;
-
             _hoverTimer += deltaTime;
 
             if (_hoverTimer >= _hoverDuration)
             {
                 _isHovering = false;
                 _isFalling = true;
-                _verticalVelocity = 0f;
+                _verticalVelocity = 0f; 
             }
         }
         else if (_isFalling)
         {
             _verticalVelocity += _gravity * deltaTime;
-            _transform.position += Vector3.up * _verticalVelocity * deltaTime;
+            pos.y += _verticalVelocity * deltaTime;
 
-            if (_transform.position.y <= _startY)
+            if (pos.y <= _startY)
             {
-                Vector3 pos = _transform.position;
                 pos.y = _startY;
                 _transform.position = pos;
-
                 _isJumping = false;
                 return Status.Success;
             }
         }
 
+        Self.Value.transform.position = pos;
         return Status.Running;
     }
+
     protected override void OnEnd()
     {
         if (_agent != null)

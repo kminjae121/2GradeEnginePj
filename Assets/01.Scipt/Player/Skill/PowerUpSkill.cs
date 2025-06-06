@@ -76,7 +76,6 @@ namespace _01.Scipt.Player.Skill
                 {
                     damage.ApplyDamage(skillCompo.skillDamage / 3,item.transform.position,null,null);
                     CameraShakingManager.instance.ShakeCam(0.1f,0.3f,5,20);
-                    item.GetComponentInChildren<EnemySkeletonSlave>().hitCoun += 1;
                     if (skillLevel == 2)
                     {
                         item.GetComponent<EnemySkeletonSlave>().ChangeJumpChannelEvent();
@@ -85,11 +84,9 @@ namespace _01.Scipt.Player.Skill
                     {
                         item.GetComponent<EnemySkeletonSlave>().HandleJumpAndStun();
                     }
-                    Debug.Log("공격됨");
                 }
                 else
                 {
-                    print("왔는데 없음");
                 }
             }
         }
