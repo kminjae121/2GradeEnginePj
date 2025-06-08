@@ -46,6 +46,7 @@ public class AttackSlashCompo : MonoBehaviour
             EntityHealth health = other.GetComponent<EntityHealth>();
             if (health != null && _skillCompo != null)
             {
+                PlayerComboSystem.Instance.RaiseCombo(3);
                 health.ApplyDamage(_skillCompo.skillDamage, Vector3.zero, null, null);
                 CameraShakingManager.instance.ShakeCam(0.1f, 0.3f, 5, 20);
                 other.GetComponent<EnemySkeletonSlave>().ChangeJumpChannelEvent();

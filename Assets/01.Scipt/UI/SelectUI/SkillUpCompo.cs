@@ -12,7 +12,7 @@
         private SkillCompo _skill;
         [SerializeField] private int _countIdx;
         [SerializeField] private List<Vector3> _skillRange;
-        private int _currentSkill = 0;
+        private int _currentSkill = -1;
         [SerializeField] private Image _skillimage;
 
         private void Awake()
@@ -46,7 +46,7 @@
             print(_currentSkill);
             _skill._skillSize = _skillRange[_currentSkill];
             
-            if (_currentSkill >= 2)
+            if (_currentSkill >= 1)
             {
                 LevelSystem.instance.itemList.RemoveAt(_countIdx);
                 gameObject.SetActive(false);

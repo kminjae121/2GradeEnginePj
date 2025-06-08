@@ -73,7 +73,6 @@ namespace _01.Scipt.Player.Skill
                 _player._isSkilling = true;
                 _player.ChangeState("UP");
                 CurrentTimeClear("UpSkill");
-                
             }
             else
                 return;
@@ -100,12 +99,10 @@ namespace _01.Scipt.Player.Skill
                 if (item.TryGetComponent(out IDamageable damage))
                 {
                     damage.ApplyDamage(skillCompo.skillDamage,item.transform.position,null,null);
+                    PlayerComboSystem.Instance.RaiseCombo(3);
+                    PlayerFuryManager.Instance.RaiseFury(12);
                     CameraShakingManager.instance.ShakeCam(0.1f,0.1f,5,40);
                     item.GetComponent<EnemySkeletonSlave>().ChangeJumpChannelEvent();
-                }
-                else
-                {
-
                 }
             }
             

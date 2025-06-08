@@ -14,7 +14,7 @@ namespace _01.Scipt.UI.SelectUI
         private SlashSkill _skill;
         [SerializeField] private int _countIdx;
         [SerializeField] private List<Vector3> _skillRange;
-        private int _currentSkill = 0;
+        private int _currentSkill = -1;
         [SerializeField] private Image _skillimage;
         private void Awake()
         {

@@ -150,11 +150,6 @@ namespace Blade.Enemies.Skeletons
         public void ResetItem()
         {
             
-        }
-
-        private void Update()
-        {
-            print(_State);
-        }
+        }   
     }
 }

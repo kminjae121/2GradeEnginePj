@@ -45,6 +45,8 @@ public class UpSkillSlashCompo : MonoBehaviour
             EntityHealth health = other.GetComponent<EntityHealth>();
             if (health != null && _skillCompo != null)
             {
+                PlayerFuryManager.Instance.RaiseFury(15);
+                PlayerComboSystem.Instance.RaiseCombo(12);
                 health.ApplyDamage(_skillCompo.skillDamage, Vector3.zero, null, null);
                 other.GetComponent<EnemySkeletonSlave>().ChangeJumpChannelEvent();
             }

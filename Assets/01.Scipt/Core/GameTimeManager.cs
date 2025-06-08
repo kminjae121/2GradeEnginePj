@@ -17,7 +17,7 @@ public class GameTimeManager : MonoSingleton<GameTimeManager>
     {
         if (Gametime > maxTime)
         {
-            Gametime = maxTime;
+            maxTime = Gametime;
         }
     }
     

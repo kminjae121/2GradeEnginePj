@@ -37,6 +37,8 @@ namespace _01.Scipt.Player.Player
         public Player ProvidePlayer() => this;
     
         private EntityStateMachine _stateMachine;
+
+        public Collider _collider { get; private set; }
         public bool isUseSheld { get; private set; }
 
         [field: SerializeField] public Transform _camPos { get; private set; } 
@@ -49,7 +51,9 @@ namespace _01.Scipt.Player.Player
             _skillCompo = GetCompo<EntitySkillCompo>();
             _movement = GetCompo<CharacterMovement>();
             _triggerCompo = GetCompo<EntityAnimatorTrigger>();
+            _collider = GetComponent<Collider>();
             OnDead.AddListener(PlayerDie);
+            OnHit.AddListener(HandleHit);
         }
 
 
@@ -75,7 +79,7 @@ namespace _01.Scipt.Player.Player
 
         protected override void HandleHit()
         {
-        
+            PlayerComboSystem.Instance.ReduceCombo(15);
         }
 
         protected override void HandleDead()

@@ -1,0 +1,155 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using _01.Scipt.Player.Player;
+using Member.Kmj._01.Scipt.Entity.AttackCompo;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class PlayerComboSystem : MonoSingleton<PlayerComboSystem>, IEntityComponet
+{
+    public float _CurrentComboStat { get; set; }
+
+    public string maxComboStr { get; set; } = "D";
+    public string CURRENTComboStr { get; set; } = "D";
+    
+    
+    private Coroutine _ComboCoroutine;
+
+    public float comboStat;
+    
+    public float reduceAmount { get; set; } = 10f;
+    
+    public bool isInRange { get; set; }
+
+    public Color _txtColor;
+
+    private Player _player;
+    private void Awake()
+    {
+        _CurrentComboStat = 0;
+    }
+    public void Initialize(Entity entity)
+    {
+        _player = entity as Player;
+    }
+    
+
+    private void Update()
+    {
+        comboStat = Mathf.Lerp(comboStat, _CurrentComboStat, Time.deltaTime);
+    }
+
+    public void RaiseCombo(float amount)
+    {
+        if (isInRange) return; 
+
+        _CurrentComboStat += amount;
+
+        if (_ComboCoroutine != null)
+            StopCoroutine(_ComboCoroutine); 
+
+        _ComboCoroutine = StartCoroutine(ReduceFury());
+
+        switch (comboStat)
+        {
+            case <= 120:
+                CURRENTComboStr = "D";
+                maxComboStr = "D";
+                _txtColor = Color.red;
+                break;
+            case <= 250:
+                CURRENTComboStr = "C";
+                maxComboStr = "C";
+                _txtColor = Color.blue;
+                break;
+            case <= 350:
+                CURRENTComboStr = "B";
+                maxComboStr = "B";
+                _txtColor = Color.green;
+                break;
+            case <= 500:
+                CURRENTComboStr = "A";
+                maxComboStr = "A";
+                _txtColor = Color.magenta;
+                break;
+            case <= 600:
+                CURRENTComboStr = "S";
+                maxComboStr = "S";
+                _txtColor = Color.yellow;
+                break;
+        }
+    }
+
+    private IEnumerator ReduceFury()
+    {
+        yield return new WaitForSeconds(1.5f); 
+
+        while (_CurrentComboStat > 0)
+        {
+            _CurrentComboStat -= reduceAmount;
+            yield return new WaitForSeconds(0.1f);
+            
+            switch (comboStat)
+            {
+                case <= 200:
+                    CURRENTComboStr = "D";
+                    maxComboStr = "D";
+                    break;
+                case <= 450:
+                    CURRENTComboStr = "C";
+                    maxComboStr = "C";
+                    break;
+                case <= 650:
+                    CURRENTComboStr = "B";
+                    maxComboStr = "B";
+                    break;
+                case <= 800:
+                    CURRENTComboStr = "A";
+                    maxComboStr = "A";
+                    break;
+                case <= 1000:
+                    CURRENTComboStr = "S";
+                    maxComboStr = "S";
+                    break;
+            }
+        }
+
+        _ComboCoroutine = null;
+    }
+
+    public void ReduceCombo(float amount)
+    {
+        if (isInRange) return; 
+
+        _CurrentComboStat -= amount;
+
+        switch (comboStat)
+        {
+            case <= 200:
+                CURRENTComboStr = "D";
+                maxComboStr = "D";
+                break;
+            case <= 450:
+                CURRENTComboStr = "C";
+                maxComboStr = "C";
+                break;
+            case <= 650:
+                CURRENTComboStr = "B";
+                maxComboStr = "B";
+                break;
+            case <= 800:
+                CURRENTComboStr = "A";
+                maxComboStr = "A";
+                break;
+            case <= 1000:
+                CURRENTComboStr = "S";
+                maxComboStr = "S";
+                break;
+        }
+    }
+    
+    
+    public bool IsInRage => isInRange;
+
+}

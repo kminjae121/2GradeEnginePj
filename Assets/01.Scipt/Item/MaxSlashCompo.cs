@@ -47,7 +47,9 @@ public class MaxSlashCompo : MonoBehaviour
             EntityHealth health = other.GetComponent<EntityHealth>();
             if (health != null && _skillCompo != null)
             {
-                health.ApplyDamage(_skillCompo.skillDamage * 3, Vector3.zero, null, null);
+                PlayerFuryManager.Instance.RaiseFury(10);
+                PlayerComboSystem.Instance.RaiseCombo(3);
+                health.ApplyDamage(_skillCompo.skillDamage * 2, Vector3.zero, null, null);
                 other.GetComponent<EnemySkeletonSlave>().ChangeJumpChannelEvent();
             }
         }

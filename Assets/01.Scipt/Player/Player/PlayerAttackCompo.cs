@@ -122,11 +122,14 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
     {
         atkDamage += currentValue - previousValue;
         baseAtkDamage += currentValue - previousValue;
+
+        BaseStatLibrary.instance.baseTxt.GetValueOrDefault("AtkDamage").text = $"공격력 : {baseAtkDamage}";
     }
     
     private void HandleBloodStatChange(StatSO stat, float currentValue, float previousValue)
     {
         bloodHp += currentValue;
+        BaseStatLibrary.instance.baseTxt.GetValueOrDefault("BloodEat").text = $"흡혈 : {bloodHp}";
     }
 
    
@@ -142,10 +145,16 @@ public class PlayerAttackCompo : MonoBehaviour, IEntityComponet, IAfterInit
         Debug.Assert(targetStat2 != null, $"{_bloodHpSO.statName} stat could not be found");
         targetStat2.OnValudeChanged += HandleBloodStatChange;
         bloodHp = targetStat2.BaseValue;
-        
     }
-    
-    
+
+    private void Start()
+    {
+        BaseStatLibrary.instance.baseTxt.GetValueOrDefault("AtkDamage").text = $"공격력 : {baseAtkDamage}";
+        BaseStatLibrary.instance.baseTxt.GetValueOrDefault("BloodEat").text = $"흡혈 : {bloodHp}";
+
+        BaseStatLibrary.instance.baseTxt.GetValueOrDefault("slashProbability").text = $"검기확률 : {slashPercent}%";
+    }
+
     private void HandleAttackVFXTrigger() 
     {
         _vfxCompo.PlayVfx($"AttackVFX{ComboCounter}", Vector3.zero, Quaternion.identity);

@@ -6701,7 +6701,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   attackCompo: {fileID: 0}
-  boxSize: {x: 1, y: 1, z: 1}
+  boxSize: {x: 1.5, y: 1.5, z: 1.5}
 --- !u!1 &7033983109556501270
 GameObject:
   m_ObjectHideFlags: 0
@@ -7302,7 +7302,7 @@ RectTransform:
   m_Father: {fileID: 5947542276592373376}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 5.2, y: 0}
   m_SizeDelta: {x: 0.02, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

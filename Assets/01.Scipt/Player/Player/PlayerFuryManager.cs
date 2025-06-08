@@ -124,7 +124,7 @@ public class PlayerFuryManager : MonoBehaviour, IEntityComponet
         
         _player._movement._rbcompo.linearVelocity = Vector3.zero;
         _player._movement.StopImmediately();
-        _player._movement.CanMove = false;
+        _player._movement.CanMove = true;
         _vfxCompo.StopVfx("FuryEffect");
     }
     

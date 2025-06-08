@@ -73,14 +73,17 @@ namespace _01.Scipt.Player.Skill
             {
                 if (item.TryGetComponent(out IDamageable damage))
                 {
+                    PlayerComboSystem.Instance.RaiseCombo(3);
                     damage.ApplyDamage(skillCompo.skillDamage / 3,item.transform.position,null,null);
                     CameraShakingManager.instance.ShakeCam(0.1f,0.3f,5,20);
                     if (skillLevel == 2)
                     {
+                        PlayerFuryManager.Instance.RaiseFury(4);
                         item.GetComponent<EnemySkeletonSlave>().ChangeJumpChannelEvent();
                     }
                     else if (skillLevel == 3)
                     {
+                        PlayerFuryManager.Instance.RaiseFury(4);
                         item.GetComponent<EnemySkeletonSlave>().HandleJumpAndStun();
                     }
                 }

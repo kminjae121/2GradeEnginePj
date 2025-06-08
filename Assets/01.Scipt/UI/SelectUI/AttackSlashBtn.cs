@@ -10,6 +10,7 @@ public class AttackSlashBtn : MonoBehaviour
 
     private int _currentAtkCnt = 0;
     [SerializeField] private int thisIdx = 0;
+    
 
     public void UpSkillLevel()
     {
@@ -20,6 +21,7 @@ public class AttackSlashBtn : MonoBehaviour
             return;
         }
         _atkCompo.slashPercent += 20;
+        BaseStatLibrary.instance.baseTxt.GetValueOrDefault("slashProbability").text = $"검기확률 : {_atkCompo.slashPercent}%";
         _currentAtkCnt++;
     }
 }
