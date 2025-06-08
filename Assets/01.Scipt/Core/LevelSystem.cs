@@ -50,6 +50,7 @@ public class LevelSystem : MonoBehaviour
     public void Show()
     {
         RandomItem();
+        Time.timeScale = 0;
         _rect.localScale = Vector3.one;
         isShow = true;
     }
@@ -59,6 +60,7 @@ public class LevelSystem : MonoBehaviour
         _rect.localScale = Vector3.zero;
         itemList.ToList().ForEach(UI => UI.SetActive(false));
         isShow = false;
+        Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }

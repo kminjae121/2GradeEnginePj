@@ -16,15 +16,15 @@ public partial class AirBornAction : Action
     private Transform _transform;
 
     private float _verticalVelocity;
-    private float _gravity = -5f;
-    private float _jumpPower = 4f;
+    private float _gravity = -7f;
+    private float _jumpPower = 5f;
 
     private float _startY;
     private bool _isJumping = false;
     private bool _isHovering = false;
     private bool _isFalling = false;
 
-    private float _hoverDuration = 0.2f;
+    private float _hoverDuration = 0.4f;
     private float _hoverTimer = 0f;
 
     protected override Status OnStart()

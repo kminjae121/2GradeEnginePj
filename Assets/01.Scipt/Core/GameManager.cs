@@ -26,14 +26,16 @@ public class GameManager : MonoBehaviour
 
     public float expValue;
     public float GetBallPercent { get; set; }
+    [SerializeField] private TextMeshProUGUI _timeTxt;
     [SerializeField] private LevelSystem levelSystem;
     [SerializeField] private Slider _slider;
+    public bool isEnd { get; set; } = false;
     private void Awake()
     {
         instance = this;
        SetStartValue();
        _slider.maxValue = nextLevel;
-       _levelTxt.text = $"현재 레벨 : {level}";
+       _levelTxt.text = $"Level : {level}";
        _currentExptxt.text = $"경험치 : {exp} : {nextLevel}";
     }
 
@@ -50,6 +52,11 @@ public class GameManager : MonoBehaviour
            expValue = Mathf.Lerp(expValue, exp,  10 * Time.deltaTime);
 
            _slider.value = expValue;
+           if (isEnd == false)
+           {
+                GameTimeManager.Instance.TickTime();
+                _timeTxt.text = $"{(int)GameTimeManager.Instance.Gametime}초";
+           }
        }
     
        public void GetExp()
@@ -63,7 +70,7 @@ public class GameManager : MonoBehaviour
                exp = 0;
                nextLevel += 1;
                _slider.maxValue = nextLevel;
-               _levelTxt.text = $"현재 레벨:{level}";
+               _levelTxt.text = $"Level : {level}";
                _currentExptxt.text = $"경험치 : {exp} : {nextLevel}";
                levelSystem.Show();
            }

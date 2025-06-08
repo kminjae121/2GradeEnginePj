@@ -38,10 +38,9 @@ namespace _01.Scipt.Player.Skill
             {
                 print("실행됨");
                 _player._movement.CanMove = false;
-                _stealCompo.MinusHealth();
-                _player.ChangeState("SLASH");
                 _player._attackCompo.IsAttack = true;
                 _player._isSkilling = true;
+                _player.ChangeState("SLASH");
                 CurrentTimeClear("SlashSkill");
                 
             }

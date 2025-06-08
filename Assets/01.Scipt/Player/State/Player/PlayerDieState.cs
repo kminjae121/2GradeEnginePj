@@ -20,6 +20,7 @@ public class PlayerDieState : PlayerState
         if (_isTriggerCall)
         {
             _player.FailUI.SetActive(true);
+            GameTimeManager.Instance.overrideTime();
             Time.timeScale = 0;
             Cursor.visible = true;         
             Cursor.lockState = CursorLockMode.None;

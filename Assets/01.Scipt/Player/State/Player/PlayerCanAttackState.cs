@@ -30,12 +30,6 @@ public abstract class PlayerCanAttackState : PlayerState
             _player._movement.StopImmediately();
             _player.ChangeState("IDLE");
         }
-        else if (!_player._isSkilling && _player.isUsePowerAttack)
-        {
-            _player._movement.CanMove = false;
-            _player._movement.StopImmediately();
-            _player.ChangeState("SWING");
-        }
     }
 
     private void HandleAttackKeyPressed()

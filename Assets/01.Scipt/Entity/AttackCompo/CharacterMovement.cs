@@ -47,8 +47,11 @@ public class CharacterMovement : MonoBehaviour, IEntityComponet, IAfterInit
 
     public void SetMove(float XMove, float ZMove)
     {
-        _movementDirection.x = XMove;
-        _movementDirection.z = ZMove;
+        if (_entity._isSkilling == false)
+        {
+            _movementDirection.x = XMove;
+            _movementDirection.z = ZMove;
+        }
     }
 
     private void Update()
@@ -85,7 +88,7 @@ public class CharacterMovement : MonoBehaviour, IEntityComponet, IAfterInit
     }
     private void CalculateMovement()
     {
-        if (CanMove)
+        if (CanMove && _entity._isSkilling == false) 
         {
 
             if (CanManualMovement)

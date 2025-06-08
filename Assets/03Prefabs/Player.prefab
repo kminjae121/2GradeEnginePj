@@ -112410,7 +112410,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0dde7f3d8aab5408507b3c59f191ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skillList: []
+  _skillList:
+  - {fileID: 11400000, guid: 8175188295143d64db93d6d888feb6dc, type: 2}
+  - {fileID: 11400000, guid: db752b805a7cffc4793557670024bc90, type: 2}
+  - {fileID: 11400000, guid: 7a69a3d60b8e4da46b9e5d2ad33077c5, type: 2}
   _skilldamageSo: {fileID: 11400000, guid: fb6da23b2fbdc6e438145ca58538b105, type: 2}
 --- !u!114 &6866875831748862320
 MonoBehaviour:
@@ -112428,7 +112431,7 @@ MonoBehaviour:
   _whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128
-  <_skillSize>k__BackingField: {x: 0, y: 0, z: 0}
+  <_skillSize>k__BackingField: {x: 3, y: 3, z: 3}
   _circleSize: 0
   _entity: {fileID: 1421520787670956032}
   <skillCoolTime>k__BackingField: 5
@@ -112462,7 +112465,7 @@ MonoBehaviour:
   _whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128
-  <_skillSize>k__BackingField: {x: 0, y: 0, z: 0}
+  <_skillSize>k__BackingField: {x: 3, y: 3, z: 3}
   _circleSize: 0
   _entity: {fileID: 1421520787670956032}
   <skillCoolTime>k__BackingField: 4

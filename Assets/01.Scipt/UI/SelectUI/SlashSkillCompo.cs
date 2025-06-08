@@ -44,7 +44,7 @@ namespace _01.Scipt.UI.SelectUI
                 _skill.currentEffectNum++;
                 _currentSkill++;
                 
-                if (_currentSkill >= 2)
+                if (_currentSkill >= 1)
                 {
                     LevelSystem.instance.itemList.RemoveAt(_countIdx);
                     gameObject.SetActive(false);

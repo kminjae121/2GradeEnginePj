@@ -42,8 +42,11 @@ public class PlayerRollCompo : MonoBehaviour, IEntityComponet, IAfterInit
 
     public void HandleRoll()
     {
-        _entity._movement.CanMove = false;
-        _entity.ChangeState("ROLL");
+        if(_entity._isSkilling == false)
+        {
+            _entity._movement.CanMove = false;
+            _entity.ChangeState("ROLL");
+        }
     }
 
 

@@ -69,10 +69,9 @@ namespace _01.Scipt.Player.Skill
             if (CanUseSkill("UpSkill") && !_player._isSkilling)
             { 
                 _player._movement.CanMove = false;
-                _stealCompo.MinusHealth();
-                _player.ChangeState("UP");
                 _player._attackCompo.IsAttack = true;
                 _player._isSkilling = true;
+                _player.ChangeState("UP");
                 CurrentTimeClear("UpSkill");
                 
             }

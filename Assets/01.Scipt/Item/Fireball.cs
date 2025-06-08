@@ -8,7 +8,7 @@ public class Fireball : MonoBehaviour
     private void Start()
     {
         _rbCompo = GetComponent<Rigidbody>();
-        _rbCompo.AddForce(transform.forward * 15, ForceMode.Impulse);
+        _rbCompo.AddForce(transform.forward * 8, ForceMode.Impulse);
         Destroy(this, 5f);
     }
 

@@ -24,7 +24,6 @@ namespace _01.Scipt.Enemy
         [SerializeField] private PoolingItemSO _enemy2Item;
         [SerializeField] private PoolingItemSO _enemy3Item;
         [SerializeField] private PoolingItemSO _longRangeEnemy;
-        [SerializeField] private TextMeshProUGUI _timetxt;
         [SerializeField] private GameObject _clearUI;
         [Inject]  private PoolManagerMono _poolManager;
         [SerializeField] private float _currentTime = 3;
@@ -42,29 +41,13 @@ namespace _01.Scipt.Enemy
         {
             if (GameManager.instance.gameTime > _currentTime)
             {
-                if (_level == _endLevel)
                 {
                     GameManager.instance.gameTime = 0;
-            
-                    if (FindObjectsOfType<EnemySkeletonSlave>().Length == 0)
-                    {
-                        Time.timeScale = 0;
-                        string currentSceneName = SceneManager.GetActiveScene().name;
-                        StageManager.Instance.ClearStage(currentSceneName);
-                        _clearUI.SetActive(true);
-                        Cursor.visible = true;         
-                        Cursor.lockState = CursorLockMode.None;   
-                    }
-                }
-                else
-                {
-                    GameManager.instance.gameTime = 0;
-                    _currentTime += 5.3f;
+                    _currentTime += 1.2f;
                     _killCount += 1.3f;
                     _level++;
                     _isTimer = true;
                     _startTime = Time.time; 
-                    _timetxt.text = $"현재 남은 라운드 : {_endLevel - _level}";
                     StartCoroutine(SpawnTime());
                 }
             }
@@ -82,7 +65,7 @@ namespace _01.Scipt.Enemy
             
             for (int i = 0; i < (int)_killCount; ++i)
             {
-                int rand = Random.Range(1, 5);
+                int rand = Random.Range(1, 4);
                 
                 if (rand == 1)
                 {
@@ -95,10 +78,6 @@ namespace _01.Scipt.Enemy
                 else if (rand == 3)
                 {
                     _enemy = _poolManager.Pop<EnemySkeletonSlave>(_enemy3Item);
-                }
-                else if (rand == 4)
-                {
-                    _enemy = _poolManager.Pop<EnemySkeletonSlave>(_longRangeEnemy);
                 }
                 
                 _enemy.GetCompo<EntityHealth>().Initialize(_enemy);

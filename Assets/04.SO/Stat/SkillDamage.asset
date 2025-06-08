@@ -16,7 +16,7 @@ MonoBehaviour:
   description: 
   icon: {fileID: 0}
   displayName: 
-  baseValue: 10
+  baseValue: 40
   minValue: 0
   maxValue: 9999
   <IsPercent>k__BackingField: 0

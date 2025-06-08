@@ -1,6 +1,6 @@
 ﻿namespace _01.Scipt.Player.State.Player
 {
-    public class PlayerUpAttackState : PlayerCanAttackState
+    public class PlayerUpAttackState : PlayerState
     {
         public PlayerUpAttackState(Member.Kmj._01.Scipt.Entity.AttackCompo.Entity entity, int animationHash) : base(entity, animationHash)
         {
