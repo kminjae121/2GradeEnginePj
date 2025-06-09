@@ -7,7 +7,7 @@ using UnityEngine;
 public class BaseStatLibrary : MonoBehaviour
 {
     public static BaseStatLibrary instance;
-    public Dictionary<string, TextMeshProUGUI> baseTxt = new Dictionary<string, TextMeshProUGUI>();
+    public Dictionary<string, TextMeshProUGUI> baseTxt;
 
     [SerializeField] private GameObject _obj;
 
@@ -15,13 +15,12 @@ public class BaseStatLibrary : MonoBehaviour
     
     private void Awake()
     {
-        _obj.GetComponentsInChildren<TextMeshProUGUI>().ToList().ForEach(UI => baseTxt.Add(UI.name, UI));
-
         instance = this;
+        baseTxt = new Dictionary<string, TextMeshProUGUI>();
+        _obj.GetComponentsInChildren<TextMeshProUGUI>().ToList().ForEach(UI => baseTxt.Add(UI.name, UI));
         
         _isOpen = false;
         _obj.SetActive(false);
-        
     }
 
     private void Update()

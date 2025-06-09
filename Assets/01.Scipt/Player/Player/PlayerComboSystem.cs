@@ -11,6 +11,7 @@ public class PlayerComboSystem : MonoSingleton<PlayerComboSystem>, IEntityCompon
     public float _CurrentComboStat { get; set; }
 
     public string maxComboStr { get; set; } = "D";
+    public string maxRecordComboStr { get; set; } = "D";
     public string CURRENTComboStr { get; set; } = "D";
     
     
@@ -56,26 +57,31 @@ public class PlayerComboSystem : MonoSingleton<PlayerComboSystem>, IEntityCompon
             case <= 120:
                 CURRENTComboStr = "D";
                 maxComboStr = "D";
+                maxRecordComboStr = "D";
                 _txtColor = Color.red;
                 break;
             case <= 250:
                 CURRENTComboStr = "C";
                 maxComboStr = "C";
+                maxRecordComboStr = "C";
                 _txtColor = Color.blue;
                 break;
             case <= 350:
                 CURRENTComboStr = "B";
                 maxComboStr = "B";
+                maxRecordComboStr = "B";
                 _txtColor = Color.green;
                 break;
             case <= 500:
                 CURRENTComboStr = "A";
                 maxComboStr = "A";
+                maxRecordComboStr = "A";
                 _txtColor = Color.magenta;
                 break;
             case <= 600:
                 CURRENTComboStr = "S";
                 maxComboStr = "S";
+                maxRecordComboStr = "S";
                 _txtColor = Color.yellow;
                 break;
         }
@@ -94,23 +100,18 @@ public class PlayerComboSystem : MonoSingleton<PlayerComboSystem>, IEntityCompon
             {
                 case <= 200:
                     CURRENTComboStr = "D";
-                    maxComboStr = "D";
                     break;
                 case <= 450:
                     CURRENTComboStr = "C";
-                    maxComboStr = "C";
                     break;
                 case <= 650:
                     CURRENTComboStr = "B";
-                    maxComboStr = "B";
                     break;
                 case <= 800:
                     CURRENTComboStr = "A";
-                    maxComboStr = "A";
                     break;
                 case <= 1000:
                     CURRENTComboStr = "S";
-                    maxComboStr = "S";
                     break;
             }
         }
@@ -128,23 +129,18 @@ public class PlayerComboSystem : MonoSingleton<PlayerComboSystem>, IEntityCompon
         {
             case <= 200:
                 CURRENTComboStr = "D";
-                maxComboStr = "D";
                 break;
             case <= 450:
                 CURRENTComboStr = "C";
-                maxComboStr = "C";
                 break;
             case <= 650:
                 CURRENTComboStr = "B";
-                maxComboStr = "B";
                 break;
             case <= 800:
                 CURRENTComboStr = "A";
-                maxComboStr = "A";
                 break;
             case <= 1000:
                 CURRENTComboStr = "S";
-                maxComboStr = "S";
                 break;
         }
     }

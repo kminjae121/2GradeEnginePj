@@ -83,6 +83,7 @@ namespace _01.Scipt.Enemy
                 _enemy.GetCompo<EntityHealth>().Initialize(_enemy);
                 _enemy.GetCompo<EntityHealth>().AfterInit();
                 _enemy.Start();
+                _enemy.transform.GetChild(0).rotation = Quaternion.Euler(0, 0, 0);
                 _enemy.transform.position = spawnPoints[a].position;
 
                 ++a;

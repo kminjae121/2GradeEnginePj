@@ -77,13 +77,17 @@ namespace Blade.Enemies
         public Quaternion LookAtTarget(Vector3 target, bool isSmooth = true)
         {
             Vector3 direction = target - _entity.transform.position;
-            direction.y = 0;
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            direction.y = 0; 
+
+            if (direction == Vector3.zero)
+                return _entity.transform.rotation;
+            
+            Quaternion lookRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
 
             if (isSmooth)
             {
                 _entity.transform.rotation = Quaternion.Slerp(_entity.transform.rotation, 
-                                                lookRotation, Time.deltaTime * rotateSpeed);
+                    lookRotation, Time.deltaTime * rotateSpeed);
             }
             else
             {
@@ -99,9 +103,12 @@ namespace Blade.Enemies
         public void SetVelocity(Vector3 velocity) => agent.velocity = velocity; 
         public void SetSpeed(float speed) => agent.speed = speed;
         public void SetDestination(Vector3 destination) => agent.SetDestination(destination);
-        
-        
-        
+
+        private void LateUpdate()
+        {
+            transform.parent.GetChild(0).rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+        }
+
 
         private Vector3 GetKnockBackEndPoint(Vector3 force)
         {

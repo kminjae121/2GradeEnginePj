@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
 using _01.Scipt.Core;
+using Blade.Combat;
 using Random = UnityEngine.Random;
 
 
@@ -31,12 +32,15 @@ namespace Blade.Enemies.Skeletons
         [Inject]  private PoolManagerMono _poolManager;
 
         private PoolingEffect _enemy;
-        
 
+
+        private EntityHealth _healthCompo;
+        
         protected override void Awake()
         {
             base.Awake();
             _collider = GetComponent<CapsuleCollider>();
+            _healthCompo = GetComponent<EntityHealth>();
             OnDead.AddListener(HandleDeathEvent);
         }
         
@@ -89,15 +93,22 @@ namespace Blade.Enemies.Skeletons
 
         public void HandleJumpAndStun()
         {
+            if (_healthCompo.currentHealth <= 0)
+            {
+                OnDead?.Invoke();
+            }
+            
             _StateChangeChannel.SendEventMessage(EnemyState.JUMPANDSTUN);
         }
         private void HandleDeathEvent()
         {
             if (IsDead) return;
+            
             GameManager.instance.GetExp();
             GameManager.instance.killCount++;
             IsDead = true;
             int random = Random.Range(0, 100);
+            
             
             if (GameManager.instance.GetBallPercent == 0)
             {
@@ -121,10 +132,12 @@ namespace Blade.Enemies.Skeletons
 
         public void ChangeJumpChannelEvent()
         {
+            
             _StateChangeChannel.SendEventMessage(EnemyState.AIRBORN);
         }
         public void ChangeHitChannelEvent()
         {
+            
             if (_State == EnemyState.AIRBORN)
             {
                 _StateChangeChannel.SendEventMessage(EnemyState.AIRBORN);

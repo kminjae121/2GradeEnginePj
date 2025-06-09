@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
        _slider.maxValue = nextLevel;
        _levelTxt.text = $"Level : {level}";
        _currentExptxt.text = $"경험치 : {exp} : {nextLevel}";
+       PlayerComboSystem.Instance.maxComboStr = "D";
     }
 
     private void Start()
@@ -61,10 +62,11 @@ public class GameManager : MonoBehaviour
            _currentComboTxt.color = PlayerComboSystem.Instance._txtColor;
            _maxLevelTxt.text = $"최대레벨 : {level}";
            _maxComboTxt.text = $"최대 콤보레벨 : {PlayerComboSystem.Instance.maxComboStr}";
-           _maxTimeTxt.text = $"최대시간 : {(int)GameTimeManager.Instance.maxTime}";
+           _maxTimeTxt.text = $"최대시간 : {(int)GameTimeManager.Instance.Gametime}";
 
            _slider.value = expValue;
-           if (isEnd == false)
+           PlayerRecordSendManager.Instance.FixRecordMT($"최대시간 : {(int)GameTimeManager.Instance.maxTime}");
+           PlayerRecordSendManager.Instance.FixRecordMS($"최대콤보레벨 : {PlayerComboSystem.Instance.maxRecordComboStr}");
            {
                 GameTimeManager.Instance.TickTime();
                 _timeTxt.text = $"{(int)GameTimeManager.Instance.Gametime}초";

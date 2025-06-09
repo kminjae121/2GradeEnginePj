@@ -49,6 +49,7 @@ public class MaxSlashCompo : MonoBehaviour
             {
                 PlayerFuryManager.Instance.RaiseFury(10);
                 PlayerComboSystem.Instance.RaiseCombo(3);
+                CameraShakingManager.instance.ShakeCam(0.2f, 0.5f, 5, 20);
                 health.ApplyDamage(_skillCompo.skillDamage * 2, Vector3.zero, null, null);
                 other.GetComponent<EnemySkeletonSlave>().ChangeJumpChannelEvent();
             }

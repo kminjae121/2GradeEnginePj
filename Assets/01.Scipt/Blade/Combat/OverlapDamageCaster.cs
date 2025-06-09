@@ -29,7 +29,7 @@ namespace _01.Scipt.Blade.Combat
                     damage.ApplyDamage(attackCompo.atkDamage,Obj.transform.position,attackData,null);
                     PlayerComboSystem.Instance.RaiseCombo(3);
                     PlayerFuryManager.Instance.RaiseFury(4f);
-                    CameraShakingManager.instance.ShakeCam(0.1f,0.2f,5,10);
+                    CameraShakingManager.instance.ShakeCam(0.1f,0.5f,5,10);
                 }
                 else
                 {

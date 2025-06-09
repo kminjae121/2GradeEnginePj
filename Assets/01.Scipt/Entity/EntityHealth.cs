@@ -21,6 +21,7 @@ namespace Blade.Combat
         [SerializeField] private SliderCompo _sliderCompo;
         private float displayedHealth;
         [SerializeField] float smoothSpeed = 3f;
+        
         public void Initialize(Entity entity)
         {
             _entity = entity;
@@ -81,11 +82,11 @@ namespace Blade.Combat
             
             _actionData.HitPoint = hitPoint;
 
-            _entity.OnHit?.Invoke();    
             if (currentHealth <= 0)
             {
                 _entity.OnDead?.Invoke();
             }
+            _entity.OnHit?.Invoke();    
         }
     }
 }

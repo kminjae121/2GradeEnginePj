@@ -47,6 +47,7 @@ public class UpSkillSlashCompo : MonoBehaviour
             {
                 PlayerFuryManager.Instance.RaiseFury(15);
                 PlayerComboSystem.Instance.RaiseCombo(12);
+                CameraShakingManager.instance.ShakeCam(0.2f, 0.5f, 5, 20);
                 health.ApplyDamage(_skillCompo.skillDamage, Vector3.zero, null, null);
                 other.GetComponent<EnemySkeletonSlave>().ChangeJumpChannelEvent();
             }
