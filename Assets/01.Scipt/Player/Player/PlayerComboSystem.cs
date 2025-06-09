@@ -54,31 +54,31 @@ public class PlayerComboSystem : MonoSingleton<PlayerComboSystem>, IEntityCompon
 
         switch (comboStat)
         {
-            case <= 120:
+            case <= 100:
                 CURRENTComboStr = "D";
                 maxComboStr = "D";
                 maxRecordComboStr = "D";
                 _txtColor = Color.red;
                 break;
-            case <= 250:
+            case <= 150:
                 CURRENTComboStr = "C";
                 maxComboStr = "C";
                 maxRecordComboStr = "C";
                 _txtColor = Color.blue;
                 break;
-            case <= 350:
+            case <= 250:
                 CURRENTComboStr = "B";
                 maxComboStr = "B";
                 maxRecordComboStr = "B";
                 _txtColor = Color.green;
                 break;
-            case <= 500:
+            case <= 340:
                 CURRENTComboStr = "A";
                 maxComboStr = "A";
                 maxRecordComboStr = "A";
                 _txtColor = Color.magenta;
                 break;
-            case <= 600:
+            case <= 700:
                 CURRENTComboStr = "S";
                 maxComboStr = "S";
                 maxRecordComboStr = "S";
@@ -98,20 +98,25 @@ public class PlayerComboSystem : MonoSingleton<PlayerComboSystem>, IEntityCompon
             
             switch (comboStat)
             {
-                case <= 200:
+                case <= 100:
                     CURRENTComboStr = "D";
+                    _txtColor = Color.red;
                     break;
-                case <= 450:
+                case <= 150:
                     CURRENTComboStr = "C";
+                     _txtColor = Color.blue;
                     break;
-                case <= 650:
+                case <= 250:
                     CURRENTComboStr = "B";
+                    _txtColor = Color.green;
                     break;
-                case <= 800:
+                case <= 340:
                     CURRENTComboStr = "A";
+                    _txtColor = Color.magenta;
                     break;
-                case <= 1000:
+                case <= 700:
                     CURRENTComboStr = "S";
+                    _txtColor = Color.yellow;
                     break;
             }
         }
@@ -127,20 +132,25 @@ public class PlayerComboSystem : MonoSingleton<PlayerComboSystem>, IEntityCompon
 
         switch (comboStat)
         {
-            case <= 200:
+            case <= 100:
                 CURRENTComboStr = "D";
+                _txtColor = Color.red;
                 break;
-            case <= 450:
+            case <= 150:
                 CURRENTComboStr = "C";
+                _txtColor = Color.blue;
                 break;
-            case <= 650:
+            case <= 250:
                 CURRENTComboStr = "B";
+                _txtColor = Color.green;
                 break;
-            case <= 800:
+            case <= 340:
                 CURRENTComboStr = "A";
+                _txtColor = Color.magenta;
                 break;
-            case <= 1000:
+            case <= 700:
                 CURRENTComboStr = "S";
+                _txtColor = Color.yellow;
                 break;
         }
     }

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolingName: Enemy3
   prefab: {fileID: 6578327114621458966, guid: fc26e7f14076c3c44964fedb03abcdc4, type: 3}
-  initCount: 100
+  initCount: 500

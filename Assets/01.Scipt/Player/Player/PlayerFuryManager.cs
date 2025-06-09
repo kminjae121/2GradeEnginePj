@@ -12,7 +12,7 @@ public class PlayerFuryManager : MonoBehaviour, IEntityComponet
 
     public float _Currentfury { get; set; }
 
-    public float maxFury { get; set; } = 100f;
+    public float maxFury { get; set; } = 250f;
     
     private float fury;
 
@@ -103,7 +103,7 @@ public class PlayerFuryManager : MonoBehaviour, IEntityComponet
         _player._movement.CanMove = false;
         _player.ChangeState("FURY");
         
-        StartCoroutine(RageDuration(10f));
+        StartCoroutine(RageDuration(5f));
     }
 
     private IEnumerator RageDuration(float duration)
@@ -121,6 +121,8 @@ public class PlayerFuryManager : MonoBehaviour, IEntityComponet
         isInRange = false;
         _Currentfury = 0;
         _furySlider.value = 0;
+        _player._attackCompo.atkDamage = _player._attackCompo.baseAtkDamage;
+        _player._skillCompo.skillDamage = _player._skillCompo.BaseskillDamage;
         
         _player._movement._rbcompo.linearVelocity = Vector3.zero;
         _player._movement.StopImmediately();
