@@ -50,6 +50,7 @@ namespace _01.Scipt.Player.Skill
 
         public void MakeSlashEffect()
         {
+            AudioManager.Instance.PlaySFX("Slash");
             if (skillLevel < 3)
             {
                 Quaternion rot = Quaternion.Euler(0f, SlashTrans[0].rotation.eulerAngles.y, 0f);

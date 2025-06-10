@@ -8,42 +8,53 @@ using UnityEngine;
 public class StoreItem : MonoBehaviour
 {
     [SerializeField] private List<StatSO> _stats;
-    [field: SerializeField] public static float price { get; private set; }
+    public static float price { get; private set; }
     [SerializeField] private List<int> upgradeStat;
     [SerializeField] private CoinTxt _coinTxt;
 
     [SerializeField] private TextMeshProUGUI _priceTmp;
-
     private void Awake()
     {
-        price = 10;
+        price = 130;
         _priceTmp.text = $"가격 : {price}";   
     }
 
     public void AddAttackDamage()
     {
+        if (GoodsManager.Instance.bloodCoin <= 0)
+            return;
+        if (GoodsManager.Instance.bloodCoin - price < 0)
+            return;
         GoodsManager.Instance.UseCoin((int)price);
         _coinTxt.UseCoin();
         price *= 1.4f;
         _stats[0].BaseValue += upgradeStat[0];
-        _priceTmp.text = $"가격 : {price}";
+        _priceTmp.text = $"가격 : {(int)price}";
     }
 
     public void AddSkilDamage()
     {
+        if (GoodsManager.Instance.bloodCoin <= 0)
+            return;
+        if (GoodsManager.Instance.bloodCoin - price < 0)
+            return;
         GoodsManager.Instance.UseCoin((int)price);
         _coinTxt.UseCoin();
         price *= 1.4f;
         _stats[1].BaseValue += upgradeStat[1];
-        _priceTmp.text = $"가격 : {price}";
+        _priceTmp.text = $"가격 : {(int)price}";
     }
 
     public void AddBloodEat()
     {
+        if (GoodsManager.Instance.bloodCoin <= 0)
+            return;
+        if (GoodsManager.Instance.bloodCoin - price < 0)
+            return;
         GoodsManager.Instance.UseCoin((int)price);
         _coinTxt.UseCoin();
         price *= 1.4f;
         _stats[2].BaseValue += upgradeStat[2];
-        _priceTmp.text = $"가격 : {price}";
+        _priceTmp.text = $"가격 : {(int)price}";
     }
 }

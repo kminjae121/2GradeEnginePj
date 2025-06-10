@@ -9,11 +9,6 @@ namespace _01.Scipt.Core
 
         public void UseCoin(int coin)
         {
-            if (bloodCoin <= 0)
-                return;
-            if (bloodCoin - coin <= 0)
-                return;
-            
             bloodCoin -= coin;
         }
         public void GetCoin(int coin)

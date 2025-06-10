@@ -14,6 +14,7 @@ public class CharacterMovement : MonoBehaviour, IEntityComponet, IAfterInit
     public bool CanMove { get; set; } = true;
 
     private EntityAnimator _animatorCompo;
+    private EntityAnimatorTrigger _triggerCompo;
     private Vector3 _autoMovement;
 
     public Vector3 _velocity { get; set; }
@@ -40,8 +41,15 @@ public class CharacterMovement : MonoBehaviour, IEntityComponet, IAfterInit
 
     private void Start()
     {
+        _triggerCompo = _entity.GetCompo<EntityAnimatorTrigger>();
         _animatorCompo = _entity.GetCompo<EntityAnimator>();
         moveSpeed = _stat.GetStat(_moveSpeedStat).Value;
+        _triggerCompo.OnMove += PlayWalkSound;
+    }
+
+    private void OnDestroy()
+    {
+        _triggerCompo.OnMove -= PlayWalkSound;
     }
 
 
@@ -54,6 +62,10 @@ public class CharacterMovement : MonoBehaviour, IEntityComponet, IAfterInit
         }
     }
 
+    public void PlayWalkSound()
+    {
+        AudioManager.Instance.PlaySFX("WalkSand");
+    }
     private void Update()
     {
         Vector2 rawInput = _entity.PlayerInput.MovementKey.normalized;

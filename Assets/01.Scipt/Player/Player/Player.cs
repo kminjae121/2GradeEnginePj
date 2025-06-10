@@ -80,6 +80,7 @@ namespace _01.Scipt.Player.Player
         protected override void HandleHit()
         {
             PlayerComboSystem.Instance.ReduceCombo(15);
+            AudioManager.Instance.PlaySFX("HitSound");
         }
 
         protected override void HandleDead()
@@ -91,7 +92,7 @@ namespace _01.Scipt.Player.Player
         {
         
         }
-
+        
         public void PlayerDie()
         {
             _isSkilling = true;

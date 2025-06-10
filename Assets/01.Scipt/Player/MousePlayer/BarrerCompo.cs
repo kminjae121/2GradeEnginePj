@@ -1,8 +1,6 @@
 using System.Reflection;
 using _01.Scipt.Player.Player;
-using UnityEditor.PackageManager;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class BarrerCompo : MonoBehaviour
 {

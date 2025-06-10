@@ -40,6 +40,8 @@ namespace _01.Scipt.UI.SelectUI
 
         public void UpSkillLevel()
         {
+            if (_skillSO == null)
+            {
                 _skill.skillLevel++;
                 _skill.currentEffectNum++;
                 _currentSkill++;
@@ -48,8 +50,16 @@ namespace _01.Scipt.UI.SelectUI
                 {
                     LevelSystem.instance.itemList.RemoveAt(_countIdx);
                     gameObject.SetActive(false);
-                }
-            
+                }   
+            }
+            else
+            {
+                _skillCompo.AddSkill(_skillSO);
+                Color color = _skillimage.color;
+                color.a = Mathf.Clamp01(1);
+                _skillimage.color = color;
+                _skillSO = null;
+            }
         }
     }
 }

@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         instance = this;
        _slider.maxValue = nextLevel;
        _levelTxt.text = $"Level : {level}";
-       _currentExptxt.text = $"경험치 : {exp} : {nextLevel}";
+       _currentExptxt.text = $"Exp : {exp} : {nextLevel}";
        PlayerComboSystem.Instance.maxComboStr = "D";
     }
 
@@ -76,16 +76,16 @@ public class GameManager : MonoBehaviour
        public void GetExp()
        {
            exp += 1;
-           _currentExptxt.text = $"경험치 : {exp} : {nextLevel}";
+           _currentExptxt.text = $"Exp : {exp} : {nextLevel}";
 
            if (exp >= nextLevel)
            {
                level++;
                exp = 0;
-               nextLevel += 6;
+               nextLevel += 4;
                _slider.maxValue = nextLevel;
                _levelTxt.text = $"Level : {level}";
-               _currentExptxt.text = $"경험치 : {exp} : {nextLevel}";
+               _currentExptxt.text = $"Exp : {exp} : {nextLevel}";
                levelSystem.Show();
            }
        }

@@ -13,6 +13,8 @@ public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponet
     public event Action OnAttackFinalVFXTrigger;
     public event Action OnAttackVFXTrigger;
 
+    public event Action OnMove;
+
     public event Action OnShakingCamTriegger;
 
     public event Action OnPowerAttackVFXTrigger;
@@ -57,6 +59,7 @@ public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponet
     }
 
     private void AttackMove() => OnAttackMoveTrigger?.Invoke();
+    private void Move()=> OnMove?.Invoke();
 
     private void AttackDash() => OnAttackDash?.Invoke();
     private void RollingStart() => OnRollStart?.Invoke();

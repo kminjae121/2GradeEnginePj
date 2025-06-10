@@ -14,10 +14,15 @@ namespace _01.Scipt.UI
         {
             _slider.maxValue = _healthCompo.maxHealth;
             _slider.value = _healthCompo.currentHealth;
+            _slider.transform.gameObject.SetActive(false);
         }
 
         private void Update()
         {
+            if (_healthCompo.currentHealth < _slider.maxValue)
+            {
+                _slider.transform.gameObject.SetActive(true);
+            }
             _slider.transform.LookAt(_playerFinder.Target.transform.position);
         }
     }

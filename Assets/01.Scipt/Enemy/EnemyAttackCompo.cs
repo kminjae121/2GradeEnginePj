@@ -36,7 +36,7 @@ namespace _01.Scipt.Enemy
             foreach (var Obj in collider)
             {
                 print(Obj.name);
-                Obj.GetComponentInChildren<EntityHealth>().ApplyDamage(10,Obj.transform.position,attackData,null);
+                Obj.GetComponentInChildren<EntityHealth>().ApplyDamage(30,Obj.transform.position,attackData,null);
                 CameraShakingManager.instance.ShakeCam(0.1f,0.6f,5,20);
             }
         }

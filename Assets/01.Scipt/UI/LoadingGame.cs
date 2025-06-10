@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoadingGame : MonoBehaviour
@@ -15,6 +16,7 @@ public class LoadingGame : MonoBehaviour
 
     private void Start()
     {
+        AudioManager.Instance.StopBGM();
         _slider.value = 0;
         Time.timeScale = 1;
     }
@@ -32,6 +34,14 @@ public class LoadingGame : MonoBehaviour
         {
             _slider.value = 1f;
             gameObject.SetActive(false);
+            if (SceneManager.GetActiveScene().name == "Stage1")
+            {
+                AudioManager.Instance.PlayBGM("GameBGM");
+            }
+            else
+            {
+                AudioManager.Instance.PlayBGM("MainBGM");
+            }
         }
     }
 }

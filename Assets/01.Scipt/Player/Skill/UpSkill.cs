@@ -35,6 +35,7 @@ namespace _01.Scipt.Player.Skill
         {
             if (skillEffectName[currentSkillEffectNameIdx] == String.Empty)
                 return;
+            AudioManager.Instance.PlaySFX("UpSkill");
             if (skillLevel == 2)
             {
                 Quaternion rot = Quaternion.Euler(0f, SlashTrans[0].rotation.eulerAngles.y, 0f);
@@ -49,6 +50,7 @@ namespace _01.Scipt.Player.Skill
             }
             else if(skillLevel == 3)
             {
+                AudioManager.Instance.PlaySFX("UpSkill");
                 foreach (Transform ts in SlashTrans)
                 {
                     Quaternion rot = Quaternion.Euler(0f, ts.rotation.eulerAngles.y, 0f);

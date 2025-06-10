@@ -65,6 +65,7 @@ namespace _01.Scipt.Player.Skill
 
         protected override void Skill()
         {
+            AudioManager.Instance.PlaySFX("PoHo",0.3f);
             Collider[] collider = Physics.OverlapBox(transform.position, _skillSize,
                 Quaternion.identity, _whatIsEnemy);
             

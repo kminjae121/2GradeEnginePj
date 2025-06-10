@@ -93,6 +93,7 @@ namespace Blade.Enemies.Skeletons
 
         public void HandleJumpAndStun()
         {
+            AudioManager.Instance.PlaySFX("HitSound");
             if (_healthCompo.currentHealth <= 0)
             {
                 OnDead?.Invoke();
@@ -103,7 +104,7 @@ namespace Blade.Enemies.Skeletons
         private void HandleDeathEvent()
         {
             if (IsDead) return;
-            
+            AudioManager.Instance.PlaySFX("HitSound");
             GameManager.instance.GetExp();
             GameManager.instance.killCount++;
             IsDead = true;
@@ -132,12 +133,12 @@ namespace Blade.Enemies.Skeletons
 
         public void ChangeJumpChannelEvent()
         {
-            
+            AudioManager.Instance.PlaySFX("HitSound");
             _StateChangeChannel.SendEventMessage(EnemyState.AIRBORN);
         }
         public void ChangeHitChannelEvent()
         {
-            
+            AudioManager.Instance.PlaySFX("HitSound");
             if (_State == EnemyState.AIRBORN)
             {
                 _StateChangeChannel.SendEventMessage(EnemyState.AIRBORN);
