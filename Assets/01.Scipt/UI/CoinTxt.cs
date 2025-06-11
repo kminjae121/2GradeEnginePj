@@ -9,11 +9,11 @@ public class CoinTxt : MonoBehaviour
 
    private void Awake()
    {
-      _coinTxt.text = $"현재 코인 : {GoodsManager.Instance.bloodCoin}";
+      _coinTxt.text = $"현재 코인 : {GoodsManager.Instance.bloodCoin.BaseValue}";
    }
 
    public void UseCoin()
    {
-      _coinTxt.text = $"현재 코인 : {GoodsManager.Instance.bloodCoin}";
+      _coinTxt.text = $"현재 코인 : {GoodsManager.Instance.bloodCoin.BaseValue}";
    }
 }

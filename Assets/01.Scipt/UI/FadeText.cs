@@ -30,9 +30,15 @@ public class FadeText : MonoBehaviour
         {
             _fadeTween.Kill(true);
         }
-
+        
         TextMeshProUGUI txt = _txt.GetValueOrDefault(name);
-        _fadeTween = txt.DOFade(endValue, duration);
+        _fadeTween = txt.DOFade(endValue, duration).OnComplete(()
+            => txt.gameObject.SetActive(false));
+    }
+
+    public TextMeshProUGUI FindTxt(string name)
+    {
+        return _txt.GetValueOrDefault(name);
     }
 
     public void ShowTxt(float endValue, float duration,string name)

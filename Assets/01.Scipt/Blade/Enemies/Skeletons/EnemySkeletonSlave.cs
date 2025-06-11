@@ -56,9 +56,6 @@ namespace Blade.Enemies.Skeletons
             _StateChangeChannel.SendEventMessage(EnemyState.IDLE);
             
             IsDead = false;
-            
-            
-            print(_State.ToString());
         }
 
         private void OnDestroy()
@@ -94,17 +91,13 @@ namespace Blade.Enemies.Skeletons
         public void HandleJumpAndStun()
         {
             AudioManager.Instance.PlaySFX("HitSound");
-            if (_healthCompo.currentHealth <= 0)
-            {
-                OnDead?.Invoke();
-            }
             
             _StateChangeChannel.SendEventMessage(EnemyState.JUMPANDSTUN);
         }
         private void HandleDeathEvent()
         {
             if (IsDead) return;
-            AudioManager.Instance.PlaySFX("HitSound");
+           // AudioManager.Instance.PlaySFX("HitSound");
             GameManager.instance.GetExp();
             GameManager.instance.killCount++;
             IsDead = true;

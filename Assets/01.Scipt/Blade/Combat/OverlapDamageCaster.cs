@@ -21,7 +21,7 @@ namespace _01.Scipt.Blade.Combat
             var collider = Physics.OverlapBox(transform.position, boxSize,
                 Quaternion.identity,whatIsEnemy);
             
-            AudioManager.Instance.PlaySFX($"SwordSound{attackCompo.ComboCounter}");
+            AudioManager.Instance.PlaySFX($"Slash{attackCompo.ComboCounter}");
 
             foreach (var Obj in collider)
                 if (Obj.TryGetComponent(out IDamageable damage))

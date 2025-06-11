@@ -19,7 +19,7 @@ namespace _01.Scipt.Enemy
         public Transform[] spawnPoints;
         private int _level = 0;
         private float _killCount = 1;
-    
+        
         [SerializeField] private PoolingItemSO _enemyItem;
         [SerializeField] private PoolingItemSO _enemy2Item;
         [SerializeField] private PoolingItemSO _enemy3Item;
@@ -42,12 +42,16 @@ namespace _01.Scipt.Enemy
             if (GameManager.instance.gameTime > _currentTime)
             {
                 {
+                    FadeText.Instance.FindTxt("RoundTxt").gameObject.SetActive(true);
+                    FadeText.Instance.FindTxt("RoundTxt").alpha = 255f;
                     GameManager.instance.gameTime = 0;
-                    _currentTime += 1.2f;
-                    _killCount += 1.3f;
+                    _currentTime = 30;
+                    _killCount += 7f;
                     _level++;
                     _isTimer = true;
-                    _startTime = Time.time; 
+                    _startTime = Time.time;
+                    FadeText.Instance.FindTxt("RoundTxt").text = $"Round{_level}";
+                    FadeText.Instance.FadeTxt(0, 3, "RoundTxt");
                     StartCoroutine(SpawnTime());
                 }
             }
@@ -92,6 +96,13 @@ namespace _01.Scipt.Enemy
                     a = 0;
                 }
             }
+            
+            _enemy = _poolManager.Pop<EnemySkeletonSlave>(_longRangeEnemy);
+            _enemy.GetCompo<EntityHealth>().Initialize(_enemy);
+            _enemy.GetCompo<EntityHealth>().AfterInit();
+            _enemy.Start();
+            _enemy.transform.GetChild(0).rotation = Quaternion.Euler(0, 0, 0);
+            _enemy.transform.position = spawnPoints[a].position;
         }
     }
 }

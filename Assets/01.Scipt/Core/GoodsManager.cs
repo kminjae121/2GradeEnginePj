@@ -1,19 +1,29 @@
-﻿using UnityEngine;
+﻿using System;
+using Blade.Core.StatSystem;
+using UnityEngine;
 
 namespace _01.Scipt.Core
 {
     public class GoodsManager : MonoSingleton<GoodsManager>
     {
 
-        public int bloodCoin { get; set; } = 10;
+        public StatSO bloodCoin;
+        
+
+        private void Update()
+        {
+           
+        }
+
 
         public void UseCoin(int coin)
         {
-            bloodCoin -= coin;
+            bloodCoin.BaseValue -= coin;
         }
         public void GetCoin(int coin)
         {
-            bloodCoin += coin;
+            bloodCoin.BaseValue += coin;
+            print(bloodCoin.BaseValue);
         }
     }
 }

@@ -64,7 +64,7 @@ public class CharacterMovement : MonoBehaviour, IEntityComponet, IAfterInit
 
     public void PlayWalkSound()
     {
-        AudioManager.Instance.PlaySFX("WalkSand");
+        AudioManager.Instance.PlaySFX("WalkSound",0.2f);
     }
     private void Update()
     {

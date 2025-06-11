@@ -16,7 +16,7 @@ public class Fireball : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.GetComponentInChildren<EntityHealth>().ApplyDamage(6,transform.position,null, null);
+            other.GetComponentInChildren<EntityHealth>().ApplyDamage(2,transform.position,null, null);
             gameObject.SetActive(false);
             CameraShakingManager.instance.ShakeCam(0.2f,0.2f,3,20);
         }

@@ -15,15 +15,15 @@ public class StoreItem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _priceTmp;
     private void Awake()
     {
-        price = 130;
+        price = 65;
         _priceTmp.text = $"가격 : {price}";   
     }
 
     public void AddAttackDamage()
     {
-        if (GoodsManager.Instance.bloodCoin <= 0)
+        if (GoodsManager.Instance.bloodCoin.BaseValue <= 0)
             return;
-        if (GoodsManager.Instance.bloodCoin - price < 0)
+        if (GoodsManager.Instance.bloodCoin.BaseValue - price < 0)
             return;
         GoodsManager.Instance.UseCoin((int)price);
         _coinTxt.UseCoin();
@@ -34,9 +34,9 @@ public class StoreItem : MonoBehaviour
 
     public void AddSkilDamage()
     {
-        if (GoodsManager.Instance.bloodCoin <= 0)
+        if (GoodsManager.Instance.bloodCoin.BaseValue <= 0)
             return;
-        if (GoodsManager.Instance.bloodCoin - price < 0)
+        if (GoodsManager.Instance.bloodCoin.BaseValue - price < 0)
             return;
         GoodsManager.Instance.UseCoin((int)price);
         _coinTxt.UseCoin();
@@ -47,9 +47,9 @@ public class StoreItem : MonoBehaviour
 
     public void AddBloodEat()
     {
-        if (GoodsManager.Instance.bloodCoin <= 0)
+        if (GoodsManager.Instance.bloodCoin.BaseValue <= 0)
             return;
-        if (GoodsManager.Instance.bloodCoin - price < 0)
+        if (GoodsManager.Instance.bloodCoin.BaseValue - price < 0)
             return;
         GoodsManager.Instance.UseCoin((int)price);
         _coinTxt.UseCoin();

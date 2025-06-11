@@ -18,12 +18,12 @@ public class LoadingGame : MonoBehaviour
     {
         AudioManager.Instance.StopBGM();
         _slider.value = 0;
-        Time.timeScale = 1;
+        Time.timeScale = 0;
     }
 
     private void Update()
     {
-        _progress += Time.deltaTime * loadingSpeed;
+        _progress += 0.0012f * loadingSpeed;
         _progress = Mathf.Clamp01(_progress);
         
         _slider.value = Mathf.Lerp(_slider.value, _progress, 0.01f);
@@ -33,10 +33,11 @@ public class LoadingGame : MonoBehaviour
         if (_slider.value >= 0.99f)
         {
             _slider.value = 1f;
+            Time.timeScale = 1;
             gameObject.SetActive(false);
             if (SceneManager.GetActiveScene().name == "Stage1")
             {
-                AudioManager.Instance.PlayBGM("GameBGM");
+                AudioManager.Instance.PlayBGM("GameBgSound");
             }
             else
             {

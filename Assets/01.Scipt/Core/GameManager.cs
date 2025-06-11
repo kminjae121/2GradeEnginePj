@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _currentExptxt;
     [SerializeField] private GameObject _ballPrefab;
 
-    public int nextLevel = 4;
+    public int nextLevel = 2;
 
     public float expValue;
     
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
            {
                level++;
                exp = 0;
-               nextLevel += 4;
+               nextLevel += 2;
                _slider.maxValue = nextLevel;
                _levelTxt.text = $"Level : {level}";
                _currentExptxt.text = $"Exp : {exp} : {nextLevel}";

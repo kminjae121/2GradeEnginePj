@@ -14,7 +14,7 @@ namespace _01.Scipt.UI.SelectUI
         private SlashSkill _skill;
         [SerializeField] private int _countIdx;
         [SerializeField] private List<Vector3> _skillRange;
-        private int _currentSkill = -1;
+        private int _currentSkill = 0;
         [SerializeField] private Image _skillimage;
         private void Awake()
         {
@@ -30,6 +30,8 @@ namespace _01.Scipt.UI.SelectUI
             
             Color color = _skillimage.color;
             color.a = Mathf.Clamp01(1);
+            _currentSkill = 0;
+            
         }
 
         private void Update()
@@ -44,9 +46,10 @@ namespace _01.Scipt.UI.SelectUI
             {
                 _skill.skillLevel++;
                 _skill.currentEffectNum++;
-                _currentSkill++;
+                _currentSkill+=1;
+                print(_currentSkill);
                 
-                if (_currentSkill >= 1)
+                if (_currentSkill == 2)
                 {
                     LevelSystem.instance.itemList.RemoveAt(_countIdx);
                     gameObject.SetActive(false);

@@ -12,7 +12,7 @@
         private SkillCompo _skill;
         [SerializeField] private int _countIdx;
         [SerializeField] private List<Vector3> _skillRange;
-        private int _currentSkill = -1;
+        private int _currentSkill = 0;
         [SerializeField] private Image _skillimage;
 
         private void Awake()
@@ -25,7 +25,7 @@
             {
                 _skill = components[0] as SkillCompo;
             }
-            
+            _currentSkill = 0;
         }
 
         private void Update()
@@ -38,13 +38,11 @@
         {
             if (_skillSO == null)
             {
-                _skill.skillLevel++;
-                _skill.currentSkillEffectNameIdx++;
-                _currentSkill++;
-                print(_currentSkill);
+                _skill.skillLevel+=1;
+                _skill.currentSkillEffectNameIdx+=1;
+                _currentSkill+=1;
                 _skill._skillSize = _skillRange[_currentSkill];
-            
-                if (_currentSkill >= 1)
+                if (_currentSkill == 2)
                 {
                     LevelSystem.instance.itemList.RemoveAt(_countIdx);
                     gameObject.SetActive(false);

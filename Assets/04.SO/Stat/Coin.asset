@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7dbd0d10f24cb134882a38a8b5d1e310, type: 3}
-  m_Name: AttackDamage
+  m_Name: Coin
   m_EditorClassIdentifier: 
-  statName: AttackDamage
-  description: 
+  statName: Coin
+  description: Coin
   icon: {fileID: 0}
   displayName: 
-  baseValue: 60
-  minValue: 10
-  maxValue: 1000
+  baseValue: 0
+  minValue: 0
+  maxValue: 1e+14
   <IsPercent>k__BackingField: 0

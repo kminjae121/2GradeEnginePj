@@ -22,7 +22,7 @@ namespace _01.Scipt.UI
 
         public void NextExplainTxt()
         {
-            if (currentIdx >= 1)
+            if (currentIdx >= 2)
                 return;
             currentIdx++;
             _txt.text = _explainTxt[currentIdx];

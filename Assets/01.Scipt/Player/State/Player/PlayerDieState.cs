@@ -10,6 +10,10 @@ public class PlayerDieState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        _player._movement.StopImmediately();
+        _player._movement.CanMove = false;
+        _player.GetComponent<Collider>().enabled = false;
+        _player.GetComponent<Rigidbody>().useGravity = false;
     }
 
     public override void Update()
@@ -17,8 +21,6 @@ public class PlayerDieState : PlayerState
         base.Update();
         if (_isTriggerCall)
         {
-            _player._movement.StopImmediately();
-            _player._movement.CanMove = false;
             _player.FailUI.SetActive(true);
             GameTimeManager.Instance.overrideTime();
             Time.timeScale = 0;

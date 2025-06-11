@@ -33,9 +33,8 @@ public class AudioManager : MonoSingleton<AudioManager>
         
         AudioSource source = GetAvailableSFXSource();
         source.spatialBlend = 0f; 
-        source.volume = volume;  
         source.clip = clip;
-        source.PlayOneShot(clip);
+        source.PlayOneShot(clip,volume);
     }
     
     private AudioSource GetAvailableSFXSource()
