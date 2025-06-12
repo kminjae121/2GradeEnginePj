@@ -30,8 +30,6 @@
 
         private void Update()
         {
-            int myIndex = transform.GetSiblingIndex();
-            _countIdx = myIndex;
         }
         
         public void UpSkillLevel()
@@ -44,7 +42,12 @@
                 _skill._skillSize = _skillRange[_currentSkill];
                 if (_currentSkill == 2)
                 {
-                    LevelSystem.instance.itemList.RemoveAt(_countIdx);
+                    int myIndex = LevelSystem.instance.itemList.IndexOf(gameObject);
+                    if (myIndex >= 0)
+                    {
+                        _countIdx = myIndex;
+                        LevelSystem.instance.itemList.RemoveAt(_countIdx);
+                    }
                     gameObject.SetActive(false);
                 }   
             }

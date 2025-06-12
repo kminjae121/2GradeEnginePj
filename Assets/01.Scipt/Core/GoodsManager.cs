@@ -23,7 +23,6 @@ namespace _01.Scipt.Core
         public void GetCoin(int coin)
         {
             bloodCoin.BaseValue += coin;
-            print(bloodCoin.BaseValue);
         }
     }
 }

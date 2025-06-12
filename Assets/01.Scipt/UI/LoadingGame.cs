@@ -37,7 +37,7 @@ public class LoadingGame : MonoBehaviour
             gameObject.SetActive(false);
             if (SceneManager.GetActiveScene().name == "Stage1")
             {
-                AudioManager.Instance.PlayBGM("GameBgSound");
+                AudioManager.Instance.PlayBGM("GameBGM");
             }
             else
             {

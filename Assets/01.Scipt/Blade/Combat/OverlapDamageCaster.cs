@@ -20,8 +20,14 @@ namespace _01.Scipt.Blade.Combat
         {
             var collider = Physics.OverlapBox(transform.position, boxSize,
                 Quaternion.identity,whatIsEnemy);
-            
-            AudioManager.Instance.PlaySFX($"Slash{attackCompo.ComboCounter}");
+
+            if (attackCompo.ComboCounter == 2)
+            {
+                AudioManager.Instance.PlaySFX("Slash2", 0.5f);
+                AudioManager.Instance.PlaySFX($"Slash{attackCompo.ComboCounter}",0.7f);
+            }
+            else
+                AudioManager.Instance.PlaySFX($"Slash{attackCompo.ComboCounter}",0.4f);
 
             foreach (var Obj in collider)
                 if (Obj.TryGetComponent(out IDamageable damage))

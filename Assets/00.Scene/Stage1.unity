@@ -2750,6 +2750,10 @@ PrefabInstance:
       propertyPath: _healthCompo
       value: 
       objectReference: {fileID: 226504563}
+    - target: {fileID: 4418549029756087208, guid: ce00013c56e23554fb7681ebb73a1fa1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4964354728013087343, guid: ce00013c56e23554fb7681ebb73a1fa1, type: 3}
       propertyPath: _skillCompo
       value: 
@@ -2776,7 +2780,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6452386517357390686, guid: ce00013c56e23554fb7681ebb73a1fa1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7397261701898907611, guid: ce00013c56e23554fb7681ebb73a1fa1, type: 3}
       propertyPath: _atkCompo

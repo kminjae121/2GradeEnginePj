@@ -90,33 +90,36 @@ namespace Blade.Enemies.Skeletons
 
         public void HandleJumpAndStun()
         {
-            AudioManager.Instance.PlaySFX("HitSound");
+            AudioManager.Instance.PlayHitSFX("HitSound");
             
             _StateChangeChannel.SendEventMessage(EnemyState.JUMPANDSTUN);
         }
+
         private void HandleDeathEvent()
         {
             if (IsDead) return;
-           // AudioManager.Instance.PlaySFX("HitSound");
-            GameManager.instance.GetExp();
-            GameManager.instance.killCount++;
-            IsDead = true;
-            int random = Random.Range(0, 100);
-            
-            
-            if (GameManager.instance.GetBallPercent == 0)
+            if (_healthCompo.currentHealth <= 0)
             {
-            }
-            else if (random <= GameManager.instance.GetBallPercent)
-            {
-                GameManager.instance.SpawnHpBall(transform.position, Quaternion.identity);
-            }
-            
-            _collider.enabled = false;
-            
-            _StateChangeChannel.SendEventMessage(EnemyState.DEAD);
+                GameManager.instance.GetExp();
+                GameManager.instance.killCount++;
+                IsDead = true;
+                int random = Random.Range(0, 100);
 
-            StartCoroutine(WaitDie());
+
+                if (GameManager.instance.GetBallPercent == 0)
+                {
+                }
+                else if (random <= GameManager.instance.GetBallPercent)
+                {
+                    GameManager.instance.SpawnHpBall(transform.position, Quaternion.identity);
+                }
+
+                _collider.enabled = false;
+
+                _StateChangeChannel.SendEventMessage(EnemyState.DEAD);
+
+                StartCoroutine(WaitDie());
+            }
         }
 
         public void KnockBack(Vector3 force, float duration)
@@ -126,12 +129,12 @@ namespace Blade.Enemies.Skeletons
 
         public void ChangeJumpChannelEvent()
         {
-            AudioManager.Instance.PlaySFX("HitSound");
+            AudioManager.Instance.PlayHitSFX("HitSound");
             _StateChangeChannel.SendEventMessage(EnemyState.AIRBORN);
         }
         public void ChangeHitChannelEvent()
         {
-            AudioManager.Instance.PlaySFX("HitSound");
+            AudioManager.Instance.PlayHitSFX("HitSound");
             if (_State == EnemyState.AIRBORN)
             {
                 _StateChangeChannel.SendEventMessage(EnemyState.AIRBORN);

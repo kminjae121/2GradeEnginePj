@@ -51,7 +51,12 @@ namespace _01.Scipt.UI.SelectUI
                 
                 if (_currentSkill == 2)
                 {
-                    LevelSystem.instance.itemList.RemoveAt(_countIdx);
+                    int myIndex = LevelSystem.instance.itemList.IndexOf(gameObject);
+                    if (myIndex >= 0)
+                    {
+                        _countIdx = myIndex;
+                        LevelSystem.instance.itemList.RemoveAt(_countIdx);
+                    }
                     gameObject.SetActive(false);
                 }   
             }

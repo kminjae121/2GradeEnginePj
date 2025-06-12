@@ -102,6 +102,7 @@ public class PlayerFuryManager : MonoBehaviour, IEntityComponet
         _player._movement.StopImmediately();
         _player._movement.CanMove = false;
         _player.ChangeState("FURY");
+        AudioManager.Instance.PlaySFX("PoHo", 0.3f);
         
         StartCoroutine(RageDuration(5f));
     }

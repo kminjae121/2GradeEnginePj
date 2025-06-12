@@ -9,7 +9,9 @@ public class AudioManager : MonoSingleton<AudioManager>
     [SerializeField] private List<AudioClip> clipList;
     public AudioMixer audioMixer;
     [SerializeField] private GameObject sfxSourcePrefab;
+    [SerializeField] private GameObject HitSourcePrefab;
     private List<AudioSource> sfxPool = new List<AudioSource>();
+    private List<AudioSource> HitPool = new List<AudioSource>();
     
     public AudioSource bgmSource;
     public AudioSource sfxSource;
@@ -36,6 +38,17 @@ public class AudioManager : MonoSingleton<AudioManager>
         source.clip = clip;
         source.PlayOneShot(clip,volume);
     }
+
+
+    public void PlayHitSFX(string clipName, float volume = 1f)
+    {
+        AudioClip clip = clips.GetValueOrDefault(clipName);
+        
+        AudioSource source = GetAvailableHitSource();
+        source.spatialBlend = 0f; 
+        source.clip = clip;
+        source.PlayOneShot(clip,volume);
+    }
     
     private AudioSource GetAvailableSFXSource()
     {
@@ -48,6 +61,20 @@ public class AudioManager : MonoSingleton<AudioManager>
         var obj = Instantiate(sfxSourcePrefab, transform);
         var newSrc = obj.GetComponent<AudioSource>();
         sfxPool.Add(newSrc);
+        return newSrc;
+    }
+    
+    private AudioSource GetAvailableHitSource()
+    {
+        foreach (var src in HitPool)
+        {
+            if (!src.isPlaying)
+                return src;
+        }
+        
+        var obj = Instantiate(HitSourcePrefab, transform);
+        var newSrc = obj.GetComponent<AudioSource>();
+        HitPool.Add(newSrc);
         return newSrc;
     }
         

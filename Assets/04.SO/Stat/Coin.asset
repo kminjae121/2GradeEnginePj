@@ -18,5 +18,5 @@ MonoBehaviour:
   displayName: 
   baseValue: 0
   minValue: 0
-  maxValue: 1e+14
+  maxValue: 1e+24
   <IsPercent>k__BackingField: 0
