@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SettingManager : MonoSingleton<SettingManager>
 {
@@ -45,7 +46,16 @@ public class SettingManager : MonoSingleton<SettingManager>
     {
         ClearSetting();
         Time.timeScale = 1f;
-        ForceShowCursor();
+        if (SceneManager.GetActiveScene().name == "Stage1")
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     private void ClearSetting()

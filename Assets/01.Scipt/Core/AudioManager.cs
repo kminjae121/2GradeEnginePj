@@ -43,11 +43,19 @@ public class AudioManager : MonoSingleton<AudioManager>
     public void PlayHitSFX(string clipName, float volume = 1f)
     {
         AudioClip clip = clips.GetValueOrDefault(clipName);
+        if (clip == null) return;
         
+        foreach (var src in HitPool)
+        {
+            if (src.isPlaying && src.clip == clip)
+                return; 
+        }
+
         AudioSource source = GetAvailableHitSource();
-        source.spatialBlend = 0f; 
+
+        source.spatialBlend = 0f;
         source.clip = clip;
-        source.PlayOneShot(clip,volume);
+        source.PlayOneShot(clip, volume);
     }
     
     private AudioSource GetAvailableSFXSource()

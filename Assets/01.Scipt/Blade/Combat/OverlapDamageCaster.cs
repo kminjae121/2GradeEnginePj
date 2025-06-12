@@ -23,11 +23,11 @@ namespace _01.Scipt.Blade.Combat
 
             if (attackCompo.ComboCounter == 2)
             {
-                AudioManager.Instance.PlaySFX("Slash2", 0.5f);
-                AudioManager.Instance.PlaySFX($"Slash{attackCompo.ComboCounter}",0.7f);
+                AudioManager.Instance.PlaySFX("Slash2", 0.4f);
+                AudioManager.Instance.PlaySFX($"Slash{attackCompo.ComboCounter}",0.3f);
             }
             else
-                AudioManager.Instance.PlaySFX($"Slash{attackCompo.ComboCounter}",0.4f);
+                AudioManager.Instance.PlaySFX($"Slash{attackCompo.ComboCounter}",0.2f);
 
             foreach (var Obj in collider)
                 if (Obj.TryGetComponent(out IDamageable damage))
