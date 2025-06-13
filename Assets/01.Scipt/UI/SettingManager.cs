@@ -19,7 +19,7 @@ public class SettingManager : MonoSingleton<SettingManager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && LoadingGame.Instance.IsEnd)
         {
             if (IsSettingUIActive())
                 CloseSetting();

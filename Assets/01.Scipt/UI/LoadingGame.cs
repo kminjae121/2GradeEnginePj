@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class LoadingGame : MonoBehaviour
 {
+    public static LoadingGame Instance;
     [SerializeField] private Slider _slider;
 
     [field: SerializeField] public float loadingSpeed { get; set; }
@@ -13,9 +14,12 @@ public class LoadingGame : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _loadingTxt;
 
     private float _progress = 0f;
+    public bool IsEnd { get; set; } = false;
 
     private void Start()
     {
+        Instance = this;
+        IsEnd  = false;
         AudioManager.Instance.StopBGM();
         _slider.value = 0;
         Time.timeScale = 0;
@@ -34,6 +38,7 @@ public class LoadingGame : MonoBehaviour
         {
             _slider.value = 1f;
             Time.timeScale = 1;
+            IsEnd  = true;
             gameObject.SetActive(false);
             if (SceneManager.GetActiveScene().name == "Stage1")
             {
