@@ -21,7 +21,6 @@ public class GetBloodBallCompo : MonoBehaviour
             return;
         }
         GameManager.instance.GetBallPercent += 20;
-        BaseStatLibrary.instance.baseTxt.GetValueOrDefault("HealthBallProbabilty").text = $"회복구 확률 {GameManager.instance.GetBallPercent}%";
         _currentAtkCnt++;
     }
 }

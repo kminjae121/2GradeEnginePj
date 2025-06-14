@@ -22,8 +22,6 @@ public class PlayerComboSystem : MonoSingleton<PlayerComboSystem>, IEntityCompon
     
     
     private Coroutine _ComboCoroutine;
-
-    public float comboStat;
     
     public float reduceAmount { get; set; } = 10f;
     
@@ -44,20 +42,13 @@ public class PlayerComboSystem : MonoSingleton<PlayerComboSystem>, IEntityCompon
     }
     
 
-    private void Update()
-    {
-        print(maxComboStr);
-        comboStat = Mathf.Lerp(comboStat, _CurrentComboStat, Time.deltaTime);
-    }
-
     public void RaiseCombo(float amount)
     {
-        if (isInRange) return; 
-
         _CurrentComboStat += amount;
-        switch (comboStat)
+            
+        switch (_CurrentComboStat)
         {
-            case <= 100:
+            case <= 50:
                 CURRENTComboStr = "D";
                 if (_comboLevel < MaxComboLevel.C)
                 {
@@ -67,7 +58,7 @@ public class PlayerComboSystem : MonoSingleton<PlayerComboSystem>, IEntityCompon
                     _txtColor = Color.red;
                 }
                 break;
-            case <= 150:
+            case <= 100:
                 CURRENTComboStr = "C";
                 if (_comboLevel < MaxComboLevel.B)
                 {
@@ -89,7 +80,7 @@ public class PlayerComboSystem : MonoSingleton<PlayerComboSystem>, IEntityCompon
                 }
 
                 break;
-            case <= 340:
+            case <= 350:
                 CURRENTComboStr = "A";
                 if (_comboLevel < MaxComboLevel.S)
                 {
@@ -100,10 +91,11 @@ public class PlayerComboSystem : MonoSingleton<PlayerComboSystem>, IEntityCompon
                 }
 
                 break;
-            case <= 700:
+            case <= 450:
                 CURRENTComboStr = "S";
                 maxComboStr = "S";
                 maxRecordComboStr = "S";
+                _comboLevel = MaxComboLevel.S;
                 _txtColor = Color.yellow;
                 break;
         }
@@ -116,32 +108,40 @@ public class PlayerComboSystem : MonoSingleton<PlayerComboSystem>, IEntityCompon
 
     private IEnumerator ReduceFury()
     {
-        yield return new WaitForSeconds(1.5f); 
+        yield return new WaitForSeconds(3f); 
 
         while (_CurrentComboStat > 0)
         {
+            yield return new WaitForSeconds(0.3f);
             _CurrentComboStat -= reduceAmount;
-            yield return new WaitForSeconds(0.1f);
             
-            switch (comboStat)
+            if (_CurrentComboStat <= 0)
             {
-                case <= 100:
+                _CurrentComboStat = 0;
+            }
+            
+            switch (_CurrentComboStat)
+            {
+                case <= 50:
                     CURRENTComboStr = "D";
-                    _txtColor = Color.red;
+                        _txtColor = Color.red;
                     break;
-                case <= 150:
+                case <= 100:
                     CURRENTComboStr = "C";
-                     _txtColor = Color.blue;
+                        _txtColor = Color.blue;
+
                     break;
                 case <= 250:
                     CURRENTComboStr = "B";
-                    _txtColor = Color.green;
+                        _txtColor = Color.green;
+
                     break;
-                case <= 340:
+                case <= 350:
                     CURRENTComboStr = "A";
-                    _txtColor = Color.magenta;
+                        _txtColor = Color.magenta;
+
                     break;
-                case <= 700:
+                case <= 450:
                     CURRENTComboStr = "S";
                     _txtColor = Color.yellow;
                     break;
@@ -153,32 +153,42 @@ public class PlayerComboSystem : MonoSingleton<PlayerComboSystem>, IEntityCompon
 
     public void ReduceCombo(float amount)
     {
-        if (isInRange) return; 
 
-        _CurrentComboStat -= amount;
-
-        switch (comboStat)
+        if(_CurrentComboStat > 0)
         {
-            case <= 100:
-                CURRENTComboStr = "D";
-                _txtColor = Color.red;
-                break;
-            case <= 150:
-                CURRENTComboStr = "C";
-                _txtColor = Color.blue;
-                break;
-            case <= 250:
-                CURRENTComboStr = "B";
-                _txtColor = Color.green;
-                break;
-            case <= 340:
-                CURRENTComboStr = "A";
-                _txtColor = Color.magenta;
-                break;
-            case <= 700:
-                CURRENTComboStr = "S";
-                _txtColor = Color.yellow;
-                break;
+            _CurrentComboStat -= amount;
+            if (_CurrentComboStat <= 0)
+            {
+                _CurrentComboStat = 0;
+            }
+            switch (_CurrentComboStat)
+            {
+                case <= 50:
+                    CURRENTComboStr = "D";
+                    _txtColor = Color.red;
+                
+                    break;
+                case <= 100:
+                    CURRENTComboStr = "C";
+                    _txtColor = Color.blue;
+                
+
+                    break;
+                case <= 250:
+                    CURRENTComboStr = "B";
+                    _txtColor = Color.green;
+
+                    break;
+                case <= 350:
+                    CURRENTComboStr = "A";
+                    _txtColor = Color.magenta;
+
+                    break;
+                case <= 450:
+                    CURRENTComboStr = "S";
+                    _txtColor = Color.yellow;
+                    break;
+            }   
         }
     }
     

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Member.Kmj._01.Scipt.Entity.AttackCompo;
+using UnityEngine;
 
 public abstract class PlayerCanAttackState : PlayerState
 {

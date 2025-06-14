@@ -55,12 +55,7 @@ namespace _01.Scipt.Player.Player
             OnDead.AddListener(PlayerDie);
             OnHit.AddListener(HandleHit);
         }
-
-
-        private void HandleRollingPressed()
-        {
-            ChangeState("ROLLING");
-        }
+        
     
    
 

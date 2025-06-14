@@ -66,29 +66,30 @@ namespace _01.Scipt.Enemy
         private void SpawnEnemy()
         {
             int a = 0;
-            
+
             for (int i = 0; i < (int)_killCount; ++i)
             {
+                EnemySkeletonSlave enemy; // <- 지역변수로 바꿉니다.
                 int rand = Random.Range(1, 4);
-                
+
                 if (rand == 1)
                 {
-                    _enemy = _poolManager.Pop<EnemySkeletonSlave>(_enemyItem);
+                    enemy = _poolManager.Pop<EnemySkeletonSlave>(_enemyItem);
                 }
                 else if (rand == 2)
                 {
-                    _enemy = _poolManager.Pop<EnemySkeletonSlave>(_enemy2Item);
+                    enemy = _poolManager.Pop<EnemySkeletonSlave>(_enemy2Item);
                 }
-                else if (rand == 3)
+                else
                 {
-                    _enemy = _poolManager.Pop<EnemySkeletonSlave>(_enemy3Item);
+                    enemy = _poolManager.Pop<EnemySkeletonSlave>(_enemy3Item);
                 }
-                
-                _enemy.GetCompo<EntityHealth>().Initialize(_enemy);
-                _enemy.GetCompo<EntityHealth>().AfterInit();
-                _enemy.Start();
-                _enemy.transform.GetChild(0).rotation = Quaternion.Euler(0, 0, 0);
-                _enemy.transform.position = spawnPoints[a].position;
+
+                enemy.GetCompo<EntityHealth>().Initialize(enemy);
+                enemy.GetCompo<EntityHealth>().AfterInit();
+                enemy.Start();
+                enemy.transform.GetChild(0).rotation = Quaternion.Euler(0, 0, 0);
+                enemy.transform.position = spawnPoints[a].position;
 
                 ++a;
                 if (a >= spawnPoints.Length)
@@ -97,12 +98,12 @@ namespace _01.Scipt.Enemy
                 }
             }
             
-            _enemy = _poolManager.Pop<EnemySkeletonSlave>(_longRangeEnemy);
-            _enemy.GetCompo<EntityHealth>().Initialize(_enemy);
-            _enemy.GetCompo<EntityHealth>().AfterInit();
-            _enemy.Start();
-            _enemy.transform.GetChild(0).rotation = Quaternion.Euler(0, 0, 0);
-            _enemy.transform.position = spawnPoints[a].position;
+            EnemySkeletonSlave longRangeEnemy = _poolManager.Pop<EnemySkeletonSlave>(_longRangeEnemy);
+            longRangeEnemy.GetCompo<EntityHealth>().Initialize(longRangeEnemy);
+            longRangeEnemy.GetCompo<EntityHealth>().AfterInit();
+            longRangeEnemy.Start();
+            longRangeEnemy.transform.GetChild(0).rotation = Quaternion.Euler(0, 0, 0);
+            longRangeEnemy.transform.position = spawnPoints[a].position;
         }
     }
 }

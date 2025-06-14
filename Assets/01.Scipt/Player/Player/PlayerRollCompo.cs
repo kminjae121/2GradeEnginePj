@@ -12,6 +12,7 @@ public class PlayerRollCompo : MonoBehaviour, IEntityComponet, IAfterInit
     public float rollSpeed { get; set; }
 
     private Player _entity;
+    public bool isRoll;
 
     private CharacterMovement _movement;
 
@@ -44,15 +45,26 @@ public class PlayerRollCompo : MonoBehaviour, IEntityComponet, IAfterInit
     {
         if(_entity._isSkilling == false)
         {
+            isRoll = true;
             _entity._movement.CanMove = false;
+            _entity._isSkilling = true;
+            _entity._attackCompo.IsAttack = false;
             _entity.ChangeState("ROLL");
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (isRoll)
+        {
+            _movement._rbcompo.AddForce(_entity.transform.forward * rollSpeed, ForceMode.Force);
         }
     }
 
 
     public void StartRoll()
     {
-        _movement._rbcompo.AddForce(_entity.transform.forward * rollSpeed, ForceMode.VelocityChange);
+       // _movement._rbcompo.AddForce(_entity.transform.forward * rollSpeed, ForceMode.VelocityChange);
     }
 
     public void SlowSpeed()

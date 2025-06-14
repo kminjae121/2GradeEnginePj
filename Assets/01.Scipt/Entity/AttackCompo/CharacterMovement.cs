@@ -78,10 +78,13 @@ public class CharacterMovement : MonoBehaviour, IEntityComponet, IAfterInit
 
     private void FixedUpdate()
     {
-        CalculateMovement();
+        if (_entity._isSkilling == false)
+        {
+            CalculateMovement();
         
             _rbcompo.linearVelocity = new Vector3(transform.TransformDirection(_velocity).x,
-                _rbcompo.linearVelocity.y, transform.TransformDirection(_velocity).z);
+                _rbcompo.linearVelocity.y, transform.TransformDirection(_velocity).z);   
+        }
     }
 
     public void MoveToEntity(Vector3 target)

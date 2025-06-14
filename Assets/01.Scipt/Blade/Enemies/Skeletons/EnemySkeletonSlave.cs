@@ -116,8 +116,6 @@ namespace Blade.Enemies.Skeletons
 
                 _collider.enabled = false;
 
-                _StateChangeChannel.SendEventMessage(EnemyState.DEAD);
-
                 StartCoroutine(WaitDie());
             }
         }
@@ -147,6 +145,7 @@ namespace Blade.Enemies.Skeletons
 
         private IEnumerator WaitDie()
         {
+            //_StateChangeChannel.SendEventMessage(EnemyState.DEAD);
             yield return new WaitForSeconds(1.3f);
             GoodsManager.Instance.GetCoin(2);
             EnemyDieCompo.Instance.PushEnemy(this);

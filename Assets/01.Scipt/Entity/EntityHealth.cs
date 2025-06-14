@@ -80,12 +80,14 @@ namespace Blade.Combat
             currentHealth = Mathf.Clamp(currentHealth -= damage, 0, maxHealth);
             
             _actionData.HitPoint = hitPoint;
-
+            
             _entity.OnHit?.Invoke();    
             
             if (currentHealth <= 0)
             {
                 _entity.OnDead?.Invoke();
+                _sliderCompo._slider.value = 0;
+                currentHealth = 0;
             }
         }
     }

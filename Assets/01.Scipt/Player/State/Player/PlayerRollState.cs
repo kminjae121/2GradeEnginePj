@@ -9,11 +9,13 @@ public class PlayerRollState : PlayerState
         
     }
 
+    private PlayerRollCompo _rollCompo;
+
     public override void Enter()
     {
         base.Enter();
         _player._collider.enabled = false;
-        
+        _rollCompo = _entity.GetCompo<PlayerRollCompo>();
         _player._movement._rbcompo.useGravity = false;
     }
 
@@ -21,6 +23,8 @@ public class PlayerRollState : PlayerState
     {
         if (_isTriggerCall)
         {
+            _rollCompo.isRoll = false;
+            _player._isSkilling = false;
             _player._movement._rbcompo.linearVelocity = Vector3.zero;
             _player._collider.enabled = true;
             _player._movement._rbcompo.useGravity = true;

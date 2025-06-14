@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        BaseStatLibrary.instance.baseTxt.GetValueOrDefault("HealthBallProbabilty").text = $"회복구 확률 {GetBallPercent}%";
       //  levelSystem.Show();
     }
     
